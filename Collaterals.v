@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 20ns / 10ns
 //------------------------------------------------
 module UPCOUNTER_POSEDGE # (parameter SIZE=16)
 (

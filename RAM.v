@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 20ns / 10ns
 
 module RAM_DUAL_READ_PORT # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM_SIZE=8 )
 (

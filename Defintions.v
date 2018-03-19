@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 20ns / 10ns
 `ifndef DEFINTIONS_V
 `define DEFINTIONS_V
 	

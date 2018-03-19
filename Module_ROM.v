@@ -1,4 +1,4 @@
-`timescale 20ns / 10ns
+`timescale 1ns / 1ps
 `include "Defintions.v"
 
 `define LOOP1 8'd8

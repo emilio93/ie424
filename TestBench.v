@@ -1,4 +1,4 @@
-`timescale 20ns / 10ns
+`timescale 1ns / 1ps
 
 ////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -40,7 +40,7 @@ module TestBench;
 	
 	always
 	begin
-		#1 Clock =  ! Clock;
+		#5  Clock =  ! Clock;
 
 	end
 

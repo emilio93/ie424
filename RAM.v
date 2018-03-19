@@ -1,4 +1,4 @@
-`timescale 20ns / 10ns
+`timescale 1ns / 1ps
 
 /**
  El módulo RAM_DUAL_READ_PORT se encarga de leer dos datos y escribir un dato en una memoria

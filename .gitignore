@@ -38,6 +38,8 @@
 *.xst
 *.wdb
 *.ini
+*.xsl
+*.ipf
 
 _ngo
 _xmsgs

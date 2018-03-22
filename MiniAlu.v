@@ -120,6 +120,22 @@ begin
 		rResult      <= wSourceData1 + wSourceData0;
 	end
 	//-------------------------------------
+	// Operación de resta.
+	// No se altera el número mostrado con 
+	// los leds.
+	// Guarda un dato en un registro, este dato 
+	// es la diferencia del dato wSourceData1 y
+	// el dato wSourceData0.
+	// eg
+	//   SUB t1,t2,t3 # t1=t2-t3
+	`SUB:
+	begin
+		rFFLedEN     <= 1'b0;
+		rBranchTaken <= 1'b0;
+		rWriteEnable <= 1'b1;
+		rResult      <= wSourceData1 - wSourceData0;
+	end
+	//-------------------------------------
 	`STO:
 	begin
 		rFFLedEN     <= 1'b0;

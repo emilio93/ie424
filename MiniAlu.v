@@ -30,9 +30,9 @@ RAM_DUAL_READ_PORT DataRam
 (
 	.Clock(         Clock        ),
 	.iWriteEnable(  rWriteEnable ),
-	.iReadAddress0( wInstruction[7:0] ),
+	.iReadAddress0( wInstruction ),
 	.iReadAddress1( wInstruction[15:8] ),
-	.iWriteAddress( wDestination ),
+	.iWriteAddress( wDestination[3:0] ),
 	.iDataIn(       rResult      ),
 	.oDataOut0(     wSourceData0 ),
 	.oDataOut1(     wSourceData1 )
@@ -49,7 +49,7 @@ UPCOUNTER_POSEDGE IP
 );
 assign wIP = (rBranchTaken) ? wIPInitialValue : wIP_temp;
 
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1 
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 3 ) FFD_OPERATION
 (
 	.Clock(Clock),
 	.Reset(Reset),
@@ -58,7 +58,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
 	.Q(wOperation)
 );
 
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD_SOURCE_ADDR_0
 (
 	.Clock(Clock),
 	.Reset(Reset),
@@ -67,7 +67,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 	.Q(wSourceAddr0)
 );
 
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 5 ) FFD_SOURCE_ADDR1
 (
 	.Clock(Clock),
 	.Reset(Reset),
@@ -76,7 +76,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 	.Q(wSourceAddr1)
 );
 
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD_DESTINATION
 (
 	.Clock(Clock),
 	.Reset(Reset),

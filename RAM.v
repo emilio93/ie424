@@ -19,13 +19,13 @@ Wire's:
 	 - oDataOut0: Dato 0 que se lee.
    - oDataOut1: Dato 1 que se escribe.
  */
-module RAM_DUAL_READ_PORT # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM_SIZE=8 )
+module RAM_DUAL_READ_PORT # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM_SIZE=8, parameter ADDR_WIDTH_MAX_USE=4 )
 (
 	input wire						Clock,
 	input wire						iWriteEnable,
-	input wire[ADDR_WIDTH-1:0]	iReadAddress0,
-	input wire[ADDR_WIDTH-1:0]	iReadAddress1,
-	input wire[ADDR_WIDTH-1:0]	iWriteAddress,
+	input wire[ADDR_WIDTH_MAX_USE-1:0]	iReadAddress0,
+	input wire[ADDR_WIDTH_MAX_USE-1:0]	iReadAddress1,
+	input wire[ADDR_WIDTH_MAX_USE-1:0]	iWriteAddress,
 	input wire[DATA_WIDTH-1:0]		 	iDataIn,
 	output reg [DATA_WIDTH-1:0] 		oDataOut0,
 	output reg [DATA_WIDTH-1:0] 		oDataOut1

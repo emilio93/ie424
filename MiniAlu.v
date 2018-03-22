@@ -9,18 +9,18 @@ module MiniAlu
  input wire Reset,
  output wire [7:0] oLed
 
- 
+
 );
 
 wire [15:0]  wIP,wIP_temp;
-reg         rWriteEnable,rBranchTaken;
-wire [27:0] wInstruction;
-wire [3:0]  wOperation;
-reg [15:0]   rResult;
-wire [7:0]  wSourceAddr0,wSourceAddr1,wDestination;
-wire [15:0] wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue;
+reg          rWriteEnable,rBranchTaken;
+wire [27:0]  wInstruction;
+wire [3:0]   wOperation;
+reg  [15:0]  rResult;
+wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination;
+wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue;
 
-ROM InstructionRom 
+ROM InstructionRom
 (
 	.iAddress(     wIP          ),
 	.oInstruction( wInstruction )
@@ -41,7 +41,7 @@ RAM_DUAL_READ_PORT DataRam
 assign wIPInitialValue = (Reset) ? 8'b0 : wDestination;
 UPCOUNTER_POSEDGE IP
 (
-.Clock(   Clock                ), 
+.Clock(   Clock                ),
 .Reset(   Reset | rBranchTaken ),
 .Initial( wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
@@ -93,7 +93,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 	.Reset(Reset),
 	.Enable( rFFLedEN ),
 	.D( wSourceData1 ),
-	.Q( oLed    )
+	.Q( oLed )
 );
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
@@ -121,9 +121,9 @@ begin
 	end
 	//-------------------------------------
 	// Operación de resta.
-	// No se altera el número mostrado con 
+	// No se altera el número mostrado con
 	// los leds.
-	// Guarda un dato en un registro, este dato 
+	// Guarda un dato en un registro, este dato
 	// es la diferencia del dato wSourceData1 y
 	// el dato wSourceData0.
 	// eg

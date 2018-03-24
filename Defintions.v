@@ -1,8 +1,8 @@
 `timescale 20ns / 10ns
 `ifndef DEFINTIONS_V
 `define DEFINTIONS_V
-	
-`default_nettype none	
+
+`default_nettype none
 `define NOP   4'd0 // 0000
 `define LED   4'd2 // 0010
 `define BLE   4'd3 // 0011

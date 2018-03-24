@@ -7,7 +7,7 @@ module ROM
 (
 	input  wire[15:0]  		iAddress,
 	output reg [27:0] 		oInstruction
-);	
+);
 always @ ( iAddress )
 begin
 	case (iAddress)
@@ -25,14 +25,14 @@ begin
 	8: oInstruction = { `ADD ,`R1,`R1,`R3    }; 
 	9: oInstruction = { `BLE ,`LOOP1,`R1,`R2 }; 
 	
-	10: oInstruction = { `ADD ,`R5,`R5,`R3    };
-	11: oInstruction = { `BLE ,`LOOP2,`R5,`R4 };	
-	12: oInstruction = { `NOP ,24'd4000       }; 
-	13: oInstruction = { `SUB ,`R7,`R7,`R3    };
-	14: oInstruction = { `JMP ,  8'd2,16'b0   };
+	10: oInstruction = { `ADD,`R5,`R5,`R3    };
+	11: oInstruction = { `BLE,`LOOP2,`R5,`R4 };
+	12: oInstruction = { `NOP,24'd4000       };
+	13: oInstruction = { `SUB,`R7,`R7,`R3    };
+	14: oInstruction = { `JMP,  8'd2,16'b0   };
 	default:
-		oInstruction = { `LED ,  24'b10101010 };		//NOP
+		oInstruction = { `LED ,  24'b10101010 }; // NOP
 	endcase	
 end
-	
+
 endmodule

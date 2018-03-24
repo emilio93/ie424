@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 20ns / 10ns
 //------------------------------------------------
 module UPCOUNTER_POSEDGE # (parameter SIZE=16)
 (
@@ -17,8 +17,8 @@ output reg [SIZE-1:0] Q
 		begin
 		if (Enable)
 			Q = Q + 1;
-			
-		end			
+
+		end
   end
 
 endmodule
@@ -31,18 +31,18 @@ module FFD_POSEDGE_SYNCRONOUS_RESET # ( parameter SIZE=8 )
 	input wire [SIZE-1:0]	D,
 	output reg [SIZE-1:0]	Q
 );
-	
 
-always @ (posedge Clock) 
+
+always @ (posedge Clock)
 begin
 	if ( Reset )
 		Q <= 0;
 	else
-	begin	
-		if (Enable) 
-			Q <= D; 
-	end	
- 
+	begin
+		if (Enable)
+			Q <= D;
+	end
+
 end//always
 
 endmodule

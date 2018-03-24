@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 20ns / 10ns
 
 ////////////////////////////////////////////////////////////////////////////////
 // Company: 
@@ -33,14 +33,14 @@ module TestBench;
 
 	// Instantiate the Unit Under Test (UUT)
 	MiniAlu uut (
-		.Clock(Clock), 
-		.Reset(Reset), 
+		.Clock(Clock),
+		.Reset(Reset),
 		.oLed(oLed)
 	);
 	
 	always
 	begin
-		#5  Clock =  ! Clock;
+		#1 Clock =  ! Clock;
 
 	end
 
@@ -54,10 +54,10 @@ module TestBench;
 		Reset = 1;
 		#50
 		Reset = 0;
-        
+
 		// Add stimulus here
 
 	end
-      
+
 endmodule
 

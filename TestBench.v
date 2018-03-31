@@ -33,8 +33,8 @@ module TestBench;
 
 	// Instantiate the Unit Under Test (UUT)
 	MiniAlu uut (
-		.Clock(Clock), 
-		.Reset(Reset), 
+		.Clock(Clock),
+		.Reset(Reset),
 		.oLed(oLed)
 	);
 	
@@ -54,10 +54,10 @@ module TestBench;
 		Reset = 1;
 		#50
 		Reset = 0;
-        
+
 		// Add stimulus here
 
 	end
-      
+
 endmodule
 

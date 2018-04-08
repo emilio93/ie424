@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2018-04-07T21:02:44</DateModified>
+  <DateModified>2018-04-07T21:17:47</DateModified>
   <ModuleName>TestBench</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/iseconfig/TestBench.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/</ImplementationReportsDirectory>
+  <SavedFilePath>/home/emanuel/Desktop/Laboratorio-de-Digitales/Lab2git/minialu/MiniALU/iseconfig/TestBench.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>/home/emanuel/Desktop/Laboratorio-de-Digitales/Lab2git/minialu/MiniALU/</ImplementationReportsDirectory>
   <DateInitialized>2018-03-31T22:07:28</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

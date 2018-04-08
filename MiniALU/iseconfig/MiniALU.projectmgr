@@ -9,12 +9,14 @@
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/Automatic `includes</ClosedNode>
       </ClosedNodes>
-      <SelectedItems/>
+      <SelectedItems>
+         <SelectedItem>TestBench (/home/emanuel/Desktop/Laboratorio-de-Digitales/Lab2git/minialu/minialu/TestBench.v)</SelectedItem>
+      </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000002020000000100000001000000640000004e000000020000000000000000000000000200000064ffffffff0000008100000003000000020000004e0000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001fc000000020000000000000000000000000200000064ffffffff000000810000000300000002000001fc0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>TestBench (/home/emanuel/Desktop/Laboratorio-de-Digitales/Lab2git/minialu/minialu/TestBench.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -22,13 +24,13 @@
          <ClosedNode>Design Utilities</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem/>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000103000000010000000100000000000000000000000064ffffffff000000810000000000000001000001030000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem/>
    </ItemView>
    <ItemView guiview="File" >
       <ClosedNodes>
@@ -94,13 +96,13 @@
          <ClosedNode>/TestBench |home|emanuel|Desktop|Laboratorio-de-Digitales|Laboratorio-1|minialu|TestBench.v/uut - MiniAlu/MuL2 - Mul2LUT</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>TestBench (/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/minialu/TestBench.v)</SelectedItem>
+         <SelectedItem>TestBench (/home/emanuel/Desktop/Laboratorio-de-Digitales/Lab2git/minialu/minialu/TestBench.v)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >3</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001fc000000020000000000000000000000000200000064ffffffff000000810000000300000002000001fc0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>TestBench (/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/minialu/TestBench.v)</CurrentItem>
+      <CurrentItem>TestBench (/home/emanuel/Desktop/Laboratorio-de-Digitales/Lab2git/minialu/minialu/TestBench.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>

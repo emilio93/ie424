@@ -1,0 +1,2 @@
+verilog isim_temp "../minialu-master-5da6a689ca791c05c077730bb83b8f2c672dabf9/Mul2LUT.v"
+verilog isim_temp "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

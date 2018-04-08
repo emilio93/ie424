@@ -1,0 +1,7 @@
+verilog work "../minialu/RAM.v"
+verilog work "../minialu/Mul2LUT.v"
+verilog work "../minialu/Module_ROM.v"
+verilog work "../minialu/Collaterals.v"
+verilog work "../minialu/MiniAlu.v"
+verilog work "../minialu/TestBench.v"
+verilog work "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v"

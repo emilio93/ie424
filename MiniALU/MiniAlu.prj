@@ -1,0 +1,5 @@
+verilog work "../minialu-master-5da6a689ca791c05c077730bb83b8f2c672dabf9/RAM.v"
+verilog work "../minialu-master-5da6a689ca791c05c077730bb83b8f2c672dabf9/Mul2LUT.v"
+verilog work "../minialu-master-5da6a689ca791c05c077730bb83b8f2c672dabf9/Module_ROM.v"
+verilog work "../minialu-master-5da6a689ca791c05c077730bb83b8f2c672dabf9/Collaterals.v"
+verilog work "../minialu-master-5da6a689ca791c05c077730bb83b8f2c672dabf9/MiniAlu.v"

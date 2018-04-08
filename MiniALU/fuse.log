@@ -1,0 +1,43 @@
+Running: /opt/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -o /home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/TestBench_isim_beh.exe -prj /home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/TestBench_beh.prj work.TestBench work.glbl 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 2
+Turning on mult-threading, number of parallel sub-compilation jobs: 4 
+Determining compilation order of HDL files
+Analyzing Verilog file "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/RAM.v" into library work
+Analyzing Verilog file "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/Mul2LUT.v" into library work
+Analyzing Verilog file "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/Module_ROM.v" into library work
+Analyzing Verilog file "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/Collaterals.v" into library work
+Analyzing Verilog file "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/MiniAlu.v" into library work
+Analyzing Verilog file "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/TestBench.v" into library work
+Analyzing Verilog file "/opt/Xilinx/14.7/ISE_DS/ISE//verilog/src/glbl.v" into library work
+Starting static elaboration
+WARNING:HDLCompiler:189 - "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/MiniAlu.v" Line 46: Size mismatch in connection of port <Initial>. Formal port size is 16-bit while actual signal size is 32-bit.
+WARNING:HDLCompiler:189 - "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/MiniAlu.v" Line 57: Size mismatch in connection of port <D>. Formal port size is 8-bit while actual signal size is 4-bit.
+WARNING:HDLCompiler:189 - "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/MiniAlu.v" Line 58: Size mismatch in connection of port <Q>. Formal port size is 8-bit while actual signal size is 4-bit.
+WARNING:HDLCompiler:189 - "/home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/../minialu/MiniAlu.v" Line 95: Size mismatch in connection of port <D>. Formal port size is 8-bit while actual signal size is 16-bit.
+Completed static elaboration
+Fuse Memory Usage: 95040 KB
+Fuse CPU Usage: 2440 ms
+Compiling module ROM
+Compiling module RAM_DUAL_READ_PORT
+Compiling module UPCOUNTER_POSEDGE
+Compiling module FFD_POSEDGE_SYNCRONOUS_RESET
+Compiling module LUT
+Compiling module LUT(i=2)
+Compiling module LUT(i=4)
+Compiling module LUT(i=7)
+Compiling module LUT(i=8)
+Compiling module LUT(i=10)
+Compiling module LUT(i=12)
+Compiling module LUT(i=14)
+Compiling module Mul2LUT
+Compiling module MiniAlu
+Compiling module TestBench
+Compiling module glbl
+Time Resolution for simulation is 1ps.
+Waiting for 13 sub-compilation(s) to finish...
+Compiled 16 Verilog Units
+Built simulation executable /home/emanuel/Desktop/Laboratorio-de-Digitales/Laboratorio-1/MiniALU/TestBench_isim_beh.exe
+Fuse Memory Usage: 392788 KB
+Fuse CPU Usage: 2560 ms
+GCC CPU Usage: 2080 ms

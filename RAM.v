@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module RAM_DUAL_READ_PORT # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM_SIZE=8 )
+module RAM_DUAL_READ_PORT # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM_SIZE=16 )
 (
 	input wire						Clock,
 	input wire						iWriteEnable,

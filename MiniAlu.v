@@ -21,6 +21,7 @@ wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination;
 reg signed [15:0]   rResult;
 wire [15:0] wIPInitialValue,wImmediateValue;
 wire signed [15:0] wSourceData0,wSourceData1;
+wire signed [15:0] wResult;
 ROM InstructionRom
 (
 	.iAddress(     wIP          ),
@@ -99,7 +100,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
 
-
+ArrMult am0(.A(wSourceData0[3:0]), .B(wSourceData1[3:0]), .R(wResult));
 
 always @ ( * )
 begin
@@ -137,12 +138,12 @@ begin
 		rResult      <= wSourceData1 - wSourceData0;
 	end
 	//-------------------------------------
-  `MULT:
+  `MUL:
 	begin
 		rFFLedEN     <= 1'b0;
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 * wSourceData0;
+		rResult      <= wResult;
 	end
 	//-------------------------------------
 	`STO:

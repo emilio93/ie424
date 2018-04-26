@@ -94,8 +94,16 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 	.Reset(Reset),
 	.Enable( rFFLedEN ),
 	.D( wSourceData1 ),
-	.Q( oLed )
+	.Q( oLed    )
 );
+
+wire [15:0] multemp;
+MulLUT MuL2
+(	.B(wSourceData0),
+	.A(wSourceData1),
+	.C(multemp)
+);
+
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
 
@@ -157,6 +165,15 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rResult      <= mul16BitResult;
+	end
+	//-------------------------------------
+	//-------------------------------------
+	`MUL2:
+	begin
+		rFFLedEN     <= 1'b0;
+		rBranchTaken <= 1'b0;
+		rWriteEnable <= 1'b1;
+		rResult      <= multemp;
 	end
 	//-------------------------------------
 	`STO:

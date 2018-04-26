@@ -33,7 +33,7 @@ begin
   12: oInstruction = {`BLE,`LOOP3,`R7,`R5};
   13: oInstruction = {`ADD,`R6,`R6,`R1};
   14: oInstruction = {`BLE,`LOOP2,`R6,`R4};
-  15: oInstruction = {`MUL16BITS,`R2,`R2,`R3};
+  15: oInstruction = {`MUL2,`R2,`R2,`R3};
   16: oInstruction = {`NOP,24'd0};
   17: oInstruction = {`BLE,`LOOP1,`R2,`R8};
   18: oInstruction = {`JMP,`INICIO,16'd0};

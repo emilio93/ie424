@@ -104,6 +104,13 @@ MulLUT MuL2
 	.C(multemp)
 );
 
+wire [15:0] mul4temp;
+MulLUT #(.DATA_WIDTH(16),.LUT_BITS(4)) MuL4
+(	.B(wSourceData0),
+	.A(wSourceData1),
+	.C(mul4temp)
+);
+
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
 
@@ -174,6 +181,14 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rResult      <= multemp;
+	end
+	//-------------------------------------
+	`MUL4:
+	begin
+		rFFLedEN     <= 1'b0;
+		rBranchTaken <= 1'b0;
+		rWriteEnable <= 1'b1;
+		rResult      <= mul4temp;
 	end
 	//-------------------------------------
 	`STO:

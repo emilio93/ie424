@@ -11,6 +11,8 @@
 `define JMP   4'd6 // 0110
 `define SUB   4'd7 // 0111
 `define LCD   4'd8 // 1000
+`define CALL  4'd12
+`define RET   4'd13
 
 `define R0 8'd0 // 00000000
 `define R1 8'd1 // 00000001
@@ -29,6 +31,7 @@
 `define R14 8'd14
 `define R15 8'd15
 
+`define RA 8'h1F
 `define H 16'b0000000001001000
 
 

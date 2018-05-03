@@ -167,6 +167,7 @@ begin
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 		rWriteEnable <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= 0;
     rWriteLCD <= 1'b0;
 	end
@@ -177,6 +178,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= wSourceData1 + wSourceData0;
     rWriteLCD <= 1'b0;
 	end
@@ -195,6 +197,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= wSourceData1 - wSourceData0;
     rWriteLCD <= 1'b0;
 	end
@@ -205,6 +208,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= wResult;
 	end
 	//-------------------------------------
@@ -214,6 +218,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= mul16BitResult;
 	end
 	//-------------------------------------
@@ -224,6 +229,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= multemp;
 	end
 	//-------------------------------------
@@ -233,6 +239,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= mul4temp;
 	end
 	//-------------------------------------
@@ -242,6 +249,7 @@ begin
 		rWriteEnable <= 1'b1;
 		rBranchTaken <= 1'b0;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		rResult      <= wImmediateValue;
     rWriteLCD <= 1'b0;
 	end
@@ -252,6 +260,7 @@ begin
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 		if (wSourceData1 <= wSourceData0 )
 			rBranchTaken <= 1'b1;
 		else
@@ -266,6 +275,7 @@ begin
 		rResult      <= 0;
 		rBranchTaken <= 1'b1;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 	end
 	//-------------------------------------	
 	`CALL:
@@ -274,6 +284,7 @@ begin
 		rWriteEnable <= 1'b1;
 		rResult      <= wIP_temp;
 		rCallTaken <= 1'b1;
+		rRetTaken <= 1'b0;
 	end
 	//-------------------------------------	
 	`RET:
@@ -292,6 +303,7 @@ begin
 		rResult      <= 0;
 		rBranchTaken <= 1'b0;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 	end
 	//-------------------------------------
   `LCD:
@@ -310,6 +322,7 @@ begin
 		rResult      <= 0;
 		rBranchTaken <= 1'b0;
 		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
 	end	
 	//-------------------------------------	
 	endcase	

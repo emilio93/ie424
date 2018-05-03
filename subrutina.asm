@@ -8,7 +8,7 @@ STO, R2, 16'b1 // valor en leds
 
 STO, R3, 16'd5 // multiplicador
 STO, R4, 16'd10 // cuentas para el ciclo2
-STO, R5, 16'd25 // cuentas para el ciclo3
+STO, R5, 16'd5 // cuentas para el ciclo3
 
 LOOP1:
 STO, R6, 16'd0 // i

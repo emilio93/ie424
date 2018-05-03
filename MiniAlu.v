@@ -31,13 +31,12 @@ wire wIsInitialized;
 
 reg rModulesLoaded;// indica si ya todos los modulos han sido inicializados y están listos
 
-wire [15:0]  wIP,wIP_temp;
-reg          rWriteEnable,rBranchTaken, rRetTaken, rCallTaken;
-wire [27:0]  wInstruction;
-wire [3:0]   wOperation;
-wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination;
-wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue;
-reg [15:0]  rResult,wResult;
+reg         rRetTaken, rCallTaken;
+reg [15:0]  wResult;
+
+always @ (*) begin
+  rModulesLoaded = wIsInitialized;
+end
 
 ROM InstructionRom
 (
@@ -59,8 +58,7 @@ RAM_DUAL_READ_PORT DataRam
 
 assign wIPInitialValue = (rCallTaken) ?  wDestination :
                          (rRetTaken)  ?  wSourceData0 :
-                         (Reset) ? 8'b0 : wDestination;
-assign wIPInitialValue = (rBranchTaken&wready) ? wDestination :
+                         (rBranchTaken&wready) ? wDestination :
                          (rBranchTaken) ? wDestination :
                          (!rModulesLoaded) ? 8'b0 :
                          (!wready) ? wIP_temp-1 :
@@ -68,27 +66,21 @@ assign wIPInitialValue = (rBranchTaken&wready) ? wDestination :
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
-.Reset(   Reset | rBranchTaken | rCallTaken | rRetTaken),
+.Reset(   !rModulesLoaded | rBranchTaken | rCallTaken | rRetTaken | !wready),
 .Initial( (rCallTaken) ? wIP+1 : 
           (rRetTaken) ? wIP+1: 
-			 wIPInitialValue + 1  ),
-.Reset(   !rModulesLoaded | rBranchTaken | !wready),
-.Initial( wIPInitialValue + 1  ),
+			    wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
-assign wIP = (rCallTaken) ? wIPInitialValue:
-             (rRetTaken) ? wIPInitialValue:
-				 (rBranchTaken) ? wIPInitialValue : wIP_temp;
 
-// wOperation
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1 
-assign wIP = (rBranchTaken&wready) ? wIPInitialValue :
-             (rBranchTaken) ? wIPInitialValue :
-             (!rModulesLoaded) ? 0 :
+assign wIP = (!rModulesLoaded) ? 0 :
+             (rBranchTaken&wready) ? wIPInitialValue :
+             (rBranchTaken | rCallTaken | rRetTaken) ? wIPInitialValue :
              (!wready) ? wIPInitialValue :
              wIP_temp;
-
+             
+// wOperation
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 (
 	.Clock(Clock),
@@ -210,37 +202,6 @@ begin
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 		rResult      <= wResult;
-	end
-	//-------------------------------------
-	`MUL16BITS:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
-		rResult      <= mul16BitResult;
-	end
-	//-------------------------------------
-	//-------------------------------------
-	`MUL2:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
-		rResult      <= multemp;
-	end
-	//-------------------------------------
-	`MUL4:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
-		rResult      <= mul4temp;
 	end
 	//-------------------------------------
 	`STO:

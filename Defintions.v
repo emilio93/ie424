@@ -11,6 +11,7 @@
 `define JMP   4'd6 // 0110
 `define SUB   4'd7 // 0111
 `define LCD   4'd8 // 1000
+`define MUL   4'd9
 `define CALL  4'd12
 `define RET   4'd13
 
@@ -31,8 +32,19 @@
 `define R14 8'd14
 `define R15 8'd15
 
-`define RA 8'h1F
+`define RA 8'd16
+
 `define H 16'b0000000001001000
+`define O 16'b0000000001001000
+`define L 16'b0000000001001000
+`define A 16'b0000000001001000
+`define ESPACIO 16'b0000000001001000
+`define M 16'b0000000001001000
+`define U 16'b0000000001001000
+`define N 16'b0000000001001000
+`define D 16'b0000000001001000
+// `define O 16'b0000000001001000
+
 
 
 `endif

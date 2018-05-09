@@ -281,7 +281,7 @@ module LCD(
 		 rTimeCountReset = 1'b1;
 		 end
 		else
-		 rNextState = `STATE_POWERON_CLEAR_B;
+		 rNextState = `STATE_STALL;
 		end	
 	
 	`STATE_STALL:

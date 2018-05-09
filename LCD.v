@@ -16,9 +16,17 @@
 `define STATE_POWERON_CLEAR_B 13
 `define STATE_STALL 14
 
+`define STATE_WRITE_MSN 15
+`define STATE_WRITE_LSN 16
+
 module LCD(
   input wire Clock,
   input wire Reset,
+  input wire write_Enabled,
+  input wire [7:0] Data,
+
+  output wire LCD_RS,
+  output wire LCD_RW,
   output wire oLCD_Enabled,
   output reg oLCD_RegisterSelect, //Command = 0, Data = 1
   output wire oLCD_StrataFlashControl,
@@ -74,16 +82,16 @@ module LCD(
         rWrite_Enabled = 0;
         oLCD_Data = 4'h0;
         oLCD_RegisterSelect = 1'b0; //estoy enviando comandos
-		
+
 		  if (rTimeCount < 32'd750000) begin
           rNextState = rCurrentState;
           rTimeCountReset = 1'b0;
-        end 	
-				
+        end
+
         else begin
           rNextState = `STATE_POWER_INIT;
           rTimeCountReset = 1'b1;
-        end 
+        end
       end
 
     //-------------------------------------------------------
@@ -224,8 +232,8 @@ module LCD(
 		else
 		 rNextState = `STATE_POWERON_EMS_B;
 		end
-		
-		
+
+
 	//Display ON/OFF state
 	`STATE_POWERON_DIS_ON_OFF_A:
 	begin
@@ -254,7 +262,7 @@ module LCD(
 		else
 		 rNextState = `STATE_POWERON_DIS_ON_OFF_B;
 		end
-		
+
 	//Display ON/OFF state
 	`STATE_POWERON_CLEAR_A:
 	begin
@@ -282,12 +290,27 @@ module LCD(
 		 end
 		else
 		 rNextState = `STATE_STALL;
-		end	
-	
+		end
+
+  //Aqui empieza la escritura
+  //---------------------------------------------
 	`STATE_STALL:
 	begin
-		 rNextState = `STATE_STALL;
-		end
+    if (write_Enabled == 1'b1) begin //write
+      LCD_RW = 1'b0;
+      LCD_RS = 1'b1;
+      rNextState = `STATE_WRITE_MSN;
+      rTimeCountReset = 1'b1;
+    end else begin
+      rNextState = `STATE_STALL;
+    end
+	end
+
+  //---------------------------------------------
+  `STATE_WRITE_MSN:
+  begin
+
+  end
 
       default: ; //modo de espera de caracteres.
     endcase

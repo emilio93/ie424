@@ -1,25 +1,25 @@
-`timescale 1ns / 1ps
-
+`timescale 1ns / 1ns
+`include "LCD.v"
 ////////////////////////////////////////////////////////////////////////////////
-// Company: 
+// Company:
 // Engineer:
 //
 // Create Date:   22:30:52 01/30/2011
 // Design Name:   MiniAlu
 // Module Name:   D:/Proyecto/RTL/Dev/MiniALU/TestBench.v
 // Project Name:  MiniALU
-// Target Device:  
-// Tool versions:  
-// Description: 
+// Target Device:
+// Tool versions:
+// Description:
 //
 // Verilog Test Fixture created by ISE for module: MiniAlu
 //
 // Dependencies:
-// 
+//
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 module TestBench;
@@ -29,18 +29,25 @@ module TestBench;
 	reg Reset;
 
 	// Outputs
-	wire [7:0] oLed;
+	wire [3:0] oData;
+	wire enb;
+	wire RegSelect;
+	wire StrataFlashFCtrl;
+	wire ReadWrite;
 
 	// Instantiate the Unit Under Test (UUT)
-	MiniAlu uut (
-		.Clock(Clock),
-		.Reset(Reset),
-		.oLed(oLed)
+	LCD uut (.Clock(Clock),
+  .Reset(Reset),
+  .oLCD_Enabled(enb),
+  .oLCD_RegisterSelect(RegSelect),
+  .oLCD_StrataFlashControl(StrataFlashFCtrl),
+  .oLCD_ReadWrite(ReadWrite),
+  .oLCD_Data(oData)
 	);
-	
+
 	always
 	begin
-		#5  Clock =  ! Clock;
+		#1  Clock =  ! Clock;
 
 	end
 
@@ -60,4 +67,3 @@ module TestBench;
 	end
 
 endmodule
-

@@ -1,6 +1,8 @@
 
 `timescale 1ns / 1ps
 `include "Defintions.v"
+//`include "LCD.v"
+//`include "TestBench_LCD.v"
 
 
 module MiniAlu
@@ -16,10 +18,9 @@ wire [15:0]  wIP,wIP_temp;
 reg          rWriteEnable,rBranchTaken;
 wire [27:0]  wInstruction;
 wire [3:0]   wOperation;
+reg  [15:0]  rResult;
 wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination;
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue;
-reg [15:0]  rResult,wResult;
-
 
 ROM InstructionRom
 (
@@ -94,33 +95,12 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 	.Reset(Reset),
 	.Enable( rFFLedEN ),
 	.D( wSourceData1 ),
-	.Q( oLed    )
+	.Q( oLed )
 );
-
-wire [15:0] multemp;
-MulLUT MuL2
-(	.B(wSourceData0),
-	.A(wSourceData1),
-	.C(multemp)
-);
-
-wire [15:0] mul4temp;
-MulLUT #(.DATA_WIDTH(16),.LUT_BITS(4)) MuL4
-(	.B(wSourceData0),
-	.A(wSourceData1),
-	.C(mul4temp)
-);
-
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
 
-wire [15:0] mul16BitResult;
 
-Mul16Bit multiplier16Bit(
-	.a(wSourceData0),
-	.b(wSourceData1),
-	.result(mul16BitResult)
-);
 
 always @ ( * )
 begin
@@ -156,39 +136,6 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rResult      <= wSourceData1 - wSourceData0;
-	end
-	//-------------------------------------
-  `MUL:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rResult      <= wResult;
-	end
-	//-------------------------------------
-	`MUL16BITS:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rResult      <= mul16BitResult;
-	end
-	//-------------------------------------
-	//-------------------------------------
-	`MUL2:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rResult      <= multemp;
-	end
-	//-------------------------------------
-	`MUL4:
-	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b1;
-		rResult      <= mul4temp;
 	end
 	//-------------------------------------
 	`STO:

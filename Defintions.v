@@ -15,6 +15,9 @@
 `define CALL  4'd12
 `define RET   4'd13
 
+`define SW   4'd14
+`define LW   4'd15
+
 `define R0 8'd0 // 00000000
 `define R1 8'd1 // 00000001
 `define R2 8'd2 // 00000010
@@ -44,6 +47,10 @@
 `define N 16'b0000000001001000
 `define D 16'b0000000001001000
 // `define O 16'b0000000001001000
+`define R8 8'd8 // 00001000
+
+`define SP 8'h0F
+`define RA 8'h1F
 
 
 

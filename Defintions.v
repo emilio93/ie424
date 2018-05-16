@@ -20,8 +20,16 @@
 `define R5 8'd5 // 00000101
 `define R6 8'd6 // 00000110
 `define R7 8'd7 // 00000111
+`define R8 8'd8
+`define R9 8'd9
+`define R10 8'd10
+`define R11 8'd11
+`define R12 8'd12
+`define R13 8'd13
+`define R14 8'd14
+`define R15 8'd15
 
-`define H 16'b0000000001001000 
+`define H 16'b0000000001001000
 
 
 `endif

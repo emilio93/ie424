@@ -26,13 +26,13 @@ begin
   7: oInstruction = {`STO,`R12,16'b0};
 // LOOP2:
   8: oInstruction = {`ADD,`R12,`R12,`R1};
-  9: oInstruction = {`BLE,`LOOP1,`R12,`R15};
+  9: oInstruction = {`BLE,`LOOP2,`R15,`R12};
   10: oInstruction = {`ADD,`R13,`R13,`R1};
-  11: oInstruction = {`BLE,`LOOP1,`R13,`R14};
+  11: oInstruction = {`BLE,`LOOP1,`R14,`R13};
   12: oInstruction = {`LCD,8'b0,`R2,8'b0};
 // LOOPINFINITO:
   13: oInstruction = {`NOP,24'd0};
-  14: oInstruction = {`BLE,`LOOPINFINITO,`R0,`R1};
+  14: oInstruction = {`BLE,`LOOPINFINITO,`R1,`R0};
   15: oInstruction = {`NOP,24'd0};
   16: oInstruction = {`JMP,`INICIO,16'd0};
 

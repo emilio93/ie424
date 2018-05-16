@@ -26,7 +26,7 @@ reg  [15:0]  rResult; //Salida de la ALU
 wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
 reg rWriteLCD; //Habilitador de la pantalla para escribir. Indica que se esta escribiendo.
-reg wready;
+wire wready;
 
 ROM InstructionRom
 (
@@ -47,18 +47,18 @@ RAM_DUAL_READ_PORT DataRam
 );
 
 assign wIPInitialValue = (Reset) ? 8'b0 :
-                         (rWriteLCD) ? wIP :
+                         (!wready) ? wIP :
                          wDestination;
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
-.Reset(   Reset | rBranchTaken | rWriteLCD),
+.Reset(   Reset | rBranchTaken | !wready),
 .Initial( wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
 assign wIP = (rBranchTaken) ? wIPInitialValue :
-             (rWriteLCD) ? (wIP_temp-1) :
+             (!wready) ? (wIP_temp-1) :
              wIP_temp;
 
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1

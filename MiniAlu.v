@@ -1,9 +1,10 @@
 
 `timescale 1ns / 1ps
-`include "Defintions.v"
 //`include "LCD.v"
 //`include "TestBench_LCD.v"
 
+`include "Defintions.v"
+`include "LCD.v"
 
 module MiniAlu
 (

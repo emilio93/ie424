@@ -14,37 +14,34 @@
 `define STATE_POWERON_DIS_ON_OFF_B 11
 `define STATE_POWERON_CLEAR_A 12
 `define STATE_POWERON_CLEAR_B 13
-`define STATE_STALL 14
+`define STATE_IDLE 14
 
 `define STATE_WRITE_MSN 15
-`define STATE_WRITE_LSN 16
+`define STATE_WRITE_DELAY 16
+`define STATE_WRITE_LSN 17
+`define STATE_WRITE_WAIT 18
 
 module LCD(
-  input wire Clock,
-  input wire Reset,
-  input wire write_Enabled,
-  input wire [7:0] Data,
+  input wire Clock, //reloj
+  input wire Reset, //reiniciar
+  input wire write_Enabled, //senal que indica que se quiere escribir
+  input wire [7:0] iData, //informacion de entrada
 
-  output wire oLCD_Enabled,
-  output reg LCD_RS,
-  output reg LCD_RW,
-  output reg oLCD_RegisterSelect, //Command = 0, Data = 1
-  output wire oLCD_StrataFlashControl,
-  output wire oLCD_ReadWrite,
-  output reg [3:0] oLCD_Data
+  output reg oLCD_Enabled, //habilitador de la pantalla
+  output reg oLCD_RS, //command = 0. Data = 1
+  output reg oLCD_RW, //para escribir es 0
+  output wire oLCD_StrataFlashControl, //para lo de intel
+  output reg [3:0] oLCD_Data, //salida de datos hacia la panatalla
+  output reg oLCD_Ready //indicador de que la pantalla esta lista para esciribir (IDLE)
   );
-
-  reg rWrite_Enabled;
-  assign oLCD_ReadWrite = 0; //Solo escribo a la LCD, no leo de ella
-  assign oLCD_StrataFlashControl = 1; //Full r/w access to LCD.
 
   reg [7:0] rCurrentState, rNextState;
   reg [31:0] rTimeCount;
   reg rTimeCountReset;
-
   reg [2:0] rWaitCount;
+  reg [7:0] rBuffer;
 
-  assign oLCD_Enabled = rWrite_Enabled;
+  assign oLCD_StrataFlashControl = 1; //Full r/w access to LCD
 
   //Next State and Delay Logic
   always @ ( posedge Clock ) begin
@@ -69,19 +66,23 @@ module LCD(
     //--------------------------------------------------------
       `STATE_RESET: begin
         rWaitCount = 0;
-        rWrite_Enabled = 0;
+        oLCD_Enabled = 0;
         oLCD_Data = 4'h0;
-        oLCD_RegisterSelect = 1'b0;
+        oLCD_RS = 1'b0;
+        oLCD_RW = 1'b0;
         rTimeCountReset = 1'b0;
+        oLCD_Ready = 1'b0;
         rNextState = `STATE_START;
       end
 
     //--------------------------------------------------------
       //Esperar 750000 ciclos
       `STATE_START: begin
-        rWrite_Enabled = 0;
+        oLCD_Enabled = 0;
         oLCD_Data = 4'h0;
-        oLCD_RegisterSelect = 1'b0; //estoy enviando comandos
+        oLCD_RS = 1'b0; //estoy enviando comandos
+        oLCD_RW = 1'b0;
+        oLCD_Ready = 1'b0;
 
 		  if (rTimeCount < 32'd750000) begin
           rNextState = rCurrentState;
@@ -97,8 +98,10 @@ module LCD(
     //-------------------------------------------------------
       //escritura de 0x3 o 0x2 segun corresponda; y esperar 12 ciclos
       `STATE_POWER_INIT: begin
-        rWrite_Enabled = 1;
-        oLCD_RegisterSelect = 1'b0; //estoy enviando comandos
+        oLCD_Enabled = 1;
+        oLCD_RS = 1'b0; //estoy enviando comandos
+        oLCD_RW = 1'b0;
+        oLCD_Ready = 1'b0;
 
         if(rWaitCount == 3)begin
           oLCD_Data = 4'h2;
@@ -123,9 +126,11 @@ module LCD(
     //---------------------------------------------------------
       //Esperar 205000 ciclos
       `STATE_POWER_WAIT0: begin
-        rWrite_Enabled = 0;
+        oLCD_Enabled = 0;
         oLCD_Data = 4'h0;
-        oLCD_RegisterSelect = 1'b0; //estoy enviando comandos
+        oLCD_RS = 1'b0; //estoy enviando comandos
+        oLCD_RW = 1'b0;
+        oLCD_Ready = 1'b0;
 
         if (rTimeCount > 32'd205000) begin
           rWaitCount = 2'd1;
@@ -140,9 +145,11 @@ module LCD(
     //---------------------------------------------------------
       //Esperar 5000 ciclos
       `STATE_POWER_WAIT1: begin
-        rWrite_Enabled = 0;
+        oLCD_Enabled = 0;
         oLCD_Data = 4'h0;
-        oLCD_RegisterSelect = 1'b0; //estoy enviando comandos
+        oLCD_RS = 1'b0; //estoy enviando comandos
+        oLCD_RW = 1'b0;
+        oLCD_Ready = 1'b0;
 
         if (rTimeCount > 32'd5000) begin
           rWaitCount = 2'd2;
@@ -157,9 +164,11 @@ module LCD(
     //---------------------------------------------------------
       //Esperar 2000 ciclos
       `STATE_POWER_WAIT2: begin
-        rWrite_Enabled = 0;
+        oLCD_Enabled = 0;
         oLCD_Data = 4'h0;
-        oLCD_RegisterSelect = 1'b0; //estoy enviando comandos
+        oLCD_RS = 1'b0; //estoy enviando comandos
+        oLCD_RW = 1'b0;
+        oLCD_Ready = 1'b0;
 
         if (rTimeCount > 32'd2000) begin
           rWaitCount = 2'd3;
@@ -172,147 +181,251 @@ module LCD(
         end
 
     //Function Set State
-
-	`STATE_POWERON_CLEARD_A:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'h2;
-		if (rTimeCount > 32'd50 ) begin
-		 rNextState = `STATE_POWERON_CLEARD_B;
-		 rTimeCountReset = 1'b1;
-		 end
-		else
-		 rNextState = `STATE_POWERON_CLEARD_A;
-		end
+    //------------------------------------------------
+    	`STATE_POWERON_CLEARD_A:
+    	begin
+    		oLCD_Enabled = 1'b0;
+    		oLCD_RS = 1'b0; //these are commands
+        oLCD_RW = 1'b0;
+    		rTimeCountReset = 1'b0;
+    		oLCD_Data = 4'h2;
+        oLCD_Ready = 1'b0;
+    		if (rTimeCount > 32'd50 ) begin
+    		 rNextState = `STATE_POWERON_CLEARD_B;
+    		 rTimeCountReset = 1'b1;
+    		 end
+    		else
+    		 rNextState = `STATE_POWERON_CLEARD_A;
+    		end
 		//------------------------------------------
-	`STATE_POWERON_CLEARD_B:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'h8;
-		if (rTimeCount > 32'd2000 )
-		 begin
-		 rNextState = `STATE_POWERON_EMS_A;
-		 rTimeCountReset = 1'b1;
-		 end
-		else begin
-		 rNextState = `STATE_POWERON_CLEARD_B;
-		end
-	end
+  	`STATE_POWERON_CLEARD_B:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'h8;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd2000 )
+  		 begin
+  		 rNextState = `STATE_POWERON_EMS_A;
+  		 rTimeCountReset = 1'b1;
+  		 end
+  		else begin
+  		 rNextState = `STATE_POWERON_CLEARD_B;
+  		end
+  	end
 
-	//Entry mode state
+  	//Entry mode state
+  //---------------------------------------------------------
+  	`STATE_POWERON_EMS_A:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'h0;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd50 ) begin
+  		 rNextState = `STATE_POWERON_EMS_B;
+  		 rTimeCountReset = 1'b1;
+  		end
+  		else
+  		 rNextState = `STATE_POWERON_EMS_A;
+  		end
+  		//------------------------------------------
+  	`STATE_POWERON_EMS_B:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'h6;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd2000 ) begin
+  		 rNextState = `STATE_POWERON_DIS_ON_OFF_A;
+  		 rTimeCountReset = 1'b1;
+  		 end
+  		else
+  		 rNextState = `STATE_POWERON_EMS_B;
+  		end
 
-	`STATE_POWERON_EMS_A:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'h0;
-		if (rTimeCount > 32'd50 ) begin
-		 rNextState = `STATE_POWERON_EMS_B;
-		 rTimeCountReset = 1'b1;
-		end
-		else
-		 rNextState = `STATE_POWERON_EMS_A;
-		end
-		//------------------------------------------
-	`STATE_POWERON_EMS_B:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'h6;
-		if (rTimeCount > 32'd2000 ) begin
-		 rNextState = `STATE_POWERON_DIS_ON_OFF_A;
-		 rTimeCountReset = 1'b1;
-		 end
-		else
-		 rNextState = `STATE_POWERON_EMS_B;
-		end
 
+  	//Display ON/OFF state
+  	`STATE_POWERON_DIS_ON_OFF_A:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'h0;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd50 ) begin
+  		 rNextState = `STATE_POWERON_DIS_ON_OFF_B;
+  		 rTimeCountReset = 1'b1;
+  		 end
+  		else
+  		 rNextState = `STATE_POWERON_DIS_ON_OFF_A;
+  		end
+  		//------------------------------------------
+  	`STATE_POWERON_DIS_ON_OFF_B:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'hC;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd2000 ) begin
+  		 rNextState = `STATE_POWERON_CLEAR_A;
+  		 rTimeCountReset = 1'b1;
+  		 end
+  		else
+  		 rNextState = `STATE_POWERON_DIS_ON_OFF_B;
+  		end
 
-	//Display ON/OFF state
-	`STATE_POWERON_DIS_ON_OFF_A:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'h0;
-		if (rTimeCount > 32'd50 ) begin
-		 rNextState = `STATE_POWERON_DIS_ON_OFF_B;
-		 rTimeCountReset = 1'b1;
-		 end
-		else
-		 rNextState = `STATE_POWERON_DIS_ON_OFF_A;
-		end
-		//------------------------------------------
-	`STATE_POWERON_DIS_ON_OFF_B:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'hC;
-		if (rTimeCount > 32'd2000 ) begin
-		 rNextState = `STATE_POWERON_CLEAR_A;
-		 rTimeCountReset = 1'b1;
-		 end
-		else
-		 rNextState = `STATE_POWERON_DIS_ON_OFF_B;
-		end
+  //-------------------------------------------------------------
+  	//Display ON/OFF state
+  	`STATE_POWERON_CLEAR_A:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'h0;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd50 ) begin
+  		 rNextState = `STATE_POWERON_CLEAR_B;
+  		 rTimeCountReset = 1'b1;
+  		 end
+  		else
+  		 rNextState = `STATE_POWERON_CLEAR_A;
+  		end
+  		//------------------------------------------
+  	`STATE_POWERON_CLEAR_B:
+  	begin
+  		oLCD_Enabled = 1'b0;
+  		oLCD_RS = 1'b0; //these are commands
+      oLCD_RW = 1'b0;
+  		rTimeCountReset = 1'b0;
+  		oLCD_Data = 4'hC;
+      oLCD_Ready = 1'b0;
+  		if (rTimeCount > 32'd82000 ) begin
+  		 rNextState = `STATE_POWERON_CLEAR_B;
+  		 rTimeCountReset = 1'b1;
+  		 end
+  		else
+  		 rNextState = `STATE_IDLE;
+  		end
 
-	//Display ON/OFF state
-	`STATE_POWERON_CLEAR_A:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'h0;
-		if (rTimeCount > 32'd50 ) begin
-		 rNextState = `STATE_POWERON_CLEAR_B;
-		 rTimeCountReset = 1'b1;
-		 end
-		else
-		 rNextState = `STATE_POWERON_CLEAR_A;
-		end
-		//------------------------------------------
-	`STATE_POWERON_CLEAR_B:
-	begin
-		rWrite_Enabled = 1'b0;
-		oLCD_RegisterSelect = 1'b0; //these are commands
-		rTimeCountReset = 1'b0;
-		oLCD_Data = 4'hC;
-		if (rTimeCount > 32'd82000 ) begin
-		 rNextState = `STATE_POWERON_CLEAR_B;
-		 rTimeCountReset = 1'b1;
-		 end
-		else
-		 rNextState = `STATE_STALL;
-		end
+    //Aqui empieza la escritura
+    //---------------------------------------------
+  	`STATE_IDLE:
+  	begin
+      oLCD_Ready = 1'b1;
+      oLCD_RW = 1'b1;
+      oLCD_Enabled = 1'b0;
+      oLCD_RS = 1'b0;
+      oLCD_Data = 4'b0;
 
-  //Aqui empieza la escritura
-  //---------------------------------------------
-	`STATE_STALL:
-	begin
-    if (write_Enabled == 1'b1) begin //write
-      LCD_RW = 1'b0;
-      LCD_RS = 1'b1;
-      rNextState = `STATE_WRITE_MSN;
-      rTimeCountReset = 1'b1;
-    end else begin
-      rNextState = `STATE_STALL;
+      if (write_Enabled == 1'b1) begin //write
+        rBuffer = iData;
+        rNextState = `STATE_WRITE_MSN;
+        rTimeCountReset = 1'b1;
+      end else begin
+        rNextState = `STATE_IDLE;
+        rBuffer = 8'b0;
+      end
+  	end
+
+    //---------------------------------------------
+    `STATE_WRITE_MSN:
+    begin
+      oLCD_Ready = 1'b0;
+      oLCD_RS = 1'b1;
+      oLCD_RW = 1'b0;
+      oLCD_Data = rBuffer[7:4];
+
+      if (rTimeCount <= 32'd2) begin
+        oLCD_Enabled = 1'b0;
+        rNextState = rCurrentState;
+      end
+      if (2 < rTimeCount <= 14) begin
+        oLCD_Enabled = 1'b1;
+        rNextState = rCurrentState;
+      end
+      if (14 < rTimeCount <= 15 ) begin
+        oLCD_Enabled = 1'b0;
+        rNextState = rCurrentState;
+      end
+      if (rTimeCount > 15) begin
+        rNextState = `STATE_WRITE_DELAY;
+      end
     end
-	end
 
-  //---------------------------------------------
-  `STATE_WRITE_MSN:
-  begin
+    //---------------------------------------------------------
+    //Esperar 50 ciclos = 1us
+    `STATE_WRITE_DELAY: begin
+      oLCD_Enabled = 0;
+      oLCD_Data = 4'h0;
+      oLCD_RS = 1'b0; //estoy enviando comandos
+      oLCD_RW = 1'b1;
+      oLCD_Ready = 1'b0;
 
-  end
+      if (rTimeCount > 32'd50) begin
+        rNextState = `STATE_WRITE_LSN;
+        rTimeCountReset = 1'b1;
+      end else begin
+        rNextState = rCurrentState;
+        rTimeCountReset = 1'b0;
+        end
+      end
 
-      default: ; //modo de espera de caracteres.
+    //---------------------------------------------
+    `STATE_WRITE_LSN:
+      begin
+        oLCD_Ready = 1'b0;
+        oLCD_RS = 1'b1;
+        oLCD_RW = 1'b0;
+        oLCD_Data = rBuffer[3:0];
+
+        if (rTimeCount <= 32'd2) begin
+          oLCD_Enabled = 1'b0;
+          rNextState = rCurrentState;
+        end
+        if (2 < rTimeCount <= 14) begin
+          oLCD_Enabled = 1'b1;
+          rNextState = rCurrentState;
+        end
+        if (14 < rTimeCount <= 15 ) begin
+          oLCD_Enabled = 1'b0;
+          rNextState = rCurrentState;
+        end
+        if (rTimeCount > 15) begin
+          rNextState = `STATE_WRITE_WAIT;
+        end
+      end
+
+
+    //---------------------------------------------------------
+      //Esperar 2000 ciclos = 40us
+      `STATE_WRITE_WAIT: begin
+        oLCD_Enabled = 0;
+        oLCD_Data = 4'h0;
+        oLCD_RS = 1'b0; //estoy enviando comandos
+        oLCD_RW = 1'b1;
+        oLCD_Ready = 1'b0;
+
+        if (rTimeCount > 32'd2000) begin
+          rNextState = `STATE_IDLE;
+          rTimeCountReset = 1'b1;
+        end
+        else begin
+          rNextState = rCurrentState;
+          rTimeCountReset = 1'b0;
+        end
+      end
+      default: rNextState = `STATE_IDLE; //modo de espera de caracteres.
     endcase
   end
 endmodule // LCD

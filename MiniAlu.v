@@ -8,10 +8,7 @@
 module MiniAlu
 (
  input wire Clock,
- input wire Reset,
- output wire [7:0] oLed
-
-
+ input wire Reset
 );
 
 wire [15:0]  wIP,wIP_temp;
@@ -21,6 +18,10 @@ wire [3:0]   wOperation;
 reg  [15:0]  rResult;
 wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination;
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue;
+wire iLCD_Ready;
+
+reg rWriteLCD;
+
 
 ROM InstructionRom
 (
@@ -40,18 +41,22 @@ RAM_DUAL_READ_PORT DataRam
 	.oDataOut1(     wSourceData1 )
 );
 
-assign wIPInitialValue = (Reset) ? 8'b0 : wDestination;
+assign wIPInitialValue = (Reset) ? 8'b0 :
+                         (!oLCD_Ready) ? wIP :
+                         wDestination;
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
-.Reset(   Reset | rBranchTaken ),
+.Reset(   Reset | rBranchTaken | (!iLCD_Ready)),
 .Initial( wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
-assign wIP = (rBranchTaken) ? wIPInitialValue : wIP_temp;
+assign wIP = (rBranchTaken) ? wIPInitialValue :
+             (iLCD_Ready) ? wIP_temp :
+             (wIP_temp-1);
 
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1 
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
 (
 	.Clock(Clock),
 	.Reset(Reset),
@@ -100,6 +105,18 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
 
+LCD LSD(
+  .Clock(Clock),
+  .Reset(Reset),
+  .write_Enabled(rWriteLCD),
+  .Data(wSourceData1),
+  .oLCD_Enabled(LCD_E),
+  .oLCD_RegisterSelect(LCD_RS), //Command = 0, Data = 1
+  .oLCD_StrataFlashControl(),
+  .oLCD_ReadWrite(LCD_RW),
+  .oLCD_Data(SF_D[11:8]),
+  .oLCD_Ready(iLCD_Ready)
+  );
 
 
 always @ ( * )
@@ -112,6 +129,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
+    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	`ADD:
@@ -120,6 +138,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rResult      <= wSourceData1 + wSourceData0;
+    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	// Operación de resta.
@@ -136,6 +155,7 @@ begin
 		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rResult      <= wSourceData1 - wSourceData0;
+    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	`STO:
@@ -144,6 +164,7 @@ begin
 		rWriteEnable <= 1'b1;
 		rBranchTaken <= 1'b0;
 		rResult      <= wImmediateValue;
+    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	`BLE:
@@ -151,25 +172,37 @@ begin
 		rFFLedEN     <= 1'b0;
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
+    rWriteLCD <= 1'b0;
 		if (wSourceData1 <= wSourceData0 )
 			rBranchTaken <= 1'b1;
 		else
 			rBranchTaken <= 1'b0;
-		
+
 	end
-	//-------------------------------------	
+	//-------------------------------------
 	`JMP:
 	begin
 		rFFLedEN     <= 1'b0;
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 		rBranchTaken <= 1'b1;
+    rWriteLCD <= 1'b0;
 	end
-	//-------------------------------------	
+	//-------------------------------------
 	`LED:
 	begin
 		rFFLedEN     <= 1'b1;
 		rWriteEnable <= 1'b0;
+		rResult      <= 0;
+		rBranchTaken <= 1'b0;
+    rWriteLCD <= 1'b0;
+	end
+	//-------------------------------------
+  `LCD:
+	begin
+		rFFLedEN     <= 1'b0;
+		rWriteEnable <= 1'b0;
+    rWriteLCD <= 1'b1;
 		rResult      <= 0;
 		rBranchTaken <= 1'b0;
 	end
@@ -180,9 +213,10 @@ begin
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 		rBranchTaken <= 1'b0;
-	end	
-	//-------------------------------------	
-	endcase	
+    rWriteLCD <= 1'b0;
+	end
+	//-------------------------------------
+	endcase
 end
 
 

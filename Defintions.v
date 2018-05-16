@@ -10,6 +10,7 @@
 `define ADD   4'd5 // 0101
 `define JMP   4'd6 // 0110
 `define SUB   4'd7 // 0111
+`define LCD   4'd8 // 1000
 
 `define R0 8'd0 // 00000000
 `define R1 8'd1 // 00000001

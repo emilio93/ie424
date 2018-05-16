@@ -11,16 +11,14 @@ module MiniAlu
  input wire Reset
 );
 
-wire [15:0]  wIP,wIP_temp;
-reg          rWriteEnable,rBranchTaken;
-wire [27:0]  wInstruction;
-wire [3:0]   wOperation;
-reg  [15:0]  rResult;
-wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination;
-wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue;
-wire iLCD_Ready;
-
-reg rWriteLCD;
+wire [15:0]  wIP,wIP_temp; //PC counter
+reg          rWriteEnable,rBranchTaken; //habilitadores
+wire [27:0]  wInstruction; //instruccion compuesta por concatenacion
+wire [3:0]   wOperation; //OPCODE
+reg  [15:0]  rResult; //Salida de la ALU
+wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
+wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
+reg rWriteLCD; //Habilitador de la pantalla para escribir. Indica que se esta escribiendo.
 
 
 ROM InstructionRom
@@ -42,19 +40,19 @@ RAM_DUAL_READ_PORT DataRam
 );
 
 assign wIPInitialValue = (Reset) ? 8'b0 :
-                         (!oLCD_Ready) ? wIP :
+                         (rWriteLCD) ? wIP :
                          wDestination;
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
-.Reset(   Reset | rBranchTaken | (!iLCD_Ready)),
+.Reset(   Reset | rBranchTaken | rWriteLCD),
 .Initial( wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
 assign wIP = (rBranchTaken) ? wIPInitialValue :
-             (iLCD_Ready) ? wIP_temp :
-             (wIP_temp-1);
+             (rWriteLCD) ? (wIP_temp-1) :
+             wIP_temp;
 
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
 (
@@ -109,13 +107,12 @@ LCD LSD(
   .Clock(Clock),
   .Reset(Reset),
   .write_Enabled(rWriteLCD),
-  .Data(wSourceData1),
+  .iData(wSourceData1[7:0]),
   .oLCD_Enabled(LCD_E),
-  .oLCD_RegisterSelect(LCD_RS), //Command = 0, Data = 1
-  .oLCD_StrataFlashControl(),
-  .oLCD_ReadWrite(LCD_RW),
-  .oLCD_Data(SF_D[11:8]),
-  .oLCD_Ready(iLCD_Ready)
+  .oLCD_RS(LCD_RS), //Command = 0, Data = 1
+  .oLCD_RW(LCD_RW),
+  .oLCD_StrataFlashControl(No_se),
+  .oLCD_Data(SF_D[11:8])
   );
 
 

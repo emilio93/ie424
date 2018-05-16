@@ -8,7 +8,13 @@
 module MiniAlu
 (
  input wire Clock,
- input wire Reset
+ input wire Reset,
+ output wire [7:0] oLed,
+ output wire [3:0] SF_D,
+ output wire LCD_E,
+ output wire LCD_RS,
+ output wire LCD_RW,
+ output wire No_se
 );
 
 wire [15:0]  wIP,wIP_temp; //PC counter

@@ -25,9 +25,9 @@ module LCD(
   input wire write_Enabled,
   input wire [7:0] Data,
 
-  output wire LCD_RS,
-  output wire LCD_RW,
   output wire oLCD_Enabled,
+  output reg LCD_RS,
+  output reg LCD_RW,
   output reg oLCD_RegisterSelect, //Command = 0, Data = 1
   output wire oLCD_StrataFlashControl,
   output wire oLCD_ReadWrite,

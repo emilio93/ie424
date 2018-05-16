@@ -34,15 +34,21 @@ module TestBench;
 	wire RegSelect;
 	wire StrataFlashFCtrl;
 	wire ReadWrite;
+	wire [3:0] SF_D;
+	wire LCD_E;
+	wire LCD_RS;
+	wire LCD_RW;
+	wire No_se;
 
 	// Instantiate the Unit Under Test (UUT)
-	LCD uut (.Clock(Clock),
-  .Reset(Reset),
-  .oLCD_Enabled(enb),
-  .oLCD_RegisterSelect(RegSelect),
-  .oLCD_StrataFlashControl(StrataFlashFCtrl),
-  .oLCD_ReadWrite(ReadWrite),
-  .oLCD_Data(oData)
+	MiniAlu uut (
+		.Clock(Clock),
+		.Reset(Reset),
+		.SF_D(SF_D),
+		.LCD_E(LCD_E),
+		.LCD_RS(LCD_RS),
+		.LCD_RW(LCD_RW),
+		.No_se(No_se)
 	);
 
 	always

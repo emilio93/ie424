@@ -51,7 +51,9 @@ RAM_DUAL_READ_PORT DataRam
 	.oDataOut1(     wSourceData1 )
 );
 
-assign wIPInitialValue = (!rModulesLoaded) ? 8'b0 :
+assign wIPInitialValue = (rBranchTaken&wready) ? wDestination :
+                         (rBranchTaken) ? wDestination :
+                         (!rModulesLoaded) ? 8'b0 :
                          (!wready) ? wIP_temp-1 :
                          wDestination;
 UPCOUNTER_POSEDGE IP
@@ -62,9 +64,10 @@ UPCOUNTER_POSEDGE IP
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
-assign wIP = (!rModulesLoaded) ? 0 :
-             (!wready) ? wIPInitialValue :
+assign wIP = (rBranchTaken&wready) ? wIPInitialValue :
              (rBranchTaken) ? wIPInitialValue :
+             (!rModulesLoaded) ? 0 :
+             (!wready) ? wIPInitialValue :
              wIP_temp;
 
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1

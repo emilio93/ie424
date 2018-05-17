@@ -350,16 +350,17 @@ module LCD(
       oLCD_RS = 1'b1;
       oLCD_RW = 1'b0;
       oLCD_Data = rBuffer[7:4];
+      rTimeCountReset = 0;
 
       if (rTimeCount <= 32'd2) begin
         oLCD_Enabled = 1'b0;
         rNextState = rCurrentState;
       end
-      if (2 < rTimeCount <= 14) begin
+      if (2 < rTimeCount & rTimeCount <= 14) begin
         oLCD_Enabled = 1'b1;
         rNextState = rCurrentState;
       end
-      if (14 < rTimeCount <= 15 ) begin
+      if (14 < rTimeCount & rTimeCount <= 15 ) begin
         oLCD_Enabled = 1'b0;
         rNextState = rCurrentState;
       end
@@ -390,8 +391,9 @@ module LCD(
     //---------------------------------------------
     `STATE_WRITE_LSN:
       begin
-      oIsInitialized = 1'b1;
+        oIsInitialized = 1'b1;
         ready = 1'b0;
+        rTimeCountReset = 1'b0;
         oLCD_RS = 1'b1;
         oLCD_RW = 1'b0;
         oLCD_Data = rBuffer[3:0];
@@ -400,11 +402,11 @@ module LCD(
           oLCD_Enabled = 1'b0;
           rNextState = rCurrentState;
         end
-        if (2 < rTimeCount <= 14) begin
+        if (2 < rTimeCount & rTimeCount <= 14) begin
           oLCD_Enabled = 1'b1;
           rNextState = rCurrentState;
         end
-        if (14 < rTimeCount <= 15 ) begin
+        if (14 < rTimeCount & rTimeCount <= 15 ) begin
           oLCD_Enabled = 1'b0;
           rNextState = rCurrentState;
         end
@@ -423,7 +425,7 @@ module LCD(
         oLCD_Data = 4'h0;
         oLCD_RS = 1'b0; //estoy enviando comandos
         oLCD_RW = 1'b1;
-
+        rTimeCountReset = 1'b0;
         if (rTimeCount > 32'd2000) begin
           rNextState = `STATE_IDLE;
           rTimeCountReset = 1'b1;

@@ -67,7 +67,7 @@ assign wIP = (!rModulesLoaded) ? 0 :
              (rBranchTaken) ? wIPInitialValue :
              wIP_temp;
 
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 (
 	.Clock(Clock),
 	.Reset(!rModulesLoaded),
@@ -110,7 +110,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 	.Clock(Clock),
 	.Reset(!rModulesLoaded),
 	.Enable( rFFLedEN ),
-	.D( wSourceData1 ),
+	.D( wSourceData1[7:0]),
 	.Q( oLed )
 );
 

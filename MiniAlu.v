@@ -29,6 +29,10 @@ reg rWriteLCD; //Habilitador de la pantalla para escribir. Indica que se esta es
 wire wready;
 wire wIsInitialized;
 
+reg rModulesLoaded;// indica si ya todos los modulos han sido inicializados y están listos
+
+always @ (*) rModulesLoaded = wIsInitialized;
+
 ROM InstructionRom
 (
 	.iAddress(     wIP          ),
@@ -47,25 +51,26 @@ RAM_DUAL_READ_PORT DataRam
 	.oDataOut1(     wSourceData1 )
 );
 
-assign wIPInitialValue = (Reset) ? 8'b0 :
-                         (!wready) ? wIP :
+assign wIPInitialValue = (!rModulesLoaded) ? 8'b0 :
+                         (!wready) ? wIP_temp-1 :
                          wDestination;
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
-.Reset(   Reset | rBranchTaken | !wready),
+.Reset(   !rModulesLoaded | rBranchTaken | !wready),
 .Initial( wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
-assign wIP = (rBranchTaken) ? wIPInitialValue :
-             (!wready) ? (wIP_temp-1) :
+assign wIP = (!rModulesLoaded) ? 0 :
+             (!wready) ? wIPInitialValue :
+             (rBranchTaken) ? wIPInitialValue :
              wIP_temp;
 
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
 (
 	.Clock(Clock),
-	.Reset(Reset),
+	.Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[27:24]),
 	.Q(wOperation)
@@ -74,7 +79,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 (
 	.Clock(Clock),
-	.Reset(Reset),
+	.Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[7:0]),
 	.Q(wSourceAddr0)
@@ -83,7 +88,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 (
 	.Clock(Clock),
-	.Reset(Reset),
+	.Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[15:8]),
 	.Q(wSourceAddr1)
@@ -92,7 +97,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
 (
 	.Clock(Clock),
-	.Reset(Reset),
+	.Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[23:16]),
 	.Q(wDestination)
@@ -103,7 +108,7 @@ reg rFFLedEN;
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 (
 	.Clock(Clock),
-	.Reset(Reset),
+	.Reset(!rModulesLoaded),
 	.Enable( rFFLedEN ),
 	.D( wSourceData1 ),
 	.Q( oLed )

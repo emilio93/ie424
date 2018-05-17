@@ -27,6 +27,7 @@ wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
 reg rWriteLCD; //Habilitador de la pantalla para escribir. Indica que se esta escribiendo.
 wire wready;
+wire wIsInitialized;
 
 ROM InstructionRom
 (
@@ -120,6 +121,7 @@ LCD LSD(
   .oLCD_RW(LCD_RW),
   .oLCD_StrataFlashControl(No_se),
   .oLCD_Data(SF_D[3:0]),
+	.oIsInitialized(wIsInitialized),
   .ready(wready)
   );
 

@@ -32,6 +32,7 @@ module LCD(
   output reg oLCD_RW, //para escribir es 0
   output wire oLCD_StrataFlashControl, //para lo de intel
   output reg [3:0] oLCD_Data, //salida de datos hacia la panatalla
+  output reg oIsInitialized,
   output reg ready
   );
 
@@ -62,6 +63,8 @@ module LCD(
 
   //Current State and output logic
   always @ ( * ) begin
+    drive_defaults;
+
     case (rCurrentState)
     //--------------------------------------------------------
       `STATE_RESET: begin
@@ -322,6 +325,7 @@ module LCD(
     //---------------------------------------------
     `STATE_IDLE:
     begin
+      oIsInitialized = 1'b1;
       ready = 1'b1;
       oLCD_RW = 1'b1;
       oLCD_Enabled = 1'b0;
@@ -341,6 +345,7 @@ module LCD(
     //---------------------------------------------
     `STATE_WRITE_MSN:
     begin
+      oIsInitialized = 1'b1;
       ready = 1'b0;
       oLCD_RS = 1'b1;
       oLCD_RW = 1'b0;
@@ -366,6 +371,7 @@ module LCD(
     //---------------------------------------------------------
     //Esperar 50 ciclos = 1us
     `STATE_WRITE_DELAY: begin
+      oIsInitialized = 1'b1;
       ready = 1'b0;
       oLCD_Enabled = 0;
       oLCD_Data = 4'h0;
@@ -384,6 +390,7 @@ module LCD(
     //---------------------------------------------
     `STATE_WRITE_LSN:
       begin
+      oIsInitialized = 1'b1;
         ready = 1'b0;
         oLCD_RS = 1'b1;
         oLCD_RW = 1'b0;
@@ -410,6 +417,7 @@ module LCD(
     //---------------------------------------------------------
       //Esperar 2000 ciclos = 40us
       `STATE_WRITE_WAIT: begin
+      oIsInitialized = 1'b1;
         ready = 1'b0;
         oLCD_Enabled = 0;
         oLCD_Data = 4'h0;
@@ -428,4 +436,10 @@ module LCD(
       default: rNextState = `STATE_IDLE; //modo de espera de caracteres.
     endcase
   end
+
+  task drive_defaults;
+    begin
+      oIsInitialized = 1'b0;
+    end
+  endtask
 endmodule // LCD

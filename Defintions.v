@@ -12,6 +12,8 @@
 `define SUB   4'd7 // 0111
 `define LCD   4'd8 // 1000
 `define MUL   4'd9
+`define PUSH   4'd10
+`define POP   4'd11
 `define CALL  4'd12
 `define RET   4'd13
 

@@ -19,7 +19,9 @@ module MiniAlu
 );
 
 wire [15:0]  wIP,wIP_temp; //PC counter
+wire [15:0]  wStackOut;
 reg          rWriteEnable,rBranchTaken; //habilitadores
+reg          rPushStackEnable, rPopStackEnable; //habilitadores para actuar en el es stack
 wire [27:0]  wInstruction; //instruccion compuesta por concatenacion
 wire [3:0]   wOperation; //OPCODE
 reg  [15:0]  rResult; //Salida de la ALU
@@ -55,6 +57,18 @@ RAM_DUAL_READ_PORT DataRam
 	.iDataIn(       rResult ),
 	.oDataOut0(     wSourceData0 ),
 	.oDataOut1(     wSourceData1 )
+);
+
+Stack Stack
+(
+	.Clock(Clock),
+	.Reset(!rModulesLoaded),
+  .write(rPushStackEnable),
+  .read(rPopStackEnable),
+  .setSP(1'b0),
+  .stackPointerIn(6'b0),
+	.iDataIn(wSourceData0),
+	.oDataOut(wStackOut)
 );
 
 
@@ -171,6 +185,7 @@ LCD LSD(
 
 always @ ( * )
 begin
+	drive_defaults;
 	case (wOperation)
 	//-------------------------------------
 	`NOP:
@@ -182,7 +197,6 @@ begin
 		rWriteEnable <= 1'b0;
 		rRetTaken <= 1'b0;
 		rResult      <= 0;
-    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	`ADD:
@@ -193,7 +207,6 @@ begin
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 		rResult      <= wSourceData1 + wSourceData0;
-    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	// Operación de resta.
@@ -212,7 +225,6 @@ begin
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 		rResult      <= wSourceData1 - wSourceData0;
-    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
   `MUL:
@@ -233,7 +245,6 @@ begin
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 		rResult      <= wImmediateValue;
-    rWriteLCD <= 1'b0;
 	end
 	//-------------------------------------
 	`BLE:
@@ -284,7 +295,30 @@ begin
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 		rRetTaken <= 1'b1;
-		rCallTaken <= 1'b0;
+	end
+	//-------------------------------------
+	//
+	// PUSH, 16'b0, R1
+	// Inserta el dato en R1 en el stack
+	//
+	`PUSH:
+	begin
+		rFFLedEN     <= 1'b0;
+		rBranchTaken <= 1'b0;
+		rPushStackEnable <= 1'b1;
+		rResult      <= 0;
+	end
+	//-------------------------------------
+	//
+	// POP, R1, 16'b0
+	// Saca el ultimo dato del stack y lo pone en R1
+	`POP:
+	begin
+		rFFLedEN     <= 1'b0;
+		rBranchTaken <= 1'b0;
+		rWriteEnable <= 1'b1;
+		rPopStackEnable <= 1'b1;
+		rResult      <= wStackOut;
 	end
 	//-------------------------------------
 	`LED:
@@ -318,6 +352,18 @@ begin
 	//-------------------------------------
 	endcase
 end
+
+task drive_defaults;
+	begin
+		rWriteEnable <= 1'b0;
+    rWriteLCD <= 1'b0;
+		rPushStackEnable <= 0;
+		rPopStackEnable <= 0;
+		rCallTaken <= 1'b0;
+		rRetTaken <= 1'b0;
+		rBranchTaken <= 1'b0;
+	end
+endtask
 
 
 endmodule

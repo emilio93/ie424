@@ -11,7 +11,7 @@ module MiniAlu
  input wire Clock,
  input wire Reset,
  output wire [7:0] oLed,
- output wire [3:0] SF_D,
+ output wire [11:8] SF_D,
  output wire LCD_E,
  output wire LCD_RS,
  output wire LCD_RW,
@@ -84,6 +84,7 @@ Stack Stack
 assign wIPInitialValue = (!rModulesLoaded) ? 8'b0 :
                          (rCallTaken | rBranchTaken&wready | rBranchTaken) ?  wDestination :
                          (rRetTaken)  ?  wSourceData0 :
+                         (!wready) ? wIP_temp-1:
                          wDestination;
 
 // El flip flop del contador de instrucciones se resetea cuando se tiene alguna
@@ -100,8 +101,7 @@ UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
 .Reset(   !rModulesLoaded | rBranchTaken | rCallTaken | rRetTaken | !wready),
-.Initial( (!wready) ? wIP:
-			    wIPInitialValue + 1  ),
+.Initial( wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
@@ -177,7 +177,7 @@ LCD LSD(
   .oLCD_RS(LCD_RS), //Command = 0, Data = 1
   .oLCD_RW(LCD_RW),
   .oLCD_StrataFlashControl(No_se),
-  .oLCD_Data(SF_D[3:0]),
+  .oLCD_Data(SF_D[11:8]),
 	.oIsInitialized(wIsInitialized),
   .ready(wready)
   );

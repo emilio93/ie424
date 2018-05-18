@@ -16,8 +16,9 @@ module Stack # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM
   // memoria
   reg [DATA_WIDTH-1:0] stack [MEM_SIZE-1:0];
 
-  always @ (read) begin
-      oDataOut = stack[stackPointer-1];
+  always @ (*) begin
+    if (stackPointer == 0) oDataOut = stack[0];
+    else oDataOut = stack[stackPointer-1];
   end
 
   always @(posedge Clock or posedge Reset) begin

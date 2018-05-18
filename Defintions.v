@@ -39,20 +39,15 @@
 
 
 `define H 16'b0000000001001000
-`define O 16'b0000000001001000
-`define L 16'b0000000001001000
-`define A 16'b0000000001001000
-`define ESPACIO 16'b0000000001001000
-`define M 16'b0000000001001000
-`define U 16'b0000000001001000
-`define N 16'b0000000001001000
-`define D 16'b0000000001001000
-// `define O 16'b0000000001001000
-`define R8 8'd8 // 00001000
+`define O 16'h8F
+`define L 16'h8C
+`define A 16'h81
+`define ESPACIO 16'h00
+`define M 16'h8D
+`define U 16'h95
+`define N 16'h8E
+`define D 16'h84
 
-`define SP 8'h0F
 `define RA 8'h1F
-
-
 
 `endif

@@ -1,11 +1,9 @@
 `timescale 1ns / 1ps
 `include "Defintions.v"
 
-`define INICIO 8'd4
-`define LOOP1 8'd12
-`define LOOP2 8'd14
-`define SUBRUTINA 8'd24
-`define LOOP3 8'd27
+`define INICIO 8'd3
+`define LOOPINFINITO 8'd18
+`define ESCRIBIRLCD 8'd21
 
 module ROM
 (
@@ -18,38 +16,36 @@ begin
   0: oInstruction = {`NOP,24'd4000};
   1: oInstruction = {`STO,`R0,16'b0};
   2: oInstruction = {`STO,`R1,16'b1};
-  3: oInstruction = {`STO,`R8,16'b11111111};
 // INICIO:
-  4: oInstruction = {`STO,`R2,16'b1};
-  5: oInstruction = {`STO,`R3,16'd2};
-  6: oInstruction = {`STO,`R4,16'd65000};
-  7: oInstruction = {`STO,`R5,16'd65000};
-  8: oInstruction = {`PUSH,16'b0,`R3};
-  9: oInstruction = {`PUSH,16'b0,`R4};
-  10: oInstruction = {`PUSH,16'b0,`R5};
-  11: oInstruction = {`STO,`R7,16'd6623};
-// LOOP1:
-  12: oInstruction = {`STO,`R6,16'd0};
-  13: oInstruction = {`MUL,`R2,`R2,`R3};
-// LOOP2:
-  14: oInstruction = {`LED,8'b0,`R6,8'b0};
-  15: oInstruction = {`PUSH,16'b0,`R7};
-  16: oInstruction = {`CALL,`SUBRUTINA,16'b0};
-  17: oInstruction = {`POP,`R7,16'b0};
-  18: oInstruction = {`ADD,`R6,`R6,`R1};
-  19: oInstruction = {`BLE,`LOOP2,`R6,`R4};
-  20: oInstruction = {`MUL,`R2,`R2,`R3};
-  21: oInstruction = {`NOP,24'd0};
-  22: oInstruction = {`BLE,`LOOP1,`R2,`R8};
-  23: oInstruction = {`JMP,`INICIO,16'd0};
-// SUBRUTINA:
-  24: oInstruction = {`NOP,24'd0};
-  25: oInstruction = {`STO,`R7,16'd0};
-  26: oInstruction = {`NOP,24'd0};
-// LOOP3:
-  27: oInstruction = {`ADD,`R7,`R7,`R1};
-  28: oInstruction = {`BLE,`LOOP3,`R7,`R5};
-  29: oInstruction = {`NOP,24'd0};
+  3: oInstruction = {`STO,`R10,`H};
+  4: oInstruction = {`STO,`R11,`O};
+  5: oInstruction = {`STO,`R12,`L};
+  6: oInstruction = {`STO,`R13,`A};
+  7: oInstruction = {`CALL,`ESCRIBIRLCD,16'b0};
+  8: oInstruction = {`STO,`R10,`ESPACIO};
+  9: oInstruction = {`STO,`R11,`M};
+  10: oInstruction = {`STO,`R12,`U};
+  11: oInstruction = {`STO,`R13,`N};
+  12: oInstruction = {`CALL,`ESCRIBIRLCD,16'b0};
+  13: oInstruction = {`STO,`R10,`ESPACIO};
+  14: oInstruction = {`STO,`R11,`D};
+  15: oInstruction = {`STO,`R12,`O};
+  16: oInstruction = {`STO,`R13,`ESPACIO};
+  17: oInstruction = {`CALL,`ESCRIBIRLCD,16'b0};
+// LOOPINFINITO:
+  18: oInstruction = {`BLE,`LOOPINFINITO,`R0,`R1};
+  19: oInstruction = {`NOP,24'd0};
+  20: oInstruction = {`JMP,`INICIO,16'd0};
+// ESCRIBIRLCD:
+  21: oInstruction = {`NOP,24'b0};
+  22: oInstruction = {`LCD,8'b0,`R10,8'b0};
+  23: oInstruction = {`NOP,24'b0};
+  24: oInstruction = {`LCD,8'b0,`R11,8'b0};
+  25: oInstruction = {`NOP,24'b0};
+  26: oInstruction = {`LCD,8'b0,`R12,8'b0};
+  27: oInstruction = {`NOP,24'b0};
+  28: oInstruction = {`LCD,8'b0,`R13,8'b0};
+  29: oInstruction = {`NOP,24'b0};
   30: oInstruction = {`RET,16'b0,`RA};
 
   default:

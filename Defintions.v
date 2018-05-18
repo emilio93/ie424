@@ -35,7 +35,6 @@
 `define R14 8'd14
 `define R15 8'd15
 
-`define RA 8'd16
 
 `define H 16'b0000000001001000
 `define O 16'b0000000001001000

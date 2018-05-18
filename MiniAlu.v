@@ -26,12 +26,13 @@ reg  [15:0]  rResult; //Salida de la ALU
 wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
 reg rWriteLCD; //Habilitador de la pantalla para escribir. Indica que se esta escribiendo.
-wire wready;
-wire wIsInitialized;
+
+wire wready; // Lcd está lista para recibir comandos.
+wire wIsInitialized; // Indica que máquina de estados de la lcd ha sido inicializada.
 
 reg rModulesLoaded;// indica si ya todos los modulos han sido inicializados y están listos
 
-reg         rRetTaken, rCallTaken;
+reg         rRetTaken, rCallTaken; // Flags para llamadas a RET y CALL
 reg [15:0]  wResult;
 
 always @ (*) begin
@@ -56,30 +57,50 @@ RAM_DUAL_READ_PORT DataRam
 	.oDataOut1(     wSourceData1 )
 );
 
-assign wIPInitialValue = (rCallTaken) ?  wDestination :
+
+// El valor que, se resetea y está disponible para el contador de instrucción wIP
+//
+// Se toma wDestination, esto es, el primer argumento de la operación, cuando se
+// ha realizado una operación CALL o BLE
+//
+// Se toma wSourceData0, esto es, el segundo argumento de la operación, cuando se
+// tiene una operación RET
+//
+// Para todo lo demás, se toma wDestination
+assign wIPInitialValue = (!rModulesLoaded) ? 8'b0 :
+                         (rCallTaken | rBranchTaken&wready | rBranchTaken) ?  wDestination :
                          (rRetTaken)  ?  wSourceData0 :
-                         (rBranchTaken&wready) ? wDestination :
-                         (rBranchTaken) ? wDestination :
-                         (!rModulesLoaded) ? 8'b0 :
-                         (!wready) ? wIP_temp-1 :
                          wDestination;
+
+// El flip flop del contador de instrucciones se resetea cuando se tiene alguna
+// de las siguentes señales :
+//   !rModulesLoaded : Esta es la señal de !reset, cuando esta baja no se han inicializado
+//                     los módulos de la minialu(la fsm de LCD). Cuando la señal está en alto
+//                     indica todos los módulos están listos. Se inicializa en
+//   rBranchTaken    : Cuando se realiza un salto mediante la operación BLE
+//   rCallTaken      : Cuando se realiza un salto mediante la operación CALL
+//   rRetTaken       : Cuando se realiza un salto mediante la operación RET
+//   !wready         : Cuando la lcd está procesando una accion. Mantiene su posición.
+//
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ),
 .Reset(   !rModulesLoaded | rBranchTaken | rCallTaken | rRetTaken | !wready),
-.Initial( (rCallTaken) ? wIP+1 : 
-          (rRetTaken) ? wIP+1: 
+.Initial( (!wready) ? wIP:
 			    wIPInitialValue + 1  ),
 .Enable(  1'b1                 ),
 .Q(       wIP_temp             )
 );
 
+// wIP es el número de instrucción que se ejecuta
+// asigna el valor de la instrucción ejecutada
+// según el caso
 assign wIP = (!rModulesLoaded) ? 0 :
              (rBranchTaken&wready) ? wIPInitialValue :
              (rBranchTaken | rCallTaken | rRetTaken) ? wIPInitialValue :
              (!wready) ? wIPInitialValue :
              wIP_temp;
-             
+
 // wOperation
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 (
@@ -238,7 +259,12 @@ begin
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 	end
-	//-------------------------------------	
+	//-------------------------------------
+	//
+	// CALL, SUBRUTINA, 16'b0
+	//
+	// Operación CALL llama a una subrutina, guardando automaticaente la
+	// dirección de retorno en el registro `RA,
 	`CALL:
 	begin
 		rFFLedEN     <= 1'b0;
@@ -247,7 +273,11 @@ begin
 		rCallTaken <= 1'b1;
 		rRetTaken <= 1'b0;
 	end
-	//-------------------------------------	
+	//-------------------------------------
+	//
+	// RET, 16'b0, RA
+	// Regresa a la direccion de retorno
+	//
 	`RET:
 	begin
 		rFFLedEN     <= 1'b0;
@@ -256,7 +286,7 @@ begin
 		rRetTaken <= 1'b1;
 		rCallTaken <= 1'b0;
 	end
-	//-------------------------------------	
+	//-------------------------------------
 	`LED:
 	begin
 		rFFLedEN     <= 1'b1;
@@ -284,9 +314,9 @@ begin
 		rBranchTaken <= 1'b0;
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
-	end	
-	//-------------------------------------	
-	endcase	
+	end
+	//-------------------------------------
+	endcase
 end
 
 

@@ -13,8 +13,7 @@ STO, R5, 16'd5 // cuentas para el ciclo3
 LOOP1:
 STO, R6, 16'd0 // i
 LOOP2:
-  STO, R7, 16'd0 // j
-  LED, 8'b0, R2, 8'b0
+  LED, 8'b0, R5, 8'b0
   CALL, SUBRUTINA, 16'b0
   ADD, R6, R6, R1
   BLE, LOOP2, R6, R4
@@ -24,6 +23,8 @@ BLE, LOOP1, R2, R8
 JMP, INICIO, 16'd0
 
 SUBRUTINA:
+  STO, R7, 16'd0 // j
+  NOP,24'd0
   LOOP3:
     ADD, R7, R7, R1
     BLE, LOOP3, R7, R5

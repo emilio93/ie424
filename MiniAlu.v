@@ -204,7 +204,7 @@ begin
 		rResult      <= wResult;
 	end
 	//-------------------------------------
-	`LW:
+	`STO:
 	begin
 		rFFLedEN     <= 1'b0;
 		rWriteEnable <= 1'b1;

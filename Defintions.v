@@ -38,15 +38,15 @@
 `define R15 8'd15
 
 
-`define H 16'b0000000001001000
-`define O 16'h8F
-`define L 16'h8C
-`define A 16'h81
-`define ESPACIO 16'h00
-`define M 16'h8D
-`define U 16'h95
-`define N 16'h8E
-`define D 16'h84
+`define H 16'h48
+`define O 16'h4F
+`define L 16'h4C
+`define A 16'h41
+`define ESPACIO 16'h20
+`define M 16'h4D
+`define U 16'h55
+`define N 16'h4E
+`define D 16'h44
 
 `define RA 8'h1F
 

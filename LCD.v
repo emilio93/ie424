@@ -447,6 +447,7 @@ module LCD(
       begin
         oIsInitialized = 1'b1;
         ready = 1'b0;
+		  wBuffer = rBuffer;
         rTimeCountReset = 1'b0;
         oLCD_RS = 1'b1;
         oLCD_RW = 1'b0;

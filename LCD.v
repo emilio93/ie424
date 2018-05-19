@@ -503,6 +503,10 @@ module LCD(
 		wWaitCount = 0;
 		rTimeCountReset = 1'b0;
 		rNextState = 1'b0;
+		oLCD_RS = 0;
+		oLCD_Data = 4'b0;
+		oLCD_Enabled = 0;
+		ready = 0;
     end
   endtask
 endmodule // LCD

@@ -112,7 +112,7 @@ module LCD(
           oLCD_Data = 4'h3;
         end
 
-        if (rTimeCount > 32'd12) begin
+        if (rTimeCount >= 32'd12) begin
           rTimeCountReset = 1'b1;
           case (rWaitCount)
             0:  rNextState = `STATE_POWER_WAIT0;
@@ -174,9 +174,15 @@ module LCD(
         oLCD_RW = 1'b0;
 
         if (rTimeCount > 32'd2000) begin
-          rWaitCount = 2'd3;
-          rNextState = `STATE_POWERON_CLEARD_A;
-          rTimeCountReset = 1'b1;
+			 if(rWaitCount == 2'd3) begin
+				 rNextState = `STATE_POWERON_CLEARD_A;
+				 rTimeCountReset = 1'b1;
+				end
+			 else if(rWaitCount == 2'd2) begin
+				 rWaitCount = 2'd3;
+				 rNextState = `STATE_POWER_INIT;
+				 rTimeCountReset = 1'b1;
+				end
         end else begin
           rNextState = rCurrentState;
           rTimeCountReset = 1'b0;
@@ -188,9 +194,19 @@ module LCD(
       `STATE_POWERON_CLEARD_A:
       begin
         ready = 1'b0;
-        oLCD_Enabled = 1'b0;
+        if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+		  if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			  oLCD_Enabled = 1'b0;
+			  end
+		  if (rTimeCount < 15) begin
+			  oLCD_RW = 1'b0;
+			  end
+		  else if (rTimeCount >= 15) begin
+			  oLCD_RW = 1'b1;
+			  end
         oLCD_RS = 1'b0; //these are commands
-        oLCD_RW = 1'b0;
         rTimeCountReset = 1'b0;
         oLCD_Data = 4'h2;
         if (rTimeCount > 32'd50 ) begin
@@ -204,9 +220,19 @@ module LCD(
     `STATE_POWERON_CLEARD_B:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'h8;
       if (rTimeCount > 32'd2000 )
@@ -224,9 +250,19 @@ module LCD(
     `STATE_POWERON_EMS_A:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'h0;
       if (rTimeCount > 32'd50 ) begin
@@ -240,9 +276,19 @@ module LCD(
     `STATE_POWERON_EMS_B:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'h6;
       if (rTimeCount > 32'd2000 ) begin
@@ -258,9 +304,19 @@ module LCD(
     `STATE_POWERON_DIS_ON_OFF_A:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'h0;
       if (rTimeCount > 32'd50 ) begin
@@ -274,9 +330,19 @@ module LCD(
     `STATE_POWERON_DIS_ON_OFF_B:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'hC;
       if (rTimeCount > 32'd2000 ) begin
@@ -292,9 +358,19 @@ module LCD(
     `STATE_POWERON_CLEAR_A:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'h0;
       if (rTimeCount > 32'd50 ) begin
@@ -308,9 +384,19 @@ module LCD(
     `STATE_POWERON_CLEAR_B:
     begin
       ready = 1'b0;
-      oLCD_Enabled = 1'b0;
+      if (2 <= rTimeCount & rTimeCount < 14) begin
+			  oLCD_Enabled = 1'b1;
+			  end
+	   if (14 <= rTimeCount & rTimeCount < 15 ) begin
+			oLCD_Enabled = 1'b0;
+			end
+	   if (rTimeCount < 15) begin
+			oLCD_RW = 1'b0;
+			end
+	   else if (rTimeCount >= 15) begin
+			oLCD_RW = 1'b1;
+			end
       oLCD_RS = 1'b0; //these are commands
-      oLCD_RW = 1'b0;
       rTimeCountReset = 1'b0;
       oLCD_Data = 4'hC;
       if (rTimeCount > 32'd82000 ) begin
@@ -356,15 +442,15 @@ module LCD(
         oLCD_Enabled = 1'b0;
         rNextState = rCurrentState;
       end
-      if (2 < rTimeCount & rTimeCount <= 14) begin
+      if (2 <= rTimeCount & rTimeCount < 14) begin
         oLCD_Enabled = 1'b1;
         rNextState = rCurrentState;
       end
-      if (14 < rTimeCount & rTimeCount <= 15 ) begin
+      if (14 <= rTimeCount & rTimeCount < 15 ) begin
         oLCD_Enabled = 1'b0;
         rNextState = rCurrentState;
       end
-      if (rTimeCount > 15) begin
+      if (rTimeCount >= 15) begin
         rNextState = `STATE_WRITE_DELAY;
       end
     end
@@ -402,15 +488,15 @@ module LCD(
           oLCD_Enabled = 1'b0;
           rNextState = rCurrentState;
         end
-        if (2 < rTimeCount & rTimeCount <= 14) begin
+        if (2 <= rTimeCount & rTimeCount < 14) begin
           oLCD_Enabled = 1'b1;
           rNextState = rCurrentState;
         end
-        if (14 < rTimeCount & rTimeCount <= 15 ) begin
+        if (14 <= rTimeCount & rTimeCount < 15 ) begin
           oLCD_Enabled = 1'b0;
           rNextState = rCurrentState;
         end
-        if (rTimeCount > 15) begin
+        if (rTimeCount >= 15) begin
           rNextState = `STATE_WRITE_WAIT;
         end
       end

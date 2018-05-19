@@ -40,9 +40,9 @@ begin
   20: oInstruction = {`STO,`R12,`U};
   21: oInstruction = {`STO,`R13,`N};
   22: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  23: oInstruction = {`STO,`R10,`ESPACIO};
-  24: oInstruction = {`STO,`R11,`D};
-  25: oInstruction = {`STO,`R12,`O};
+  23: oInstruction = {`STO,`R10,`D};
+  24: oInstruction = {`STO,`R11,`O};
+  25: oInstruction = {`STO,`R12,`ESPACIO};
   26: oInstruction = {`STO,`R13,`ESPACIO};
   27: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
   28: oInstruction = {`POP,`R13,16'b0};

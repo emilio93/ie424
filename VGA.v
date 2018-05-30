@@ -18,16 +18,17 @@ module VGA(
   output reg oHSync,
   output reg oVSync
 );
-
+  parameter SCREEN_HEIGHT = 478; // 480;
   parameter [18:0] tdisph = 18'd638, // 18'd640, 
-                   tpwh = 18'd94, // 18'd96, 
-						 tfph = 18'd14, // 18'd16, 
-						 tbph = 18'd46, // 18'd48,
-                   tpwv = 18'd1598, // 18'd1600, 
-						 tfpv= 18'd7998, // 18'd8000, 
+                   tpwh = 18'd94,    // 18'd96, 
+						 tfph = 18'd14,    // 18'd16, 
+						 tbph = 18'd46,    // 18'd48,
+                   tpwv = 18'd1598,  // 18'd1600, 
+						 tfpv = 18'd7998,  // 18'd8000, 
 						 tbpv = 18'd23198; // 18'd23200;
   reg clk25;
   reg rRed, rGreen, rBlue;
+  reg [18:0] rCntV;
 
   reg [2:0] state, next;
 
@@ -38,6 +39,7 @@ module VGA(
 	   clk25 <= 0;
 		oCtrH <= 0;
 		oCtrV <= 0;
+		rCntV <= 0;
     end else begin
 	   clk25 <= !clk25;
 	 end
@@ -47,7 +49,7 @@ module VGA(
       state <= next;
 		{rRed, rGreen, rBlue} <= data;
       if (state == `STATE_PWV | state == `STATE_BPV | state == `STATE_FPV) begin
-        oCtrV <= oCtrV+1;
+        rCntV <= rCntV+1;
       end else if (state == `STATE_PWH |
               	    state == `STATE_BPH |
 						 state == `STATE_FPH |
@@ -55,10 +57,18 @@ module VGA(
 		  oCtrH <= oCtrH+1;
 		end
 		
-		if (state != next) begin 
+		if (state == `STATE_PWV) begin
 		  oCtrV <= 0;
+		end else if (state == `STATE_PWH & state != next) begin
+		  if (oCtrV > SCREEN_HEIGHT) oCtrV <= 0;
+		  else oCtrV <= oCtrV + 1;
+		end
+		
+		if (state != next) begin 
+		  rCntV <= 0;
 		  oCtrH <= 0;
 		end
+		
   end
 
   always @(*) begin
@@ -69,16 +79,18 @@ module VGA(
         next = `STATE_PWV;
       end
       `STATE_PWV: begin
-        if (oCtrV>tpwv) next = `STATE_BPV;
+        if (rCntV>tpwv) next = `STATE_BPV;
         else next = `STATE_PWV;
+		  oVSync = 1'b0;
       end
       `STATE_BPV: begin
-		  if (oCtrV>tbpv) next = `STATE_PWH;
+		  if (rCntV>tbpv) next = `STATE_PWH;
         else next = `STATE_BPV;
       end
       `STATE_PWH: begin
 		  if (oCtrH>tpwh) next = `STATE_BPH;
         else next = `STATE_PWH;
+		  oHSync = 1'b0;
       end
       `STATE_BPH: begin
 		  if (oCtrH>tbph) next = `STATE_DISPH;
@@ -89,16 +101,17 @@ module VGA(
         else next = `STATE_DISPH;
       end
       `STATE_FPH: begin
-		  if (oCtrH>tfph) next = `STATE_FPV;
+		  if (oCtrV>SCREEN_HEIGHT) next = `STATE_FPV;
+		  if (oCtrH>tfph) next = `STATE_PWH;
         else next = `STATE_FPH;
       end
       `STATE_FPV: begin
-		  if (oCtrV>tfpv) next = `STATE_PWV;
+		  if (rCntV>tfpv) next = `STATE_PWV;
         else next = `STATE_FPV;
       end
 	 endcase
   end
-
+		
   task drive_defaults;
     begin
       colorChannels = {rRed, rGreen, rBlue};

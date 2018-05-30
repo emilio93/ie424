@@ -1,28 +1,52 @@
 [*]
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
-[*] Wed May 23 17:34:26 2018
+[*] Wed May 30 17:32:26 2018
 [*]
-[dumpfile] "/home/julianmoruav/Documents/Git_Labo_Digitales/waves.vcd"
-[dumpfile_mtime] "Wed May 23 17:19:04 2018"
-[dumpfile_size] 2592
-[savefile] "/home/julianmoruav/Documents/Git_Labo_Digitales/ondas.gtkw"
-[timestart] 0
+[dumpfile] "/home/julianmoruav/Documents/Git_Labo_Digitales/Pruebas/waves.vcd"
+[dumpfile_mtime] "Wed May 30 17:30:19 2018"
+[dumpfile_size] 13996514
+[savefile] "/home/julianmoruav/Documents/Git_Labo_Digitales/Pruebas/ondas.gtkw"
+[timestart] 2404000
 [size] 1215 705
-[pos] 64 106
-*-6.691716 70 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
-[treeopen] testbench.
+[pos] 64 407
+*-17.691715 2941000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.s2p.
 [sst_width] 43
-[signals_width] 126
+[signals_width] 179
 [sst_expanded] 0
 [sst_vpaned_height] 197
 @28
+testbench.wClock
 testbench.s2p.iReset
-testbench.s2p.Clock
+@200
+-keyClock:
+@28
+testbench.s2p.kc.enable
+testbench.s2p.kc.iClock
+testbench.s2p.kc.oClock
+@200
+-S2P
+@28
 testbench.s2p.i1b
+testbench.s2p.buffer_11b[10:0]
 testbench.s2p.recieving
 @22
 testbench.s2p.cont[3:0]
+@24
+testbench.s2p.cuenta[2:0]
 @28
 testbench.s2p.o11b[10:0]
+@24
+testbench.s2p.oNum[2:0]
+@200
+-Decoder:
+@28
+testbench.dec.i11b[10:0]
+@24
+testbench.dec.iNum[2:0]
+@29
+testbench.dec.error
+@28
+testbench.dec.oKey[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

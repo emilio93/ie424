@@ -190,22 +190,15 @@ begin
 	//-------------------------------------
 	`NOP:
 	begin
-		rFFLedEN     <= 1'b0;
+	   // drive_defaults;
 		rBranchTaken <= 1'b0;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 		rWriteEnable <= 1'b0;
-		rRetTaken <= 1'b0;
 		rResult      <= 0;
 	end
 	//-------------------------------------
 	`ADD:
 	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 		rResult      <= wSourceData1 + wSourceData0;
 	end
 	//-------------------------------------
@@ -219,41 +212,25 @@ begin
 	//   SUB t1,t2,t3 # t1=t2-t3
 	`SUB:
 	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 		rResult      <= wSourceData1 - wSourceData0;
 	end
 	//-------------------------------------
   `MUL:
 	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 		rResult      <= wResult;
 	end
 	//-------------------------------------
 	`STO:
 	begin
-		rFFLedEN     <= 1'b0;
 		rWriteEnable <= 1'b1;
-		rBranchTaken <= 1'b0;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 		rResult      <= wImmediateValue;
 	end
 	//-------------------------------------
 	`BLE:
 	begin
-		rFFLedEN     <= 1'b0;
-		rWriteEnable <= 1'b0;
 		rResult      <= 0;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 		if (wSourceData1 <= wSourceData0 )
 			rBranchTaken <= 1'b1;
 		else
@@ -263,12 +240,8 @@ begin
 	//-------------------------------------
 	`JMP:
 	begin
-		rFFLedEN     <= 1'b0;
-		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 		rBranchTaken <= 1'b1;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 	end
 	//-------------------------------------
 	//
@@ -278,11 +251,9 @@ begin
 	// dirección de retorno en el registro `RA,
 	`CALL:
 	begin
-		rFFLedEN     <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rResult      <= wIP_temp;
 		rCallTaken <= 1'b1;
-		rRetTaken <= 1'b0;
 	end
 	//-------------------------------------
 	//
@@ -291,8 +262,6 @@ begin
 	//
 	`RET:
 	begin
-		rFFLedEN     <= 1'b0;
-		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 		rRetTaken <= 1'b1;
 	end
@@ -303,8 +272,6 @@ begin
 	//
 	`PUSH:
 	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
 		rPushStackEnable <= 1'b1;
 		rResult      <= 0;
 	end
@@ -314,8 +281,6 @@ begin
 	// Saca el ultimo dato del stack y lo pone en R1
 	`POP:
 	begin
-		rFFLedEN     <= 1'b0;
-		rBranchTaken <= 1'b0;
 		rWriteEnable <= 1'b1;
 		rPopStackEnable <= 1'b1;
 		rResult      <= wStackOut;
@@ -324,30 +289,18 @@ begin
 	`LED:
 	begin
 		rFFLedEN     <= 1'b1;
-		rWriteEnable <= 1'b0;
 		rResult      <= 0;
-		rBranchTaken <= 1'b0;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
 	end
 	//-------------------------------------
   `LCD:
 	begin
-		rFFLedEN     <= 1'b0;
-		rWriteEnable <= 1'b0;
-    rWriteLCD <= 1'b1;
+      rWriteLCD <= 1'b1;
 		rResult      <= 0;
-		rBranchTaken <= 1'b0;
 	end
 	//-------------------------------------
 	default:
 	begin
-		rFFLedEN     <= 1'b1;
-		rWriteEnable <= 1'b0;
-		rResult      <= 0;
-		rBranchTaken <= 1'b0;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
+	  // drive_defaults;
 	end
 	//-------------------------------------
 	endcase
@@ -355,8 +308,9 @@ end
 
 task drive_defaults;
 	begin
+	   rFFLedEN     <= 1'b0;
 		rWriteEnable <= 1'b0;
-    rWriteLCD <= 1'b0;
+      rWriteLCD <= 1'b0;
 		rPushStackEnable <= 0;
 		rPopStackEnable <= 0;
 		rCallTaken <= 1'b0;

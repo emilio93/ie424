@@ -26,7 +26,6 @@ module VGA(
                    tpwv = 18'd1598,  // 18'd1600, 
 						 tfpv = 18'd7998,  // 18'd8000, 
 						 tbpv = 18'd23198; // 18'd23200;
-  reg clk25;
   reg rRed, rGreen, rBlue;
   reg [18:0] rCntV;
 
@@ -34,18 +33,12 @@ module VGA(
 
   always @(posedge clk or posedge rst) begin
     if (rst) begin
-      state <= 5'b0;
+      //state <= 5'b0;
       state <= `STATE_RST;
-	   clk25 <= 0;
 		oCtrH <= 0;
 		oCtrV <= 0;
 		rCntV <= 0;
-    end else begin
-	   clk25 <= !clk25;
-	 end
-  end
-
-  always @(posedge clk25) begin
+	 end else begin
       state <= next;
 		{rRed, rGreen, rBlue} <= data;
       if (state == `STATE_PWV | state == `STATE_BPV | state == `STATE_FPV) begin
@@ -68,15 +61,15 @@ module VGA(
 		  rCntV <= 0;
 		  oCtrH <= 0;
 		end
-		
+	 end
   end
 
   always @(*) begin
     next = 0;
     drive_defaults;
     case (state)
-      `STATE_RST: begin
-        next = `STATE_PWV;
+       `STATE_RST: begin
+       next = `STATE_PWV;
       end
       `STATE_PWV: begin
         if (rCntV>tpwv) next = `STATE_BPV;
@@ -102,7 +95,7 @@ module VGA(
       end
       `STATE_FPH: begin
 		  if (oCtrV>SCREEN_HEIGHT) next = `STATE_FPV;
-		  if (oCtrH>tfph) next = `STATE_PWH;
+		  else if (oCtrH>tfph) next = `STATE_PWH;
         else next = `STATE_FPH;
       end
       `STATE_FPV: begin
@@ -111,7 +104,7 @@ module VGA(
       end
 	 endcase
   end
-		
+
   task drive_defaults;
     begin
       colorChannels = {rRed, rGreen, rBlue};

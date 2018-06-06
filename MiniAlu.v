@@ -5,6 +5,7 @@
 
 `include "Defintions.v"
 `include "LCD.v"
+`include "VGA.v"
 
 module MiniAlu
 (
@@ -15,7 +16,12 @@ module MiniAlu
  output wire LCD_E,
  output wire LCD_RS,
  output wire LCD_RW,
- output wire No_se
+ output wire No_se,
+ output wire VGA_RED,
+ output wire VGA_BLUE,
+ output wire VGA_GREEN,
+ output wire VGA_VS,
+ output wire VGA_HS
 );
 
 wire [15:0]  wIP,wIP_temp; //PC counter
@@ -40,6 +46,24 @@ reg [15:0]  wResult;
 always @ (*) begin
   rModulesLoaded = wIsInitialized;
 end
+
+reg clk25;
+always @ (posedge Clock) begin
+  if (Reset) clk25<=0;
+  else clk25<=!clk25;
+end
+// Instancia de máquina de estados 
+// para el puerto VGA
+VGA vga(
+  .clk(clk25),
+  .rst(~rModulesLoaded),
+  .data(3'b011),
+  // .oCtrH(), 
+  // .oCtrV(),
+  .colorChannels({VGA_RED, VGA_BLUE, VGA_GREEN}),
+  .oHSync(VGA_HS),
+  .oVSync(VGA_VS)
+);
 
 ROM InstructionRom
 (

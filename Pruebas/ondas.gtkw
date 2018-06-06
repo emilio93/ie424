@@ -1,52 +1,62 @@
 [*]
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
-[*] Wed May 30 17:32:26 2018
+[*] Wed Jun  6 17:57:10 2018
 [*]
 [dumpfile] "/home/julianmoruav/Documents/Git_Labo_Digitales/Pruebas/waves.vcd"
-[dumpfile_mtime] "Wed May 30 17:30:19 2018"
-[dumpfile_size] 13996514
+[dumpfile_mtime] "Wed Jun  6 17:57:03 2018"
+[dumpfile_size] 11420698
 [savefile] "/home/julianmoruav/Documents/Git_Labo_Digitales/Pruebas/ondas.gtkw"
-[timestart] 2404000
+[timestart] 0
 [size] 1215 705
-[pos] 64 407
-*-17.691715 2941000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 66 385
+*-18.691715 740000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
 [treeopen] testbench.s2p.
 [sst_width] 43
 [signals_width] 179
 [sst_expanded] 0
 [sst_vpaned_height] 197
 @28
-testbench.wClock
-testbench.s2p.iReset
-@200
--keyClock:
-@28
-testbench.s2p.kc.enable
-testbench.s2p.kc.iClock
-testbench.s2p.kc.oClock
-@200
--S2P
-@28
-testbench.s2p.i1b
-testbench.s2p.buffer_11b[10:0]
-testbench.s2p.recieving
+testbench.wClockFPGA
+testbench.wClockTeclado
+testbench.wReset
+testbench.w1b
+testbench.tecla
 @22
 testbench.s2p.cont[3:0]
+@200
+-S2P
+@29
+testbench.s2p.ClockSampled
+@28
+testbench.s2p.recieving
 @24
-testbench.s2p.cuenta[2:0]
+testbench.s2p.cont[3:0]
+@c00028
+testbench.s2p.buffer_11b[10:0]
+@28
+(0)testbench.s2p.buffer_11b[10:0]
+(1)testbench.s2p.buffer_11b[10:0]
+(2)testbench.s2p.buffer_11b[10:0]
+(3)testbench.s2p.buffer_11b[10:0]
+(4)testbench.s2p.buffer_11b[10:0]
+(5)testbench.s2p.buffer_11b[10:0]
+(6)testbench.s2p.buffer_11b[10:0]
+(7)testbench.s2p.buffer_11b[10:0]
+(8)testbench.s2p.buffer_11b[10:0]
+(9)testbench.s2p.buffer_11b[10:0]
+(10)testbench.s2p.buffer_11b[10:0]
+@1401200
+-group_end
 @28
 testbench.s2p.o11b[10:0]
 @24
-testbench.s2p.oNum[2:0]
+testbench.s2p.cuenta[2:0]
+testbench.wNum[2:0]
 @200
 -Decoder:
 @28
-testbench.dec.i11b[10:0]
-@24
-testbench.dec.iNum[2:0]
-@29
-testbench.dec.error
-@28
-testbench.dec.oKey[7:0]
+testbench.wError
+testbench.wKey[7:0]
 [pattern_trace] 1
 [pattern_trace] 0

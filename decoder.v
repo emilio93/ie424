@@ -5,7 +5,7 @@ module decoder (i11b, iNum, error, oKey);
   output reg error;
 
   always @ (*) begin
-    if ((i11b[0] != 1) || (i11b[10] != 0) || (iNum[0] == i11b[9])) begin
+    if ((i11b[0] != 1) || (i11b[10] != 0) || (iNum[0] != i11b[9])) begin
       error = 1;
     end else begin
       error = 0;

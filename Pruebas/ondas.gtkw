@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
-[*] Wed Jun  6 17:57:10 2018
+[*] Wed Jun 13 13:47:50 2018
 [*]
 [dumpfile] "/home/julianmoruav/Documents/Git_Labo_Digitales/Pruebas/waves.vcd"
-[dumpfile_mtime] "Wed Jun  6 17:57:03 2018"
-[dumpfile_size] 11420698
+[dumpfile_mtime] "Wed Jun 13 13:45:56 2018"
+[dumpfile_size] 11420686
 [savefile] "/home/julianmoruav/Documents/Git_Labo_Digitales/Pruebas/ondas.gtkw"
 [timestart] 0
 [size] 1215 705
 [pos] 66 385
-*-18.691715 740000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-18.691715 800000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] testbench.
 [treeopen] testbench.s2p.
 [sst_width] 43

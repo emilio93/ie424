@@ -90,6 +90,7 @@ module VGA(
         else next = `STATE_BPH;
       end
       `STATE_DISPH: begin
+			colorChannels = data;
 		  if (oCtrH>tdisph) next = `STATE_FPH;
         else next = `STATE_DISPH;
       end
@@ -107,7 +108,7 @@ module VGA(
 
   task drive_defaults;
     begin
-      colorChannels = {rRed, rGreen, rBlue};
+      colorChannels = 3'b0;
       oHSync = 1'b1;
       oVSync = 1'b1;
     end

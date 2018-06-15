@@ -46,21 +46,44 @@ always @ (*) begin
 end
 
 reg clk25;
-always @ (posedge Clock) begin
+always @ (posedge Clock or posedge Reset) begin
   if (Reset) clk25<=0;
-  else clk25<=!clk25;
+  else clk25<=clk25+1'b1;
 end
-// Instancia de máquina de estados 
+
+wire [10:0] ctrH, ctrV;
+// Instancia de máquina de estados
 // para el puerto VGA
 VGA vga(
   .clk(clk25),
   .rst(~rModulesLoaded),
   .data(3'b011),
-  // .oCtrH(), 
-  // .oCtrV(),
+  .oCtrH(ctrH),
+  .oCtrV(ctrV),
   .colorChannels({VGA_RED, VGA_BLUE, VGA_GREEN}),
   .oHSync(VGA_HS),
   .oVSync(VGA_VS)
+);
+
+reg [7:0] vgaramh, vgaramv;
+VGAAdapter vgaadapter(
+	.widthPos(ctrH),
+	.heightPos(ctrV),
+	.widthMin(),
+	.heightMin()
+);
+
+reg VGAWrite;
+reg [7:0] rVGAResult;
+wire [2:0] VGAOut;
+VGARam # ( 3, 8, 16*12 )
+VGARam (
+  .Clock(Clock),
+  .iWriteEnable(VGAWrite),
+  .iReadAddress(),
+  .iWriteAddress(rVGAResult),
+  .iDataIn(wResult),
+  .oDataOut(VGAOut)
 );
 
 ROM InstructionRom
@@ -208,7 +231,7 @@ begin
   `MUL:
 	begin
 		rWriteEnable <= 1'b1;
-		rResult      <= wResult;
+		rResult      <= wSourceData1 * wSourceData0;
 	end
 	//-------------------------------------
 	`STO:
@@ -276,8 +299,15 @@ begin
 	//-------------------------------------
   `LCD:
 	begin
-      rWriteLCD <= 1'b1;
-		rResult      <= 0;
+    rWriteLCD <= 1'b1;
+		rResult      <= wSourceData0;
+	end
+
+	`VGA:
+	begin
+		VGAWrite <= 1'b1;
+		wResult <= wSourceData1;
+		rVGAResult <= wSourceData0;
 	end
 	//-------------------------------------
 	default:
@@ -290,14 +320,16 @@ end
 
 task drive_defaults;
 	begin
-	   rFFLedEN     <= 1'b0;
+		rVGAResult <= 1'b0;
+	  rFFLedEN <= 1'b0;
 		rWriteEnable <= 1'b0;
-      rWriteLCD <= 1'b0;
+    rWriteLCD <= 1'b0;
 		rPushStackEnable <= 0;
 		rPopStackEnable <= 0;
 		rCallTaken <= 1'b0;
 		rRetTaken <= 1'b0;
 		rBranchTaken <= 1'b0;
+		VGAWrite <= 1'b0;
 	end
 endtask
 

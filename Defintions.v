@@ -18,8 +18,6 @@
 `define CALL  4'd12
 `define RET   4'd13
 
-`define SW   4'd14
-`define LW   4'd15
 
 `define R0 8'd0 // 00000000
 `define R1 8'd1 // 00000001
@@ -45,6 +43,13 @@
 
 `define RA 8'h1F
 /*
+
+`define VGA   4'd14 // 1101
+
+
+`define RA 8'h1F
+
+// LETRAS LCD
 `define H 16'h48
 `define O 16'h4F
 `define L 16'h4C
@@ -56,5 +61,16 @@
 `define D 16'h44
 
 `define RA 8'h1F*/
+// COLORES VGA
+`define COLOR_BLACK 8'b000
+`define COLOR_WHITE 8'b111
+
+`define COLOR_RED 8'b100
+`define COLOR_GREEN 8'b010
+`define COLOR_BLUE 8'b001
+
+`define COLOR_MAGENTA 8'b101
+`define COLOR_YELLOW 8'b110
+`define COLOR_CYAN 8'b011
 
 `endif

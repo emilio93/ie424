@@ -1,11 +1,14 @@
 `timescale 1ns / 1ps
 `include "Defintions.v"
- 
+
 `define INICIO 8'd3
-`define LOOPINFINITO 8'd4
-`define ESCRIBIRLCD 8'd7
-`define ESCRIBIR4LETRAS 8'd35
- 
+`define LOOPVERTICAL 8'd10
+`define LOOPHORIZONTAL 8'd11
+`define REGRESOLOOPHORIZONTAL 8'd19
+`define REGRESOLOOPVERTICAL 8'd23
+`define FIN 8'd26
+`define DISPLAY 8'd27
+
 module ROM
 (
   input  wire[15:0] iAddress,
@@ -18,55 +21,53 @@ begin
   1: oInstruction = {`STO,`R0,16'b0};
   2: oInstruction = {`STO,`R1,16'b1};
 // INICIO:
-  3: oInstruction = {`CALL,`ESCRIBIRLCD,16'b0};
-// LOOPINFINITO:
-  4: oInstruction = {`BLE,`LOOPINFINITO,`R0,`R1};
-  5: oInstruction = {`NOP,24'd0};
-  6: oInstruction = {`JMP,`INICIO,16'd0};
-// ESCRIBIRLCD:
-  7: oInstruction = {`NOP,24'b0};
-  8: oInstruction = {`PUSH,16'b0,`RA};
-  9: oInstruction = {`PUSH,16'b0,`R10};
-  10: oInstruction = {`PUSH,16'b0,`R11};
-  11: oInstruction = {`PUSH,16'b0,`R12};
-  12: oInstruction = {`PUSH,16'b0,`R13};
-  13: oInstruction = {`STO,`R10,`H};
-  14: oInstruction = {`STO,`R11,`O};
-  15: oInstruction = {`STO,`R12,`L};
-  16: oInstruction = {`STO,`R13,`A};
-  17: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  18: oInstruction = {`STO,`R10,`ESPACIO};
-  19: oInstruction = {`STO,`R11,`M};
-  20: oInstruction = {`STO,`R12,`U};
-  21: oInstruction = {`STO,`R13,`N};
-  22: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  23: oInstruction = {`STO,`R10,`D};
-  24: oInstruction = {`STO,`R11,`O};
-  25: oInstruction = {`STO,`R12,`ESPACIO};
-  26: oInstruction = {`STO,`R13,`ESPACIO};
-  27: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  28: oInstruction = {`POP,`R13,16'b0};
-  29: oInstruction = {`POP,`R12,16'b0};
-  30: oInstruction = {`POP,`R11,16'b0};
-  31: oInstruction = {`POP,`R10,16'b0};
-  32: oInstruction = {`POP,`RA,16'b0};
-  33: oInstruction = {`NOP,24'b0};
-  34: oInstruction = {`RET,16'b0,`RA};
-// ESCRIBIR4LETRAS:
-  35: oInstruction = {`NOP,24'b0};
-  36: oInstruction = {`LCD,8'b0,`R10,8'b0};
-  37: oInstruction = {`NOP,24'b0};
-  38: oInstruction = {`LCD,8'b0,`R11,8'b0};
-  39: oInstruction = {`NOP,24'b0};
-  40: oInstruction = {`LCD,8'b0,`R12,8'b0};
-  41: oInstruction = {`NOP,24'b0};
-  42: oInstruction = {`LCD,8'b0,`R13,8'b0};
-  43: oInstruction = {`NOP,24'b0};
-  44: oInstruction = {`RET,16'b0,`RA};
- 
+  3: oInstruction = {`STO,`R11,16'b0};
+  4: oInstruction = {`STO,`R12,16'b0};
+  5: oInstruction = {`STO,`R13,16'd16};
+  6: oInstruction = {`STO,`R14,16'd12};
+  7: oInstruction = {`STO,`R3,16'd3};
+  8: oInstruction = {`STO,`R4,16'd6};
+  9: oInstruction = {`STO,`R5,16'd9};
+// LOOPVERTICAL:
+  10: oInstruction = {`STO,`R11,16'b0};
+// LOOPHORIZONTAL:
+  11: oInstruction = {`STO,`R10,8'b0,`COLOR_GREEN};
+  12: oInstruction = {`BLE,`REGRESOLOOPHORIZONTAL,`R12,`R3};
+  13: oInstruction = {`STO,`R10,8'b0,`COLOR_RED};
+  14: oInstruction = {`BLE,`REGRESOLOOPHORIZONTAL,`R12,`R4};
+  15: oInstruction = {`STO,`R10,8'b0,`COLOR_MAGENTA};
+  16: oInstruction = {`BLE,`REGRESOLOOPHORIZONTAL,`R12,`R5};
+  17: oInstruction = {`STO,`R10,8'b0,`COLOR_BLUE};
+  18: oInstruction = {`JMP,`REGRESOLOOPHORIZONTAL,16'b0};
+// REGRESOLOOPHORIZONTAL:
+  19: oInstruction = {`BLE,`REGRESOLOOPVERTICAL,`R13,`R11};
+  20: oInstruction = {`CALL,`DISPLAY,16'b0};
+  21: oInstruction = {`ADD,`R11,`R11,`R1};
+  22: oInstruction = {`JMP,`LOOPHORIZONTAL,16'b0};
+// REGRESOLOOPVERTICAL:
+  23: oInstruction = {`BLE,`FIN,`R14,`R12};
+  24: oInstruction = {`ADD,`R12,`R12,`R1};
+  25: oInstruction = {`JMP,`LOOPVERTICAL,16'b0};
+// FIN:
+  26: oInstruction = {`JMP,`FIN,16'b0};
+// DISPLAY:
+  27: oInstruction = {`NOP,24'b0};
+  28: oInstruction = {`PUSH,16'b0,`RA};
+  29: oInstruction = {`PUSH,16'b0,`R2};
+  30: oInstruction = {`NOP,24'b0};
+  31: oInstruction = {`MUL,`R2,`R12,`R13};
+  32: oInstruction = {`NOP,24'b0};
+  33: oInstruction = {`ADD,`R2,`R2,`R11};
+  34: oInstruction = {`NOP,24'b0};
+  35: oInstruction = {`VGA,8'b0,`R10,`R2};
+  36: oInstruction = {`POP,`R2,16'b0};
+  37: oInstruction = {`POP,`RA,16'b0};
+  38: oInstruction = {`NOP,24'b0};
+  39: oInstruction = {`RET,16'b0,`RA};
+
   default:
-	oInstruction = {`LED,24'b10101010}; // NOP
-  endcase  
+    oInstruction = {`LED,24'b10101010}; // NOP
+  endcase
 end
- 
+
 endmodule

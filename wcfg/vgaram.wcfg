@@ -1,0 +1,1506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/dvl/Desktop/ucr/2018-i/ie0424/minialu/minialu/TestBenchVGA_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="TestBenchVGA" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="4" />
+   <wvobject fp_name="group71" type="group">
+      <obj_property name="label">TB</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TestBenchVGA/SF_D" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">SF_D[3:0]</obj_property>
+         <obj_property name="ObjectShortName">SF_D[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/LCD_E" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">LCD_E</obj_property>
+         <obj_property name="ObjectShortName">LCD_E</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/LCD_RS" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">LCD_RS</obj_property>
+         <obj_property name="ObjectShortName">LCD_RS</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/LCD_RW" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">LCD_RW</obj_property>
+         <obj_property name="ObjectShortName">LCD_RW</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/No_se" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">No_se</obj_property>
+         <obj_property name="ObjectShortName">No_se</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/VGA_RED" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_RED</obj_property>
+         <obj_property name="ObjectShortName">VGA_RED</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/VGA_GREEN" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_GREEN</obj_property>
+         <obj_property name="ObjectShortName">VGA_GREEN</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/VGA_BLUE" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_BLUE</obj_property>
+         <obj_property name="ObjectShortName">VGA_BLUE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/ctrH" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ctrH[18:0]</obj_property>
+         <obj_property name="ObjectShortName">ctrH[18:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/ctrV" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ctrV[18:0]</obj_property>
+         <obj_property name="ObjectShortName">ctrV[18:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/VGA_VS" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_VS</obj_property>
+         <obj_property name="ObjectShortName">VGA_VS</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/VGA_HS" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_HS</obj_property>
+         <obj_property name="ObjectShortName">VGA_HS</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/dataOut" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">dataOut[2:0]</obj_property>
+         <obj_property name="ObjectShortName">dataOut[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group87" type="group">
+      <obj_property name="label">UUT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TestBenchVGA/uut/Clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">Clock</obj_property>
+         <obj_property name="ObjectShortName">Clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/Reset" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">Reset</obj_property>
+         <obj_property name="ObjectShortName">Reset</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/oLed" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">oLed[7:0]</obj_property>
+         <obj_property name="ObjectShortName">oLed[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/SF_D" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">SF_D[11:8]</obj_property>
+         <obj_property name="ObjectShortName">SF_D[11:8]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/LCD_E" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">LCD_E</obj_property>
+         <obj_property name="ObjectShortName">LCD_E</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/LCD_RS" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">LCD_RS</obj_property>
+         <obj_property name="ObjectShortName">LCD_RS</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/LCD_RW" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">LCD_RW</obj_property>
+         <obj_property name="ObjectShortName">LCD_RW</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/No_se" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">No_se</obj_property>
+         <obj_property name="ObjectShortName">No_se</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGA_RED" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_RED</obj_property>
+         <obj_property name="ObjectShortName">VGA_RED</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGA_BLUE" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_BLUE</obj_property>
+         <obj_property name="ObjectShortName">VGA_BLUE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGA_GREEN" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_GREEN</obj_property>
+         <obj_property name="ObjectShortName">VGA_GREEN</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGA_VS" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_VS</obj_property>
+         <obj_property name="ObjectShortName">VGA_VS</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGA_HS" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGA_HS</obj_property>
+         <obj_property name="ObjectShortName">VGA_HS</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wIP" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wIP[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wIP[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wIP_temp" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wIP_temp[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wIP_temp[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wStackOut" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wStackOut[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wStackOut[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wInstruction" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wInstruction[27:0]</obj_property>
+         <obj_property name="ObjectShortName">wInstruction[27:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wOperation" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wOperation[3:0]</obj_property>
+         <obj_property name="ObjectShortName">wOperation[3:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wSourceAddr0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wSourceAddr0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">wSourceAddr0[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wSourceAddr1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wSourceAddr1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">wSourceAddr1[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wDestination" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wDestination[7:0]</obj_property>
+         <obj_property name="ObjectShortName">wDestination[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wSourceData0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wSourceData0[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wSourceData0[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wSourceData1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wSourceData1[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wSourceData1[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wIPInitialValue" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wIPInitialValue[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wIPInitialValue[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wImmediateValue" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wImmediateValue[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wImmediateValue[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wready" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">wready</obj_property>
+         <obj_property name="ObjectShortName">wready</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wIsInitialized" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">wIsInitialized</obj_property>
+         <obj_property name="ObjectShortName">wIsInitialized</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/ctrH" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ctrH[10:0]</obj_property>
+         <obj_property name="ObjectShortName">ctrH[10:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/ctrV" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ctrV[10:0]</obj_property>
+         <obj_property name="ObjectShortName">ctrV[10:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rWriteEnable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rWriteEnable</obj_property>
+         <obj_property name="ObjectShortName">rWriteEnable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rBranchTaken" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rBranchTaken</obj_property>
+         <obj_property name="ObjectShortName">rBranchTaken</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rPushStackEnable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rPushStackEnable</obj_property>
+         <obj_property name="ObjectShortName">rPushStackEnable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rPopStackEnable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rPopStackEnable</obj_property>
+         <obj_property name="ObjectShortName">rPopStackEnable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rResult" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rResult[15:0]</obj_property>
+         <obj_property name="ObjectShortName">rResult[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rWriteLCD" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rWriteLCD</obj_property>
+         <obj_property name="ObjectShortName">rWriteLCD</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rModulesLoaded" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rModulesLoaded</obj_property>
+         <obj_property name="ObjectShortName">rModulesLoaded</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rRetTaken" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rRetTaken</obj_property>
+         <obj_property name="ObjectShortName">rRetTaken</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rCallTaken" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rCallTaken</obj_property>
+         <obj_property name="ObjectShortName">rCallTaken</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/wResult" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">wResult[15:0]</obj_property>
+         <obj_property name="ObjectShortName">wResult[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/clk25" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk25</obj_property>
+         <obj_property name="ObjectShortName">clk25</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGAWrite" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">VGAWrite</obj_property>
+         <obj_property name="ObjectShortName">VGAWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rVGAResult" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rVGAResult[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rVGAResult[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/rFFLedEN" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rFFLedEN</obj_property>
+         <obj_property name="ObjectShortName">rFFLedEN</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group142" type="group">
+      <obj_property name="label">RAM</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/Clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">Clock</obj_property>
+         <obj_property name="ObjectShortName">Clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/iWriteEnable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">iWriteEnable</obj_property>
+         <obj_property name="ObjectShortName">iWriteEnable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/iReadAddress0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iReadAddress0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">iReadAddress0[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/iReadAddress1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iReadAddress1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">iReadAddress1[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/iWriteAddress" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iWriteAddress[7:0]</obj_property>
+         <obj_property name="ObjectShortName">iWriteAddress[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/iDataIn" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iDataIn[15:0]</obj_property>
+         <obj_property name="ObjectShortName">iDataIn[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/oDataOut0" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">oDataOut0[15:0]</obj_property>
+         <obj_property name="ObjectShortName">oDataOut0[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/oDataOut1" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">oDataOut1[15:0]</obj_property>
+         <obj_property name="ObjectShortName">oDataOut1[15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">Ram[31:0,15:0]</obj_property>
+         <obj_property name="ObjectShortName">Ram[31:0,15:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[31]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[31,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[31,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[30]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[30,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[30,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[29]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[29,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[29,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[28]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[28,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[28,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[27]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[27,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[27,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[26]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[26,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[26,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[25]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[25,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[25,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[24]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[24,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[24,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[23]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[23,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[23,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[22]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[22,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[22,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[21]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[21,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[21,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[20]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[20,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[20,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[19]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[19,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[19,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[18]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[18,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[18,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[17]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[17,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[17,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[16]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[16,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[16,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[15]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[15,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[15,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[14]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[14,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[14,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[13]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[13,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[13,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[12]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[12,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[12,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[11]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[11,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[11,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[10]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[10,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[10,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[9]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[9,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[9,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[8]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[8,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[8,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[7]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[7,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[7,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[6]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[6,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[6,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[5]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[5,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[5,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[4]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[4,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[4,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[3]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[3,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[3,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[2]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[2,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[2,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[1]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[1,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[1,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/DataRam/Ram[0]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[0,15:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[0,15:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/DATA_WIDTH" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">DATA_WIDTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA_WIDTH[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/ADDR_WIDTH" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ADDR_WIDTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ADDR_WIDTH[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/DataRam/MEM_SIZE" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">MEM_SIZE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">MEM_SIZE[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group131" type="group">
+      <obj_property name="label">vgaram</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/Clock" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">Clock</obj_property>
+         <obj_property name="ObjectShortName">Clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/iWriteEnable" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">iWriteEnable</obj_property>
+         <obj_property name="ObjectShortName">iWriteEnable</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/iReadAddress" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iReadAddress[7:0]</obj_property>
+         <obj_property name="ObjectShortName">iReadAddress[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/iWriteAddress" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iWriteAddress[7:0]</obj_property>
+         <obj_property name="ObjectShortName">iWriteAddress[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/iDataIn" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">iDataIn[2:0]</obj_property>
+         <obj_property name="ObjectShortName">iDataIn[2:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/oDataOut" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">oDataOut[2:0]</obj_property>
+         <obj_property name="ObjectShortName">oDataOut[2:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">Ram[191:0,2:0]</obj_property>
+         <obj_property name="ObjectShortName">Ram[191:0,2:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[191]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[191,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[191,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[190]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[190,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[190,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[189]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[189,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[189,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[188]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[188,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[188,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[187]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[187,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[187,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[186]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[186,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[186,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[185]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[185,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[185,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[184]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[184,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[184,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[183]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[183,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[183,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[182]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[182,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[182,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[181]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[181,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[181,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[180]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[180,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[180,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[179]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[179,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[179,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[178]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[178,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[178,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[177]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[177,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[177,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[176]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[176,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[176,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[175]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[175,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[175,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[174]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[174,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[174,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[173]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[173,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[173,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[172]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[172,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[172,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[171]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[171,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[171,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[170]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[170,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[170,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[169]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[169,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[169,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[168]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[168,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[168,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[167]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[167,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[167,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[166]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[166,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[166,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[165]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[165,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[165,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[164]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[164,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[164,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[163]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[163,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[163,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[162]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[162,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[162,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[161]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[161,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[161,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[160]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[160,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[160,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[159]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[159,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[159,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[158]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[158,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[158,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[157]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[157,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[157,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[156]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[156,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[156,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[155]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[155,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[155,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[154]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[154,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[154,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[153]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[153,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[153,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[152]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[152,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[152,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[151]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[151,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[151,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[150]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[150,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[150,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[149]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[149,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[149,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[148]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[148,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[148,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[147]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[147,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[147,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[146]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[146,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[146,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[145]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[145,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[145,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[144]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[144,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[144,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[143]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[143,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[143,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[142]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[142,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[142,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[141]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[141,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[141,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[140]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[140,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[140,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[139]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[139,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[139,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[138]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[138,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[138,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[137]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[137,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[137,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[136]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[136,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[136,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[135]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[135,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[135,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[134]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[134,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[134,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[133]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[133,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[133,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[132]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[132,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[132,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[131]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[131,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[131,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[130]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[130,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[130,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[129]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[129,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[129,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[128]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[128,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[128,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[127]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[127,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[127,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[126]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[126,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[126,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[125]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[125,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[125,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[124]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[124,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[124,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[123]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[123,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[123,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[122]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[122,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[122,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[121]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[121,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[121,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[120]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[120,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[120,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[119]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[119,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[119,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[118]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[118,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[118,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[117]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[117,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[117,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[116]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[116,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[116,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[115]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[115,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[115,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[114]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[114,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[114,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[113]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[113,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[113,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[112]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[112,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[112,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[111]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[111,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[111,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[110]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[110,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[110,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[109]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[109,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[109,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[108]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[108,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[108,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[107]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[107,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[107,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[106]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[106,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[106,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[105]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[105,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[105,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[104]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[104,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[104,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[103]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[103,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[103,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[102]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[102,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[102,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[101]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[101,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[101,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[100]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[100,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[100,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[99]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[99,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[99,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[98]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[98,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[98,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[97]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[97,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[97,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[96]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[96,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[96,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[95]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[95,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[95,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[94]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[94,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[94,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[93]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[93,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[93,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[92]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[92,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[92,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[91]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[91,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[91,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[90]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[90,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[90,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[89]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[89,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[89,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[88]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[88,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[88,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[87]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[87,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[87,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[86]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[86,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[86,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[85]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[85,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[85,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[84]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[84,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[84,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[83]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[83,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[83,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[82]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[82,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[82,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[81]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[81,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[81,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[80]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[80,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[80,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[79]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[79,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[79,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[78]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[78,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[78,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[77]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[77,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[77,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[76]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[76,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[76,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[75]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[75,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[75,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[74]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[74,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[74,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[73]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[73,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[73,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[72]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[72,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[72,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[71]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[71,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[71,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[70]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[70,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[70,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[69]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[69,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[69,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[68]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[68,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[68,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[67]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[67,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[67,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[66]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[66,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[66,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[65]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[65,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[65,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[64]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[64,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[64,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[63]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[63,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[63,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[62]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[62,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[62,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[61]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[61,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[61,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[60]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[60,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[60,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[59]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[59,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[59,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[58]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[58,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[58,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[57]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[57,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[57,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[56]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[56,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[56,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[55]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[55,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[55,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[54]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[54,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[54,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[53]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[53,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[53,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[52]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[52,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[52,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[51]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[51,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[51,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[50]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[50,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[50,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[49]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[49,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[49,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[48]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[48,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[48,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[47]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[47,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[47,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[46]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[46,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[46,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[45]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[45,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[45,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[44]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[44,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[44,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[43]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[43,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[43,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[42]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[42,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[42,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[41]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[41,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[41,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[40]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[40,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[40,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[39]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[39,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[39,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[38]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[38,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[38,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[37]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[37,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[37,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[36]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[36,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[36,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[35]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[35,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[35,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[34]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[34,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[34,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[33]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[33,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[33,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[32]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[32,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[32,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[31]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[31,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[31,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[30]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[30,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[30,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[29]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[29,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[29,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[28]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[28,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[28,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[27]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[27,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[27,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[26]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[26,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[26,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[25]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[25,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[25,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[24]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[24,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[24,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[23]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[23,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[23,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[22]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[22,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[22,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[21]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[21,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[21,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[20]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[20,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[20,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[19]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[19,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[19,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[18]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[18,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[18,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[17]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[17,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[17,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[16]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[16,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[16,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[15]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[15,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[15,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[14]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[14,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[14,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[13]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[13,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[13,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[12]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[12,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[12,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[11]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[11,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[11,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[10]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[10,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[10,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[9]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[9,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[9,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[8]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[8,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[8,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[7]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[7,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[7,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[6]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[6,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[6,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[5]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[5,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[5,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[4]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[4,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[4,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[3]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[3,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[3,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[2]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[2,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[2,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[1]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[1,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[1,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject fp_name="/TestBenchVGA/uut/VGARam/Ram[0]" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">[0,2:0]</obj_property>
+            <obj_property name="ObjectShortName">Ram[0,2:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/DATA_WIDTH" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">DATA_WIDTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">DATA_WIDTH[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/ADDR_WIDTH" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">ADDR_WIDTH[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ADDR_WIDTH[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/TestBenchVGA/uut/VGARam/MEM_SIZE" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">MEM_SIZE[31:0]</obj_property>
+         <obj_property name="ObjectShortName">MEM_SIZE[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

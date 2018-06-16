@@ -12,9 +12,9 @@ STO, R12, 16'b0 // vertical
 STO, R13, 16'd16 // horizontal
 STO, R14, 16'd12 // vertical
 
-STO, R3, 16'd3
-STO, R4, 16'd6
-STO, R5, 16'd9
+STO, R3, 16'd2
+STO, R4, 16'd5
+STO, R5, 16'd8
 
 // width = 16, height = 12
 //

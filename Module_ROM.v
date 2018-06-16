@@ -25,9 +25,9 @@ begin
   4: oInstruction = {`STO,`R12,16'b0};
   5: oInstruction = {`STO,`R13,16'd16};
   6: oInstruction = {`STO,`R14,16'd12};
-  7: oInstruction = {`STO,`R3,16'd3};
-  8: oInstruction = {`STO,`R4,16'd6};
-  9: oInstruction = {`STO,`R5,16'd9};
+  7: oInstruction = {`STO,`R3,16'd2};
+  8: oInstruction = {`STO,`R4,16'd5};
+  9: oInstruction = {`STO,`R5,16'd8};
 // LOOPVERTICAL:
   10: oInstruction = {`STO,`R11,16'b0};
 // LOOPHORIZONTAL:

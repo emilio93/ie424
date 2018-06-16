@@ -1,4 +1,4 @@
-`timescale 1ns / 1ns
+`timescale 20ns / 10ns
 `include "LCD.v"
 `include "VGA.v"
 

@@ -18,8 +18,8 @@ module MiniAlu
  output wire LCD_RW,
  output wire No_se,
  output wire VGA_RED,
- output wire VGA_BLUE,
  output wire VGA_GREEN,
+ output wire VGA_BLUE,
  output wire VGA_VS,
  output wire VGA_HS
 );
@@ -53,36 +53,38 @@ always @ (posedge Clock or posedge Reset) begin
   else clk25<=clk25+1'b1;
 end
 
+wire [2:0] VGAOut;
 wire [10:0] ctrH, ctrV;
 // Instancia de máquina de estados
 // para el puerto VGA
 VGA vga(
   .clk(clk25),
   .rst(~rModulesLoaded),
-  .data(3'b011),
+  .rgb(VGAOut),
   .oCtrH(ctrH),
   .oCtrV(ctrV),
-  .colorChannels({VGA_RED, VGA_BLUE, VGA_GREEN}),
-  .oHSync(VGA_HS),
-  .oVSync(VGA_VS)
+  .RED(VGA_RED),
+  .GREEN(VGA_GREEN),
+  .BLUE(VGA_BLUE),
+  .HS(VGA_HS),
+  .VS(VGA_VS)
 );
 
-reg [7:0] vgaramh, vgaramv;
+wire [3:0] vgaramh, vgaramv;
 VGAAdapter vgaadapter(
 	.widthPos(ctrH),
 	.heightPos(ctrV),
-	.widthMin(),
-	.heightMin()
+	.widthMin(vgaramh),
+	.heightMin(vgaramv)
 );
 
 reg VGAWrite;
 reg [7:0] rVGAResult;
-wire [2:0] VGAOut;
 VGARam # ( 3, 8, 16*12 )
 VGARam (
   .Clock(Clock),
   .iWriteEnable(VGAWrite),
-  .iReadAddress(),
+  .iReadAddress((16*vgaramv+vgaramh)),
   .iWriteAddress(rVGAResult),
   .iDataIn(wResult),
   .oDataOut(VGAOut)

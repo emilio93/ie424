@@ -11,10 +11,10 @@
 
 module ROM
 (
-	input  wire[15:0]  		iAddress,
-	output reg [27:0] 		oInstruction
-);	
-always @ ( iAddress )
+  input  wire[15:0] iAddress,
+  output reg [27:0] oInstruction
+);
+always @ (iAddress)
 begin
   case (iAddress)
   0: oInstruction = {`NOP,24'd4000};

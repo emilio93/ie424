@@ -1,10 +1,8 @@
 `timescale 1ns / 1ps
 
 // El adaptador es una interfaz entre la memoria de video y el controlador vga
-// para la memoria de video actua como un lector de widthIn x heightIn,
-// para el controlador funciona como una memoria de widthOut x heightOut,
-//
-//
+// para la memoria de video actua como un lector de widthMemPos x heightMemPos,
+// para el controlador funciona como una memoria de widthVgaPos x heightVgaPos,
 module VGAAdapter # (
   parameter widthOut=640,
   parameter heightOut=480,
@@ -17,7 +15,7 @@ module VGAAdapter # (
   output reg [3:0] heightMin
 );
 
-always @ (*) begin
+      always @ (*) begin
    widthMin = widthPos < 40 ? 4'd0 :
                       widthPos >= 40 & widthPos < 80 ? 4'd1:
                       widthPos >= 80 & widthPos < 120 ? 4'd2:
@@ -48,5 +46,5 @@ always @ (*) begin
                       heightPos < 440 ? 4'd10:
                       heightPos < 480 ? 4'd11: 0;
 
-end
+      end
 endmodule

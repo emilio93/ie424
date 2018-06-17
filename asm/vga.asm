@@ -78,7 +78,7 @@ JMP, FIN, 16'b0
 // R11=x
 // R12=y
 // R4=limHor
-// R2= R11 + R12 * R4
+// R2= R11 + R12 * R13
 DISPLAY:
   NOP, 24'b0
   PUSH, 16'b0, RA

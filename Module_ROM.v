@@ -1,72 +1,40 @@
 `timescale 1ns / 1ps
 `include "Defintions.v"
- 
-`define INICIO 8'd3
-`define LOOPINFINITO 8'd4
-`define ESCRIBIRLCD 8'd7
-`define ESCRIBIR4LETRAS 8'd35
- 
+
+`define LOOP1 8'd9
+`define LOOP2 8'd6
 module ROM
 (
-  input  wire[15:0] iAddress,
-  output reg [27:0] oInstruction
-);
-always @ (iAddress)
+	input  wire[15:0]  		iAddress,
+	output reg [27:0] 		oInstruction
+);	
+always @ ( iAddress )
 begin
-  case (iAddress)
-  0: oInstruction = {`NOP,24'd4000};
-  1: oInstruction = {`STO,`R0,16'b0};
-  2: oInstruction = {`STO,`R1,16'b1};
-// INICIO:
-  3: oInstruction = {`CALL,`ESCRIBIRLCD,16'b0};
-// LOOPINFINITO:
-  4: oInstruction = {`BLE,`LOOPINFINITO,`R0,`R1};
-  5: oInstruction = {`NOP,24'd0};
-  6: oInstruction = {`JMP,`INICIO,16'd0};
-// ESCRIBIRLCD:
-  7: oInstruction = {`NOP,24'b0};
-  8: oInstruction = {`PUSH,16'b0,`RA};
-  9: oInstruction = {`PUSH,16'b0,`R10};
-  10: oInstruction = {`PUSH,16'b0,`R11};
-  11: oInstruction = {`PUSH,16'b0,`R12};
-  12: oInstruction = {`PUSH,16'b0,`R13};
-  13: oInstruction = {`STO,`R10,`H};
-  14: oInstruction = {`STO,`R11,`O};
-  15: oInstruction = {`STO,`R12,`L};
-  16: oInstruction = {`STO,`R13,`A};
-  17: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  18: oInstruction = {`STO,`R10,`ESPACIO};
-  19: oInstruction = {`STO,`R11,`M};
-  20: oInstruction = {`STO,`R12,`U};
-  21: oInstruction = {`STO,`R13,`N};
-  22: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  23: oInstruction = {`STO,`R10,`D};
-  24: oInstruction = {`STO,`R11,`O};
-  25: oInstruction = {`STO,`R12,`ESPACIO};
-  26: oInstruction = {`STO,`R13,`ESPACIO};
-  27: oInstruction = {`CALL,`ESCRIBIR4LETRAS,16'b0};
-  28: oInstruction = {`POP,`R13,16'b0};
-  29: oInstruction = {`POP,`R12,16'b0};
-  30: oInstruction = {`POP,`R11,16'b0};
-  31: oInstruction = {`POP,`R10,16'b0};
-  32: oInstruction = {`POP,`RA,16'b0};
-  33: oInstruction = {`NOP,24'b0};
-  34: oInstruction = {`RET,16'b0,`RA};
-// ESCRIBIR4LETRAS:
-  35: oInstruction = {`NOP,24'b0};
-  36: oInstruction = {`LCD,8'b0,`R10,8'b0};
-  37: oInstruction = {`NOP,24'b0};
-  38: oInstruction = {`LCD,8'b0,`R11,8'b0};
-  39: oInstruction = {`NOP,24'b0};
-  40: oInstruction = {`LCD,8'b0,`R12,8'b0};
-  41: oInstruction = {`NOP,24'b0};
-  42: oInstruction = {`LCD,8'b0,`R13,8'b0};
-  43: oInstruction = {`NOP,24'b0};
-  44: oInstruction = {`RET,16'b0,`RA};
- 
-  default:
-	oInstruction = {`LED,24'b10101010}; // NOP
-  endcase  
+	case (iAddress)
+
+	0: oInstruction = { `NOP ,24'd4000    };
+	1: oInstruction = { `TEC ,`R7,`R7,8'b0 };
+	2: oInstruction = { `STO ,`R3,16'b000000001001}; 
+	3: oInstruction = { `STO ,`R6,16'b000000000010}; 
+	4: oInstruction = { `STO, `R4,16'd100 };
+	5: oInstruction = { `STO, `R5,16'd0     };  //j
+//LOOP2:
+	6: oInstruction = { `LED ,8'b0,`R7,8'b0 };
+	7: oInstruction = { `STO ,`R1,16'h0     }; 	
+	8: oInstruction = { `STO ,`R2,16'd65 };
+//LOOP1:	
+	9: oInstruction = { `ADD ,`R1,`R1,`R6    }; 
+	10: oInstruction = { `BLE ,`LOOP1,`R1,`R2 }; 
+	
+	11: oInstruction = { `ADD ,`R5,`R5,`R6    };
+	12: oInstruction = { `BLE ,`LOOP2,`R5,`R4 };	
+	13: oInstruction = { `NOP ,24'd4000       }; 
+	//14: oInstruction = { `MUL2 ,`R7,`R7,`R3    };
+	15: oInstruction = { `NOP ,24'd4000       };
+	16: oInstruction = { `JMP ,  8'd1,16'b0   };
+	default:
+		oInstruction = { `LED ,  24'b10101010 };		//NOP
+	endcase	
 end
- 
+	
 endmodule

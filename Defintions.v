@@ -10,7 +10,8 @@
 `define ADD   4'd5 // 0101
 `define JMP   4'd6 // 0110
 `define SUB   4'd7 // 0111
-`define LCD   4'd8 // 1000
+//`define LCD   4'd8 // 1000
+`define TEC   4'd8 // 1000
 `define MUL   4'd9
 `define PUSH   4'd10
 `define POP   4'd11
@@ -37,7 +38,13 @@
 `define R14 8'd14
 `define R15 8'd15
 
+`define S 8'h1b
+`define W 8'h1d
+`define A 8'h1c
+`define D 8'h23
 
+`define RA 8'h1F
+/*
 `define H 16'h48
 `define O 16'h4F
 `define L 16'h4C
@@ -48,6 +55,6 @@
 `define N 16'h4E
 `define D 16'h44
 
-`define RA 8'h1F
+`define RA 8'h1F*/
 
 `endif

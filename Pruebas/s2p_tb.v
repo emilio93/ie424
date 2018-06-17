@@ -2,24 +2,19 @@
 `include "../decoder.v"
 
 module testbench;
-  reg wClockFPGA, wReset, w1b;
+  reg  wReset, w1b;
   reg wClockTeclado;
   wire wError;
   wire [10:0] w11b;
-  wire [2:0] wNum;
   wire [7:0] wKey;
   reg tecla;
 
-  serial2parallel s2p(.ClockFPGA(wClockFPGA), .iReset(wReset), .i1b(w1b), .o11b(w11b), .oNum(wNum), .ClockTeclado(wClockTeclado));
-  decoder dec(.i11b(w11b), .iNum(wNum), .error(wError), .oKey(wKey));
+  serial2parallel s2p(.iReset(wReset), .ClockTeclado(wClockTeclado), .i1b(w1b), .o8b(wKey));
 
-
-  always #5 wClockFPGA = ~wClockFPGA;
   always #20000 wClockTeclado = ~(wClockTeclado & tecla);
 
   initial begin
     tecla <= 0;
-    wClockFPGA <= 1;
     wReset <= 0;
     w1b <= 1;
     wClockTeclado <= 1;

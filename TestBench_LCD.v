@@ -22,7 +22,86 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-module TestBench;
+//`include "../serial2parallel.v"
+`include "../decoder.v"
+
+module testbench;
+  reg  wReset, w1b;
+  reg wClockTeclado;
+  reg Clock;
+  wire wError;
+  wire [10:0] w11b;
+  wire [7:0] wKey;
+  reg tecla;
+  reg [7:0] oLed;
+
+	MiniAlu uut (
+		.Clock(Clock), 
+		.Reset(wReset), 
+		.oLed(oLed),
+		.PS2_DATA(w1b),
+		.PS2_CLK(wClockTeclado)
+	);
+  always #5 Clock = ~Clock;	
+  always #20000 wClockTeclado = ~(wClockTeclado & tecla);
+
+  initial begin
+    tecla <= 0;
+    wReset <= 0;
+    w1b <= 1;
+    wClockTeclado <= 1;
+	 Clock <= 1;
+    #10 wReset <= 1;
+    #20 wReset <= 0;
+
+    #159990 w1b <= 0;//inicia
+    #10 wClockTeclado <= 0; tecla <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 0;
+    #40000 w1b <= 1;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1; //termina 011010001 11 --> 3
+    tecla <= 0;
+
+    #159990 w1b <= 0;//inicia
+    #10 wClockTeclado <= 0; tecla <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1; //termina 011110000 11 --> 3
+    tecla<=0;
+
+    #159990 w1b <= 0;//inicia
+    #10 wClockTeclado <= 0; tecla <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 0;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1;
+    #40000 w1b <= 0;
+    #40000 w1b <= 1;
+    #40000 w1b <= 1; //termina 010000110 11 --> 2 (error de paridad forzado)
+    tecla<=0;
+    #2200000;
+    $finish;
+  end
+endmodule //testbench
+
+
+/*module TestBench;
 
 	// Inputs
 	reg Clock;
@@ -72,4 +151,4 @@ module TestBench;
 
 	end
 
-endmodule
+endmodule*/

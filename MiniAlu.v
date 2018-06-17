@@ -11,6 +11,8 @@ module MiniAlu
 (
  input wire Clock,
  input wire Reset,
+ input wire PS2_DATA, 
+ input wire PS2_CLK,
  output wire [7:0] oLed,
  output wire [11:8] SF_D,
  output wire LCD_E,
@@ -249,7 +251,34 @@ LCD LSD(
   .oIsInitialized(wIsInitialized),
   .ready(wready)
   );
-
+  
+wire CLK_cnt; 
+wire slowCLK; 
+assign slowCLK = CLK_cnt; 
+UPCOUNTER_POSEDGE #(1) CLK25  
+( 
+.Clock(   Clock                ), 
+.Reset(   Reset ), 
+.Initial( 1'd0 ), 
+.Enable(  1'b1                 ), 
+.Q(       CLK_cnt             ) 
+); 
+ 
+reg [7:0] ClockFilter; 
+reg ClockTeclado; 
+reg [7:0] DataFilter; 
+reg ibData; 
+always @ (posedge slowCLK) begin 
+  ClockFilter <= {PS2_CLK, ClockFilter[7:1]}; 
+  if (ClockFilter == 8'hFF) ClockTeclado = 1'b1; 
+  if (ClockFilter == 8'd0) ClockTeclado = 1'b0; 
+  DataFilter <= {PS2_DATA, DataFilter[7:1]}; 
+  if (DataFilter == 8'hFF) ibData = 1'b1; 
+  if (DataFilter == 8'd0) ibData = 1'b0; 
+end 
+   
+wire [7:0] wKey;   
+serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(ClockTeclado)); 
 
 always @ ( * )
 begin

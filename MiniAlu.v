@@ -45,16 +45,18 @@ always @ (*) begin
   rModulesLoaded = wIsInitialized;
 end
 
+
+// Generación de clock a 25MHz
 reg clk25;
 always @ (posedge Clock or posedge Reset) begin
   if (Reset) clk25<=0;
-  else clk25<=clk25+1'b1;
+  else clk25<=clk25+1'b1; // 0+1=1, 1+1=0, 0+1=1, ...
 end
 
-wire [2:0] VGAOut;
-wire [10:0] ctrH, ctrV;
-// Instancia de máquina de estados
-// para el puerto VGA
+wire [2:0] VGAOut;      // Dato solicitado para mostrar en pixel
+wire [10:0] ctrH, ctrV; // Posición del controlador vga(0 en tiempos de inactividad)
+
+// Controlador VGA
 VGA vga(
   .clk(clk25),
   .rst(~rModulesLoaded),
@@ -68,7 +70,9 @@ VGA vga(
   .VS(VGA_VS)
 );
 
-wire [3:0] vgaramh, vgaramv;
+wire [3:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
+
+// Adaptador de controlador VGA a memoria
 VGAAdapter vgaadapter(
 	.widthPos(ctrH),
 	.heightPos(ctrV),
@@ -76,14 +80,29 @@ VGAAdapter vgaadapter(
 	.heightMin(vgaramv)
 );
 
-reg VGAWrite;
-reg [7:0] rVGAResult;
-VGARam # ( 3, 8, 16*12 )
-VGARam (
+reg VGAWrite;               // senal para habilitar escritura en memoria de video
+reg [7:0] rVGAWriteAddress; // posición de memoria de video para escribir
+
+// Memoria de video
+// el primer parametro indica que se trabaja con datos de 3 bits que forman un color
+// el segundo parametro indica que las direcciones son de 8 bits, esto limita el tamaño
+//   de la memoria a 2^8 datos de 3(o n) bits. Este tamaño se puede ampliar hasta con
+//   16 bits, el tamaño de los datos en los registros, correspondería a un máximo de
+//   65536 datos.
+// el tercer parametro es el tamaño de la memoria
+// notese que el dato de lectura corresponde a la cantidad de datos horizontales por
+//   la posición de linea vertical más la posición horizontal.
+parameter VGA_DATA_WIDTH=3;
+parameter VGA_ADDR_WIDTH=8;
+parameter VGA_MEM_WIDTH=16;
+parameter VGA_MEM_HEIGHT=12;
+parameter VGA_MEM_SIZE=VGA_MEM_WIDTH*VGA_MEM_HEIGHT;
+VGARam # (VGA_DATA_WIDTH, VGA_ADDR_WIDTH, VGA_MEM_SIZE )
+vgaram (
   .Clock(Clock),
   .iWriteEnable(VGAWrite),
-  .iReadAddress((16*vgaramv+vgaramh)),
-  .iWriteAddress(rVGAResult),
+  .iReadAddress(VGA_MEM_WIDTH*vgaramv+vgaramh),
+  .iWriteAddress(rVGAWriteAddress),
   .iDataIn(wResult),
   .oDataOut(VGAOut)
 );
@@ -100,13 +119,50 @@ RAM_DUAL_READ_PORT DataRam
 	.iWriteEnable(  rWriteEnable ),
 	.iReadAddress0( wInstruction[7:0] ),
 	.iReadAddress1( wInstruction[15:8] ),
-	.iWriteAddress( wDestination ),
+  .iWriteAddress( rCallTaken ? `RA : wDestination ),
 	.iDataIn(       rResult      ),
 	.oDataOut0(     wSourceData0 ),
 	.oDataOut1(     wSourceData1 )
 );
 
-assign wIPInitialValue = (Reset) ? 8'b0 : wDestination;
+Stack Stack
+(
+  .Clock(Clock),
+  .Reset(!rModulesLoaded),
+  .write(rPushStackEnable),
+  .read(rPopStackEnable),
+  .setSP(1'b0),
+  .stackPointerIn(6'b0),
+  .iDataIn(wSourceData0),
+  .oDataOut(wStackOut)
+);
+
+
+// El valor que, se resetea y está disponible para el contador de instrucción wIP
+//
+// Se toma wDestination, esto es, el primer argumento de la operación, cuando se
+// ha realizado una operación CALL o BLE
+//
+// Se toma wSourceData0, esto es, el segundo argumento de la operación, cuando se
+// tiene una operación RET
+//
+// Para todo lo demás, se toma wDestination
+assign wIPInitialValue = (!rModulesLoaded) ? 8'b0 :
+                         (rCallTaken | rBranchTaken&wready | rBranchTaken) ?  wDestination :
+                         (rRetTaken)  ?  wSourceData0 :
+                         (!wready) ? wIP_temp-1:
+                         wDestination;
+
+// El flip flop del contador de instrucciones se resetea cuando se tiene alguna
+// de las siguentes señales :
+//   !rModulesLoaded : Esta es la señal de !reset, cuando esta baja no se han inicializado
+//                     los módulos de la minialu(la fsm de LCD). Cuando la señal está en alto
+//                     indica todos los módulos están listos. Se inicializa en
+//   rBranchTaken    : Cuando se realiza un salto mediante la operación BLE
+//   rCallTaken      : Cuando se realiza un salto mediante la operación CALL
+//   rRetTaken       : Cuando se realiza un salto mediante la operación RET
+//   !wready         : Cuando la lcd está procesando una accion. Mantiene su posición.
+//
 UPCOUNTER_POSEDGE IP
 (
 .Clock(   Clock                ), 
@@ -120,7 +176,7 @@ assign wIP = (rBranchTaken) ? wIPInitialValue : wIP_temp;
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1 
 (
 	.Clock(Clock),
-	.Reset(Reset),
+  .Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[27:24]),
 	.Q(wOperation)
@@ -129,7 +185,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD1
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 (
 	.Clock(Clock),
-	.Reset(Reset),
+  .Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[7:0]),
 	.Q(wSourceAddr0)
@@ -138,7 +194,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 (
 	.Clock(Clock),
-	.Reset(Reset),
+  .Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[15:8]),
 	.Q(wSourceAddr1)
@@ -147,7 +203,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
 (
 	.Clock(Clock),
-	.Reset(Reset),
+  .Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[23:16]),
 	.Q(wDestination)
@@ -157,11 +213,11 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
 reg rFFLedEN;
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
 (
-	.Clock(Clock),
-	.Reset(Reset),
-	.Enable( rFFLedEN ),
+  .Clock(Clock),
+  .Reset(!rModulesLoaded),
+  .Enable( rFFLedEN ),
 	.D( wSourceData1 ),
-	.Q( oLed    )
+  .Q( oLed )
 );
 
 /*wire [15:0] multemp;
@@ -174,9 +230,19 @@ Mul2LUT MuL2
 
 assign wImmediateValue = {wSourceAddr1,wSourceAddr0};
 
-wire CLK_cnt;
-wire slowCLK;
-assign slowCLK = CLK_cnt;
+LCD LSD(
+  .Clock(Clock),
+  .Reset(Reset),
+  .write_Enabled(rWriteLCD),
+  .iData(wSourceData1[7:0]),
+  .oLCD_Enabled(LCD_E),
+  .oLCD_RS(LCD_RS), //Command = 0, Data = 1
+  .oLCD_RW(LCD_RW),
+  .oLCD_StrataFlashControl(No_se),
+  .oLCD_Data(SF_D[11:8]),
+  .oIsInitialized(wIsInitialized),
+  .ready(wready)
+  );
 
 UPCOUNTER_POSEDGE #(1) CLK25 
 (
@@ -205,6 +271,7 @@ serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(Cloc
 
 always @ ( * )
 begin
+  drive_defaults;
 	case (wOperation)
 	//-------------------------------------
 	`NOP:
@@ -221,12 +288,17 @@ begin
 		rResult      <= wSourceData1 + wSourceData0;
 	end
 	//-------------------------------------
-	/*`MUL2:
+  // Operación de resta.
+  // No se altera el número mostrado con
+  // los leds.
+  // Guarda un dato en un registro, este dato
+  // es la diferencia del dato wSourceData1 y
+  // el dato wSourceData0.
+  // eg
+  //   SUB t1,t2,t3 # t1=t2-t3
+  `SUB:
 	begin
 		rWriteEnable <= 1'b1;
-		rResult      <= multemp;
-	end*/
-	//-------------------------------------
 		rResult      <= wSourceData1 - wSourceData0;
 	end
 	//-------------------------------------
@@ -239,7 +311,6 @@ begin
 	`STO:
 	begin
 		rWriteEnable <= 1'b1;
-		rBranchTaken <= 1'b0;
 		rResult      <= wImmediateValue;
 	end
 	//-------------------------------------
@@ -259,7 +330,12 @@ begin
 		rBranchTaken <= 1'b1;
 	end
 	//-------------------------------------	
-	`LED:
+  //
+  // CALL, SUBRUTINA, 16'b0
+  //
+  // Operación CALL llama a una subrutina, guardando automaticaente la
+  // dirección de retorno en el registro `RA,
+  `CALL:
 	begin
 		rWriteEnable <= 1'b1;
 		rResult      <= wIP_temp;
@@ -285,8 +361,11 @@ begin
 		rPushStackEnable <= 1'b1;
 		rResult      <= 0;
 	end
-	
-	`TEC:
+  //-------------------------------------
+  //
+  // POP, R1, 16'b0
+  // Saca el ultimo dato del stack y lo pone en R1
+  `POP:
 	begin
 		rWriteEnable <= 1'b1;
 		rPopStackEnable <= 1'b1;
@@ -302,37 +381,89 @@ begin
   `LCD:
 	begin
     rWriteLCD <= 1'b1;
-		rResult      <= wSourceData0;
-	end
+    rResult      <= wSourceData0;
+  end
 
-	`VGA:
-	begin
-		VGAWrite <= 1'b1;
-		wResult <= wSourceData1;
-		rVGAResult <= wSourceData0;
-	end
-	//-------------------------------------
-	default:
+  // VGA, 8'b0, R1, R2
+  // Coloca el dato en R1 en la posición de memoria en R2
+  // Se puede utilizar la siguiente subrutina para escritura
+  // en una posicion
+  //
+  // //
+  // // LE ENTRA R10, R11, R12, R13 y R14
+  // // PONE EL COLOR INDICADO EN R10
+  // // EN LA POSICIÓN R11, R12
+  // // R13 ES EL LIMITE HORIONTAL
+  // // R14 ES EL LIMITE VERTICAL
+  // // _______________________
+  // // |
+  // // | 0X0 1X0 2X0 ... nX0
+  // // | 0x1 1x1 2x1 ... nx1
+  // // |  .   .   . .     .
+  // // |  .   .   .    .  .
+  // // |  .   .   .       .
+  // // | 0xm 1xm 2xm ... nxm
+  // // |_____________________
+  // //
+  // // ______________________
+  // // |
+  // // | 0+0n 1+0n 2+0n ... (n-1)+0n
+  // // | 0+1n 1+1n 2+1n ... (n-1)+1n
+  // // | 0+2n 1+2n 2+2n ... (n-1)+2n
+  // // |  .    .    .  .     .
+  // // |  .    .    .     .  .
+  // // |  .    .    .        .
+  // // | 0+mn 1+mn 2+mn  ... (n-1)+nm
+  // // |_____________________
+  // //
+  // // R2 = R11 + R12 * R13
+  // DISPLAY:
+  //   NOP, 24'b0
+  //   PUSH, 16'b0, RA
+  //   PUSH, 16'b0, R2
+
+  //   NOP, 24'b0
+  //   MUL, R2, R12, R13
+  //   NOP, 24'b0
+  //   ADD, R2, R2, R11
+
+  //   NOP, 24'b0
+  //   VGA, 8'b0, R10, R2
+
+  //   POP, R2, 16'b0
+  //   POP, RA, 16'b0
+  //   NOP, 24'b0
+  //   RET, 16'b0, RA
+  `VGA:
+  begin
+    VGAWrite <= 1'b1; // habilitar escritura en memoria de video
+    wResult <= wSourceData1; //
+    rVGAWriteAddress <= wSourceData0;
+  end
+  //-------------------------------------
+  default:
 	begin
 	  // drive_defaults;
 	end
 	//-------------------------------------
-	endcase
+  endcase
 end
 
+// Aca se puede agregar los valores por defecto para
+// los distintos regs utilizados,
 task drive_defaults;
-	begin
-		rVGAResult <= 1'b0;
-	  rFFLedEN <= 1'b0;
-		rWriteEnable <= 1'b0;
+  begin
+    rVGAWriteAddress <= 1'b0;
+    rFFLedEN <= 1'b0;
+    rWriteEnable <= 1'b0;
     rWriteLCD <= 1'b0;
 		rPushStackEnable <= 0;
 		rPopStackEnable <= 0;
-		rCallTaken <= 1'b0;
-		rRetTaken <= 1'b0;
-		rBranchTaken <= 1'b0;
-		VGAWrite <= 1'b0;
-	end
+    rCallTaken <= 1'b0;
+    rRetTaken <= 1'b0;
+    rBranchTaken <= 1'b0;
+    VGAWrite <= 1'b0;      // por lo general no se escribe en memoria de video
+  end
 endtask
 
 endmodule

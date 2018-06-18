@@ -21,7 +21,9 @@ module MiniAlu
  output wire VGA_GREEN,
  output wire VGA_BLUE,
  output wire VGA_VS,
- output wire VGA_HS
+ output wire VGA_HS,
+ input wire PS2_DATA,  
+ input wire PS2_CLK
 );
 
 wire [15:0]  wIP,wIP_temp; //PC counter
@@ -250,6 +252,34 @@ LCD LSD(
   .ready(wready)
   );
 
+wire CLK_cnt;
+wire slowCLK;
+assign slowCLK = CLK_cnt;
+ 
+UPCOUNTER_POSEDGE #(1) CLK25 
+(
+.Clock(   Clock                ),
+.Reset(   Reset ),
+.Initial( 1'd0 ),
+.Enable(  1'b1                 ),
+.Q(       CLK_cnt             )
+);
+
+reg [7:0] ClockFilter;
+reg ClockTeclado;
+reg [7:0] DataFilter;
+reg ibData;
+always @ (posedge slowCLK) begin
+  ClockFilter <= {PS2_CLK, ClockFilter[7:1]};
+  if (ClockFilter == 8'hFF) ClockTeclado = 1'b1;
+  if (ClockFilter == 8'd0) ClockTeclado = 1'b0;
+  DataFilter <= {PS2_DATA, DataFilter[7:1]};
+  if (DataFilter == 8'hFF) ibData = 1'b1;
+  if (DataFilter == 8'd0) ibData = 1'b0;
+end
+  
+wire [7:0] wKey;  
+serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(ClockTeclado));
 
 always @ ( * )
 begin
@@ -355,10 +385,22 @@ begin
 	end
 	//-------------------------------------
 	`LED:
-	begin
-		rFFLedEN     <= 1'b1;
-		rResult      <= 0;
-	end
+  begin
+    rFFLedEN     <= 1'b1;
+    rWriteEnable <= 1'b0;
+    rResult      <= 0;
+    rBranchTaken <= 1'b0;
+  end
+  
+  `TEC:
+  begin
+    rFFLedEN     <= 1'b0;
+    rWriteEnable <= 1'b1;
+    rBranchTaken <= 1'b0;
+    rCallTaken <= 1'b0;
+    rRetTaken <= 1'b0;
+    rResult      <= wKey;
+  end
 	//-------------------------------------
   `LCD:
 	begin

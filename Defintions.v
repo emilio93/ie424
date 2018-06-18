@@ -36,7 +36,8 @@
 `define R15 8'd15
 
 `define VGA   4'd14 // 1101
-
+`define TEC   4'd1
+`define INC   4'd2 
 
 `define RA 8'h1F
 

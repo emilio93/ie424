@@ -10,7 +10,7 @@
 `define Continue2 8'd60
 `define REGRESOLOOPVERTICAL 8'd63
 `define FIN 8'd66
-`define DISPLAY 8'd68
+`define DISPLAY 8'd81
 
 
 module ROM
@@ -96,25 +96,35 @@ begin
   64: oInstruction = {`ADD,`R12,`R12,`R1};
   65: oInstruction = {`JMP,`LOOPVERTICAL,16'b0};
 // FIN:
-  66: oInstruction = {`TEC,`R7,`R7,1'b0};	 
-  67: oInstruction = {`JMP,`FIN,16'b0};
+  66: oInstruction = {`STO,`R10,8'b0,`COLOR_RED};
+  67: oInstruction = {`STO,`R11,16'd4};
+  68: oInstruction = {`STO,`R12,16'd3};
+  69: oInstruction = {`CALL,`DISPLAY,16'b0};
+  70: oInstruction = {`STO,`R11,16'd5};
+  71: oInstruction = {`STO,`R12,16'd3};
+  72: oInstruction = {`CALL,`DISPLAY,16'b0};
+  73: oInstruction = {`STO,`R11,16'd4};
+  74: oInstruction = {`STO,`R12,16'd2};
+  75: oInstruction = {`CALL,`DISPLAY,16'b0};
+  76: oInstruction = {`STO,`R11,16'd5};
+  77: oInstruction = {`STO,`R12,16'd2};
+  78: oInstruction = {`CALL,`DISPLAY,16'b0};
+  79: oInstruction = {`JMP,`FIN,16'b0};
+  80: oInstruction = {`JMP,`INICIO,16'b0};
 // DISPLAY:
-  68: oInstruction = {`NOP,24'b0};
-  69: oInstruction = {`PUSH,16'b0,`RA};
-  70: oInstruction = {`PUSH,16'b0,`R2};
-  71: oInstruction = {`NOP,24'b0};
-  72: oInstruction = {`MUL,`R2,`R12,`R13};
-  73: oInstruction = {`NOP,24'b0};
-  74: oInstruction = {`ADD,`R2,`R2,`R11};
-  75: oInstruction = {`NOP,24'b0};
-  76: oInstruction = {`VGA,8'b0,`R10,`R2};
-  77: oInstruction = {`POP,`R2,16'b0};
-  78: oInstruction = {`POP,`RA,16'b0};
-  79: oInstruction = {`NOP,24'b0};
-  80: oInstruction = {`RET,16'b0,`RA};
-  81: oInstruction = {`TEC,`R7,`R7,1'b0};
-  82: oInstruction = {`LED ,8'b0,`R7,8'b0};
-  83: oInstruction = {`JMP,8'd41,16'b0};  
+  81: oInstruction = {`NOP,24'b0};
+  82: oInstruction = {`PUSH,16'b0,`RA};
+  83: oInstruction = {`PUSH,16'b0,`R2};
+  84: oInstruction = {`NOP,24'b0};
+  85: oInstruction = {`MUL,`R2,`R12,`R13};
+  86: oInstruction = {`NOP,24'b0};
+  87: oInstruction = {`ADD,`R2,`R2,`R11};
+  88: oInstruction = {`NOP,24'b0};
+  89: oInstruction = {`VGA,8'b0,`R10,`R2};
+  90: oInstruction = {`POP,`R2,16'b0};
+  91: oInstruction = {`POP,`RA,16'b0};
+  92: oInstruction = {`NOP,24'b0};
+  93: oInstruction = {`RET,16'b0,`RA}; 
 
   default:
     oInstruction = {`LED,24'b10101010}; // NOP

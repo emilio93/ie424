@@ -22,7 +22,7 @@ module MiniAlu
  output wire VGA_BLUE,
  output wire VGA_VS,
  output wire VGA_HS,
- input wire PS2_DATA,  
+ input wire PS2_DATA,
  input wire PS2_CLK
 );
 
@@ -30,8 +30,8 @@ wire [15:0]  wIP,wIP_temp; //PC counter
 wire [15:0]  wStackOut;
 reg          rWriteEnable,rBranchTaken; //habilitadores
 reg          rPushStackEnable, rPopStackEnable; //habilitadores para actuar en el es stack
-wire [27:0]  wInstruction; //instruccion compuesta por concatenacion
-wire [3:0]   wOperation; //OPCODE
+wire [29:0]  wInstruction; //instruccion compuesta por concatenacion
+wire [5:0]   wOperation; //OPCODE
 reg  [15:0]  rResult; //Salida de la ALU
 wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
@@ -191,7 +191,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 	.Clock(Clock),
   .Reset(!rModulesLoaded),
 	.Enable(1'b1),
-	.D(wInstruction[27:24]),
+	.D(wInstruction[29:24]),
 	.Q(wOperation)
 );
 
@@ -255,8 +255,8 @@ LCD LSD(
 wire CLK_cnt;
 wire slowCLK;
 assign slowCLK = CLK_cnt;
- 
-UPCOUNTER_POSEDGE #(1) CLK25 
+
+UPCOUNTER_POSEDGE #(1) CLK25
 (
 .Clock(   Clock                ),
 .Reset(   Reset ),
@@ -277,8 +277,8 @@ always @ (posedge slowCLK) begin
   if (DataFilter == 8'hFF) ibData = 1'b1;
   if (DataFilter == 8'd0) ibData = 1'b0;
 end
-  
-wire [7:0] wKey;  
+
+wire [7:0] wKey;
 serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(ClockTeclado));
 
 always @ ( * )
@@ -293,6 +293,30 @@ begin
 		rWriteEnable <= 1'b0;
 		rResult      <= 0;
 	end
+  //------------------------------------------
+  `AND:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= wSourceData1 & wSourceData0;
+  end
+  //------------------------------------------
+  `OR:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= wSourceData1 | wSourceData0;
+  end
+  //------------------------------------------
+  `NOR:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= ~(wSourceData1 | wSourceData0);
+  end
+  //--------------------------------------
+  `ADDI: //{OPCODE[4], DESTINATION[8], SOURCE1[8], INM[8]} = 28bits
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= wSourceData1 + wSourceAddr0;
+  end
 	//-------------------------------------
 	`ADD:
 	begin
@@ -336,12 +360,22 @@ begin
 
 	end
 	//-------------------------------------
+  `BEQ:
+  begin
+  rResult <= 0;
+    if (wSourceData1 == wSourceData0) begin
+      rBranchTaken <= 1'b1;
+    end else begin
+      rBranchTaken <= 1'b0;
+    end
+  end
+  //---------------------------------------
 	`JMP:
 	begin
 		rResult      <= 0;
 		rBranchTaken <= 1'b1;
 	end
-	//-------------------------------------	
+	//-------------------------------------
   //
   // CALL, SUBRUTINA, 16'b0
   //
@@ -391,7 +425,7 @@ begin
     rResult      <= 0;
     rBranchTaken <= 1'b0;
   end
-  
+
   `TEC:
   begin
     rFFLedEN     <= 1'b0;

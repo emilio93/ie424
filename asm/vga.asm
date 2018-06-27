@@ -58,8 +58,8 @@ WAIT:
     ADD, R3, R3, R1
     BLE, WAIT1, R3, R4
   NOP, 24'b0
-  POP, R2, 16'b0
   POP, R3, 16'b0
+  POP, R2, 16'b0
   POP, RA, 16'b0
   NOP, 24'b0
   RET, 16'b0, RA

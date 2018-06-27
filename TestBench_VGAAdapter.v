@@ -5,10 +5,17 @@ module TestBench_VGAAdapter;
   reg        Clock;
   reg        Reset;
   reg[9:0] wP, hP;
-  wire[7:0] wM, hM;
+  wire[3:0] wM, hM;
 
 	// Instantiate the Unit Under Test (UUT)
-  VGAAdapter VGAAdapter (
+  VGAAdapter  # (
+    640,
+    480,
+    32,
+    24,
+    20, // 640 / 32
+    20 // 480 / 24
+  ) VGAAdapter (
     .widthVgaPos(wP),
     .heightVgaPos(hP),
     .widthMemPos(wM),

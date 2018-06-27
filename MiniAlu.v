@@ -78,10 +78,10 @@ wire [3:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
 
 // Adaptador de controlador VGA a memoria
 VGAAdapter vgaadapter(
-  .widthVgaPos(ctrH),
-  .heightVgaPos(ctrV),
-  .widthMemPos(vgaramh),
-  .heightMemPos(vgaramv)
+	.widthPos(ctrH),
+	.heightPos(ctrV),
+	.widthMin(vgaramh),
+	.heightMin(vgaramv)
 );
 
 reg VGAWrite;               // senal para habilitar escritura en memoria de video
@@ -526,3 +526,10 @@ endtask
 
 
 endmodule
+
+VGAAdapter 
+vgaadapter(
+	.widthVgaPos(ctrH),
+	.heightVgaPos(ctrV),
+	.widthMemPos(vgaramh),
+	.heightMemPos(vgaramv)

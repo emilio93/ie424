@@ -41,6 +41,12 @@
 `define R13 8'd13
 `define R14 8'd14
 `define R15 8'd15
+`define R16 8'd16
+`define R17 8'd17
+`define R18 8'd18
+`define R19 8'd19
+`define R20 8'd20
+`define R21 8'd21
 
 
 

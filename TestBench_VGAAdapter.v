@@ -9,12 +9,12 @@ module TestBench_VGAAdapter;
 
 	// Instantiate the Unit Under Test (UUT)
   VGAAdapter VGAAdapter (
-    .widthPos(wP),
-    .heightPos(hP),
-    .widthMin(wM),
-    .heightMin(hM)
+    .widthVgaPos(wP),
+    .heightVgaPos(hP),
+    .widthMemPos(wM),
+    .heightMemPos(hM)
   );
-	
+
 	always
 	begin
 		#1  Clock =  ! Clock;
@@ -29,36 +29,36 @@ module TestBench_VGAAdapter;
 		#100;
     @ (posedge Clock);
 		Reset <= 1;
-		
+
 		wP <= 0;
 		hP <= 0;
-    
-    #50 
+
+    #50
     @ (posedge Clock);
 		Reset <= 0;
-		
+
 		// Wait 100 ns for global reset to finish
 	#100;
  @ (posedge Clock);
 	Reset <= 1;
-	
+
 	wP <= 100;
 	hP <= 50;
-    
+
 	 #100
-	 
+
 	wP <= 200;
 	hP <= 100;
-	
+
 	 #100
-	 
+
 	wP <= 400;
 	hP <= 200;
 	 #100
-	 
+
 	wP <= 639;
 	hP <= 479;
-	
+
 	end
 
 endmodule

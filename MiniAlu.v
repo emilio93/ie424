@@ -78,10 +78,10 @@ wire [3:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
 
 // Adaptador de controlador VGA a memoria
 VGAAdapter vgaadapter(
-	.widthPos(ctrH),
-	.heightPos(ctrV),
-	.widthMin(vgaramh),
-	.heightMin(vgaramv)
+  .widthVgaPos(ctrH),
+  .heightVgaPos(ctrV),
+  .widthMemPos(vgaramh),
+  .heightMemPos(vgaramv)
 );
 
 reg VGAWrite;               // senal para habilitar escritura en memoria de video
@@ -113,20 +113,20 @@ vgaram (
 
 ROM InstructionRom
 (
-	.iAddress(     wIP          ),
-	.oInstruction( wInstruction )
+  .iAddress(     wIP          ),
+  .oInstruction( wInstruction )
 );
 
 RAM_DUAL_READ_PORT DataRam
 (
-	.Clock(         Clock        ),
-	.iWriteEnable(  rWriteEnable ),
-	.iReadAddress0( wInstruction[7:0] ),
-	.iReadAddress1( wInstruction[15:8] ),
+  .Clock(         Clock        ),
+  .iWriteEnable(  rWriteEnable ),
+  .iReadAddress0( wInstruction[7:0] ),
+  .iReadAddress1( wInstruction[15:8] ),
   .iWriteAddress( rCallTaken ? `RA : wDestination ),
-	.iDataIn(       rResult      ),
-	.oDataOut0(     wSourceData0 ),
-	.oDataOut1(     wSourceData1 )
+  .iDataIn(       rResult ),
+  .oDataOut0(     wSourceData0 ),
+  .oDataOut1(     wSourceData1 )
 );
 
 Stack Stack
@@ -188,7 +188,7 @@ assign wIP = (!rModulesLoaded) ? 0 :
 // wOperation
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
 	.Enable(1'b1),
 	.D(wInstruction[29:24]),
@@ -198,31 +198,31 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 // wSourceAddr0
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[7:0]),
-	.Q(wSourceAddr0)
+  .Enable(1'b1),
+  .D(wInstruction[7:0]),
+  .Q(wSourceAddr0)
 );
 
 // wSourceAddr1
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[15:8]),
-	.Q(wSourceAddr1)
+  .Enable(1'b1),
+  .D(wInstruction[15:8]),
+  .Q(wSourceAddr1)
 );
 
 // wDestination
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[23:16]),
-	.Q(wDestination)
+  .Enable(1'b1),
+  .D(wInstruction[23:16]),
+  .Q(wDestination)
 );
 
 
@@ -333,30 +333,30 @@ begin
   // eg
   //   SUB t1,t2,t3 # t1=t2-t3
   `SUB:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 - wSourceData0;
-	end
-	//-------------------------------------
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 - wSourceData0;
+  end
+  //-------------------------------------
   `MUL:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 * wSourceData0;
-	end
-	//-------------------------------------
-	`STO:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wImmediateValue;
-	end
-	//-------------------------------------
-	`BLE:
-	begin
-		rResult      <= 0;
-		if (wSourceData1 <= wSourceData0 )
-			rBranchTaken <= 1'b1;
-		else
-			rBranchTaken <= 1'b0;
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 * wSourceData0;
+  end
+  //-------------------------------------
+  `STO:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wImmediateValue;
+  end
+  //-------------------------------------
+  `BLE:
+  begin
+    rResult      <= 0;
+    if (wSourceData1 <= wSourceData0 )
+      rBranchTaken <= 1'b1;
+    else
+      rBranchTaken <= 1'b0;
 
 	end
 	//-------------------------------------
@@ -382,31 +382,31 @@ begin
   // Operación CALL llama a una subrutina, guardando automaticaente la
   // dirección de retorno en el registro `RA,
   `CALL:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wIP_temp;
-		rCallTaken <= 1'b1;
-	end
-	//-------------------------------------
-	//
-	// RET, 16'b0, RA
-	// Regresa a la direccion de retorno
-	//
-	`RET:
-	begin
-		rResult      <= 0;
-		rRetTaken <= 1'b1;
-	end
-	//-------------------------------------
-	//
-	// PUSH, 16'b0, R1
-	// Inserta el dato en R1 en el stack
-	//
-	`PUSH:
-	begin
-		rPushStackEnable <= 1'b1;
-		rResult      <= 0;
-	end
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wIP_temp;
+    rCallTaken <= 1'b1;
+  end
+  //-------------------------------------
+  //
+  // RET, 16'b0, RA
+  // Regresa a la direccion de retorno
+  //
+  `RET:
+  begin
+    rResult      <= 0;
+    rRetTaken <= 1'b1;
+  end
+  //-------------------------------------
+  //
+  // PUSH, 16'b0, R1
+  // Inserta el dato en R1 en el stack
+  //
+  `PUSH:
+  begin
+    rPushStackEnable <= 1'b1;
+    rResult      <= 0;
+  end
   //-------------------------------------
   //
   // POP, R1, 16'b0
@@ -437,7 +437,7 @@ begin
   end
 	//-------------------------------------
   `LCD:
-	begin
+  begin
     rWriteLCD <= 1'b1;
     rResult      <= wSourceData0;
   end
@@ -500,10 +500,10 @@ begin
   end
   //-------------------------------------
   default:
-	begin
-	  // drive_defaults;
-	end
-	//-------------------------------------
+  begin
+    // drive_defaults;
+  end
+  //-------------------------------------
   endcase
 end
 
@@ -515,8 +515,8 @@ task drive_defaults;
     rFFLedEN <= 1'b0;
     rWriteEnable <= 1'b0;
     rWriteLCD <= 1'b0;
-		rPushStackEnable <= 0;
-		rPopStackEnable <= 0;
+    rPushStackEnable <= 0;
+    rPopStackEnable <= 0;
     rCallTaken <= 1'b0;
     rRetTaken <= 1'b0;
     rBranchTaken <= 1'b0;

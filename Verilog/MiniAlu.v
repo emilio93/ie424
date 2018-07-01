@@ -6,6 +6,8 @@
 `include "Defintions.v"
 `include "LCD.v"
 `include "VGA.v"
+`include "serial2parallel.v"
+`include "decoder.v"
 
 module MiniAlu
 (
@@ -22,7 +24,7 @@ module MiniAlu
  output wire VGA_BLUE,
  output wire VGA_VS,
  output wire VGA_HS,
- input wire PS2_DATA,  
+ input wire PS2_DATA,
  input wire PS2_CLK
 );
 
@@ -255,8 +257,8 @@ LCD LSD(
 wire CLK_cnt;
 wire slowCLK;
 assign slowCLK = CLK_cnt;
- 
-UPCOUNTER_POSEDGE #(1) CLK25 
+
+UPCOUNTER_POSEDGE #(1) CLK25
 (
 .Clock(   Clock                ),
 .Reset(   Reset ),
@@ -277,8 +279,8 @@ always @ (posedge slowCLK) begin
   if (DataFilter == 8'hFF) ibData = 1'b1;
   if (DataFilter == 8'd0) ibData = 1'b0;
 end
-  
-wire [7:0] wKey;  
+
+wire [7:0] wKey;
 serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(ClockTeclado));
 
 always @ ( * )
@@ -341,7 +343,7 @@ begin
 		rResult      <= 0;
 		rBranchTaken <= 1'b1;
 	end
-	//-------------------------------------	
+	//-------------------------------------
   //
   // CALL, SUBRUTINA, 16'b0
   //
@@ -391,14 +393,10 @@ begin
     rResult      <= 0;
     rBranchTaken <= 1'b0;
   end
-  
+
   `TEC:
   begin
-    rFFLedEN     <= 1'b0;
     rWriteEnable <= 1'b1;
-    rBranchTaken <= 1'b0;
-    rCallTaken <= 1'b0;
-    rRetTaken <= 1'b0;
     rResult      <= wKey;
   end
 	//-------------------------------------
@@ -489,6 +487,7 @@ task drive_defaults;
     VGAWrite <= 1'b0;      // por lo general no se escribe en memoria de video
   end
 endtask
+
 
 
 endmodule

@@ -74,14 +74,14 @@ VGA vga(
   .VS(VGA_VS)
 );
 
-wire [3:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
+wire [4:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
 
 // Adaptador de controlador VGA a memoria
-VGAAdapter vgaadapter(
-  .widthPos(ctrH),
-  .heightPos(ctrV),
-  .widthMin(vgaramh),
-  .heightMin(vgaramv)
+VGAAdapter vgaadapter (
+  .widthVgaPos(ctrH),
+  .heightVgaPos(ctrV),
+  .widthMemPos(vgaramh),
+  .heightMemPos(vgaramv)
 );
 
 reg VGAWrite;               // senal para habilitar escritura en memoria de video
@@ -124,7 +124,7 @@ RAM_DUAL_READ_PORT DataRam
   .iReadAddress0( wInstruction[7:0] ),
   .iReadAddress1( wInstruction[15:8] ),
   .iWriteAddress( rCallTaken ? `RA : wDestination ),
-  .iDataIn(       rResult      ),
+  .iDataIn(       rResult ),
   .oDataOut0(     wSourceData0 ),
   .oDataOut1(     wSourceData1 )
 );
@@ -190,9 +190,9 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 (
   .Clock(Clock),
   .Reset(!rModulesLoaded),
-  .Enable(1'b1),
-  .D(wInstruction[29:24]),
-  .Q(wOperation)
+	.Enable(1'b1),
+	.D(wInstruction[29:24]),
+	.Q(wOperation)
 );
 
 // wSourceAddr0
@@ -232,7 +232,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable( rFFLedEN ),
-  .D( wSourceData1 ),
+	.D( wSourceData1 ),
   .Q( oLed )
 );
 
@@ -284,15 +284,15 @@ serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(Cloc
 always @ ( * )
 begin
   drive_defaults;
-  case (wOperation)
-  //-------------------------------------
-  `NOP:
-  begin
-     // drive_defaults;
-    rBranchTaken <= 1'b0;
-    rWriteEnable <= 1'b0;
-    rResult      <= 0;
-  end
+	case (wOperation)
+	//-------------------------------------
+	`NOP:
+	begin
+	   // drive_defaults;
+		rBranchTaken <= 1'b0;
+		rWriteEnable <= 1'b0;
+		rResult      <= 0;
+	end
   //------------------------------------------
   `AND:
   begin
@@ -317,13 +317,13 @@ begin
     rWriteEnable <= 1'b1;
     rResult <= wSourceData1 + wSourceAddr0;
   end
-  //-------------------------------------
-  `ADD:
-  begin
-    rWriteEnable <= 1'b1;
-    rResult      <= wSourceData1 + wSourceData0;
-  end
-  //-------------------------------------
+	//-------------------------------------
+	`ADD:
+	begin
+		rWriteEnable <= 1'b1;
+		rResult      <= wSourceData1 + wSourceData0;
+	end
+	//-------------------------------------
   // Operación de resta.
   // No se altera el número mostrado con
   // los leds.
@@ -358,8 +358,8 @@ begin
     else
       rBranchTaken <= 1'b0;
 
-  end
-  //-------------------------------------
+	end
+	//-------------------------------------
   `BEQ:
   begin
   rResult <= 0;
@@ -370,12 +370,12 @@ begin
     end
   end
   //---------------------------------------
-  `JMP:
-  begin
-    rResult      <= 0;
-    rBranchTaken <= 1'b1;
-  end
-  //-------------------------------------
+	`JMP:
+	begin
+		rResult      <= 0;
+		rBranchTaken <= 1'b1;
+	end
+	//-------------------------------------
   //
   // CALL, SUBRUTINA, 16'b0
   //
@@ -412,13 +412,13 @@ begin
   // POP, R1, 16'b0
   // Saca el ultimo dato del stack y lo pone en R1
   `POP:
-  begin
-    rWriteEnable <= 1'b1;
-    rPopStackEnable <= 1'b1;
-    rResult      <= wStackOut;
-  end
-  //-------------------------------------
-  `LED:
+	begin
+		rWriteEnable <= 1'b1;
+		rPopStackEnable <= 1'b1;
+		rResult      <= wStackOut;
+	end
+	//-------------------------------------
+	`LED:
   begin
     rFFLedEN     <= 1'b1;
     rWriteEnable <= 1'b0;
@@ -435,7 +435,7 @@ begin
     rRetTaken <= 1'b0;
     rResult      <= wKey;
   end
-  //-------------------------------------
+	//-------------------------------------
   `LCD:
   begin
     rWriteLCD <= 1'b1;

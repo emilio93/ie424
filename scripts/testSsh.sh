@@ -1,5 +1,10 @@
-folder=temporalie424
+#!/bin/bash
 
+dt=$(date '+%d/%m/%Y %H:%M:%S');
+
+# nombre seguro para evitar choques
+# utiliza la fecha y hora actual
+folder=ie424temporal$dt
 # crear folder en home
 cd
 mkdir $folder
@@ -7,7 +12,6 @@ cd $folder
 
 # obtener proyecte e ir a experimento 3
 git clone git@gitlab.com:labo-digitales-i/minialu.git .
-git checkout experimento3
 
 workingDir="$(pwd)"
 # probar la simulacion/síntesis

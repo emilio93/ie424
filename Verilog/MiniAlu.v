@@ -6,8 +6,6 @@
 `include "Defintions.v"
 `include "LCD.v"
 `include "VGA.v"
-`include "serial2parallel.v"
-`include "decoder.v"
 
 module MiniAlu
 (
@@ -32,8 +30,8 @@ wire [15:0]  wIP,wIP_temp; //PC counter
 wire [15:0]  wStackOut;
 reg          rWriteEnable,rBranchTaken; //habilitadores
 reg          rPushStackEnable, rPopStackEnable; //habilitadores para actuar en el es stack
-wire [27:0]  wInstruction; //instruccion compuesta por concatenacion
-wire [3:0]   wOperation; //OPCODE
+wire [29:0]  wInstruction; //instruccion compuesta por concatenacion
+wire [5:0]   wOperation; //OPCODE
 reg  [15:0]  rResult; //Salida de la ALU
 wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
 wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
@@ -80,10 +78,10 @@ wire [3:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
 
 // Adaptador de controlador VGA a memoria
 VGAAdapter vgaadapter(
-	.widthPos(ctrH),
-	.heightPos(ctrV),
-	.widthMin(vgaramh),
-	.heightMin(vgaramv)
+  .widthPos(ctrH),
+  .heightPos(ctrV),
+  .widthMin(vgaramh),
+  .heightMin(vgaramv)
 );
 
 reg VGAWrite;               // senal para habilitar escritura en memoria de video
@@ -115,20 +113,20 @@ vgaram (
 
 ROM InstructionRom
 (
-	.iAddress(     wIP          ),
-	.oInstruction( wInstruction )
+  .iAddress(     wIP          ),
+  .oInstruction( wInstruction )
 );
 
 RAM_DUAL_READ_PORT DataRam
 (
-	.Clock(         Clock        ),
-	.iWriteEnable(  rWriteEnable ),
-	.iReadAddress0( wInstruction[7:0] ),
-	.iReadAddress1( wInstruction[15:8] ),
+  .Clock(         Clock        ),
+  .iWriteEnable(  rWriteEnable ),
+  .iReadAddress0( wInstruction[7:0] ),
+  .iReadAddress1( wInstruction[15:8] ),
   .iWriteAddress( rCallTaken ? `RA : wDestination ),
-	.iDataIn(       rResult      ),
-	.oDataOut0(     wSourceData0 ),
-	.oDataOut1(     wSourceData1 )
+  .iDataIn(       rResult      ),
+  .oDataOut0(     wSourceData0 ),
+  .oDataOut1(     wSourceData1 )
 );
 
 Stack Stack
@@ -190,41 +188,41 @@ assign wIP = (!rModulesLoaded) ? 0 :
 // wOperation
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[27:24]),
-	.Q(wOperation)
+  .Enable(1'b1),
+  .D(wInstruction[29:24]),
+  .Q(wOperation)
 );
 
 // wSourceAddr0
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[7:0]),
-	.Q(wSourceAddr0)
+  .Enable(1'b1),
+  .D(wInstruction[7:0]),
+  .Q(wSourceAddr0)
 );
 
 // wSourceAddr1
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[15:8]),
-	.Q(wSourceAddr1)
+  .Enable(1'b1),
+  .D(wInstruction[15:8]),
+  .Q(wSourceAddr1)
 );
 
 // wDestination
 FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
 (
-	.Clock(Clock),
+  .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[23:16]),
-	.Q(wDestination)
+  .Enable(1'b1),
+  .D(wInstruction[23:16]),
+  .Q(wDestination)
 );
 
 
@@ -234,7 +232,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable( rFFLedEN ),
-	.D( wSourceData1 ),
+  .D( wSourceData1 ),
   .Q( oLed )
 );
 
@@ -286,22 +284,46 @@ serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(Cloc
 always @ ( * )
 begin
   drive_defaults;
-	case (wOperation)
-	//-------------------------------------
-	`NOP:
-	begin
-	   // drive_defaults;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b0;
-		rResult      <= 0;
-	end
-	//-------------------------------------
-	`ADD:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 + wSourceData0;
-	end
-	//-------------------------------------
+  case (wOperation)
+  //-------------------------------------
+  `NOP:
+  begin
+     // drive_defaults;
+    rBranchTaken <= 1'b0;
+    rWriteEnable <= 1'b0;
+    rResult      <= 0;
+  end
+  //------------------------------------------
+  `AND:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= wSourceData1 & wSourceData0;
+  end
+  //------------------------------------------
+  `OR:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= wSourceData1 | wSourceData0;
+  end
+  //------------------------------------------
+  `NOR:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= ~(wSourceData1 | wSourceData0);
+  end
+  //--------------------------------------
+  `ADDI: //{OPCODE[4], DESTINATION[8], SOURCE1[8], INM[8]} = 28bits
+  begin
+    rWriteEnable <= 1'b1;
+    rResult <= wSourceData1 + wSourceAddr0;
+  end
+  //-------------------------------------
+  `ADD:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 + wSourceData0;
+  end
+  //-------------------------------------
   // Operación de resta.
   // No se altera el número mostrado con
   // los leds.
@@ -311,82 +333,92 @@ begin
   // eg
   //   SUB t1,t2,t3 # t1=t2-t3
   `SUB:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 - wSourceData0;
-	end
-	//-------------------------------------
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 - wSourceData0;
+  end
+  //-------------------------------------
   `MUL:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 * wSourceData0;
-	end
-	//-------------------------------------
-	`STO:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wImmediateValue;
-	end
-	//-------------------------------------
-	`BLE:
-	begin
-		rResult      <= 0;
-		if (wSourceData1 <= wSourceData0 )
-			rBranchTaken <= 1'b1;
-		else
-			rBranchTaken <= 1'b0;
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 * wSourceData0;
+  end
+  //-------------------------------------
+  `STO:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wImmediateValue;
+  end
+  //-------------------------------------
+  `BLE:
+  begin
+    rResult      <= 0;
+    if (wSourceData1 <= wSourceData0 )
+      rBranchTaken <= 1'b1;
+    else
+      rBranchTaken <= 1'b0;
 
-	end
-	//-------------------------------------
-	`JMP:
-	begin
-		rResult      <= 0;
-		rBranchTaken <= 1'b1;
-	end
-	//-------------------------------------
+  end
+  //-------------------------------------
+  `BEQ:
+  begin
+  rResult <= 0;
+    if (wSourceData1 == wSourceData0) begin
+      rBranchTaken <= 1'b1;
+    end else begin
+      rBranchTaken <= 1'b0;
+    end
+  end
+  //---------------------------------------
+  `JMP:
+  begin
+    rResult      <= 0;
+    rBranchTaken <= 1'b1;
+  end
+  //-------------------------------------
   //
   // CALL, SUBRUTINA, 16'b0
   //
   // Operación CALL llama a una subrutina, guardando automaticaente la
   // dirección de retorno en el registro `RA,
   `CALL:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wIP_temp;
-		rCallTaken <= 1'b1;
-	end
-	//-------------------------------------
-	//
-	// RET, 16'b0, RA
-	// Regresa a la direccion de retorno
-	//
-	`RET:
-	begin
-		rResult      <= 0;
-		rRetTaken <= 1'b1;
-	end
-	//-------------------------------------
-	//
-	// PUSH, 16'b0, R1
-	// Inserta el dato en R1 en el stack
-	//
-	`PUSH:
-	begin
-		rPushStackEnable <= 1'b1;
-		rResult      <= 0;
-	end
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wIP_temp;
+    rCallTaken <= 1'b1;
+  end
+  //-------------------------------------
+  //
+  // RET, 16'b0, RA
+  // Regresa a la direccion de retorno
+  //
+  `RET:
+  begin
+    rResult      <= 0;
+    rRetTaken <= 1'b1;
+  end
+  //-------------------------------------
+  //
+  // PUSH, 16'b0, R1
+  // Inserta el dato en R1 en el stack
+  //
+  `PUSH:
+  begin
+    rPushStackEnable <= 1'b1;
+    rResult      <= 0;
+  end
   //-------------------------------------
   //
   // POP, R1, 16'b0
   // Saca el ultimo dato del stack y lo pone en R1
   `POP:
-	begin
-		rWriteEnable <= 1'b1;
-		rPopStackEnable <= 1'b1;
-		rResult      <= wStackOut;
-	end
-	//-------------------------------------
-	`LED:
+  begin
+    rWriteEnable <= 1'b1;
+    rPopStackEnable <= 1'b1;
+    rResult      <= wStackOut;
+  end
+  //-------------------------------------
+  `LED:
   begin
     rFFLedEN     <= 1'b1;
     rWriteEnable <= 1'b0;
@@ -396,12 +428,16 @@ begin
 
   `TEC:
   begin
+    rFFLedEN     <= 1'b0;
     rWriteEnable <= 1'b1;
+    rBranchTaken <= 1'b0;
+    rCallTaken <= 1'b0;
+    rRetTaken <= 1'b0;
     rResult      <= wKey;
   end
-	//-------------------------------------
+  //-------------------------------------
   `LCD:
-	begin
+  begin
     rWriteLCD <= 1'b1;
     rResult      <= wSourceData0;
   end
@@ -464,10 +500,10 @@ begin
   end
   //-------------------------------------
   default:
-	begin
-	  // drive_defaults;
-	end
-	//-------------------------------------
+  begin
+    // drive_defaults;
+  end
+  //-------------------------------------
   endcase
 end
 
@@ -479,15 +515,14 @@ task drive_defaults;
     rFFLedEN <= 1'b0;
     rWriteEnable <= 1'b0;
     rWriteLCD <= 1'b0;
-		rPushStackEnable <= 0;
-		rPopStackEnable <= 0;
+    rPushStackEnable <= 0;
+    rPopStackEnable <= 0;
     rCallTaken <= 1'b0;
     rRetTaken <= 1'b0;
     rBranchTaken <= 1'b0;
     VGAWrite <= 1'b0;      // por lo general no se escribe en memoria de video
   end
 endtask
-
 
 
 endmodule

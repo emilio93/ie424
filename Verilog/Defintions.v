@@ -3,19 +3,26 @@
 `define DEFINTIONS_V
 
 `default_nettype none
-`define NOP   4'd0 // 0000
-`define LED   4'd2 // 0010
-`define BLE   4'd3 // 0011
-`define STO   4'd4 // 0100
-`define ADD   4'd5 // 0101
-`define JMP   4'd6 // 0110
-`define SUB   4'd7 // 0111
-`define LCD   4'd8 // 1000
-`define MUL   4'd9
-`define PUSH   4'd10
-`define POP   4'd11
-`define CALL  4'd12
-`define RET   4'd13
+`define NOP   6'd0 // 0000
+`define TEC   6'd1
+`define LED   6'd2 // 0010
+`define BLE   6'd3 // 0011
+`define STO   6'd4 // 0100
+`define ADD   6'd5 // 0101
+`define JMP   6'd6 // 0110
+`define SUB   6'd7 // 0111
+`define LCD   6'd8 // 1000
+`define MUL   6'd9
+`define PUSH   6'd10
+`define POP   6'd11
+`define CALL  6'd12
+`define RET   6'd13
+`define VGA   6'd14 // 1101
+`define ADDI   6'd15
+`define BEQ 6'd16
+`define AND 6'd17
+`define OR 6'd18
+`define NOR 6'd19
 
 
 `define R0 8'd0 // 00000000
@@ -35,9 +42,7 @@
 `define R14 8'd14
 `define R15 8'd15
 
-`define VGA   4'd14 // 1101
-`define TEC   4'd1
-`define INC   4'd2 
+
 
 `define RA 8'h1F
 

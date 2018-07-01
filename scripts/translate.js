@@ -40,7 +40,7 @@ let getOutputFile = (args, v=false) => {
 
 // Creates the verilog module code.
 //
-let generateModule = (lines,dataWidth=16,instructionWidth=28,includeFile="Defintions.v", moduleName="ROM", iAddress="iAddress", oInstruction="oInstruction") => {
+let generateModule = (lines,dataWidth=16,instructionWidth=30,includeFile="Defintions.v", moduleName="ROM", iAddress="iAddress", oInstruction="oInstruction") => {
   let tags = '';
   let instructions = '';
 

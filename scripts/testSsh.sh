@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dt=$(date '+%d/%m/%Y %H:%M:%S');
+dt=$(date '+%d-%m-%Y--%H-%M-%S');
 
 # nombre seguro para evitar choques
 # utiliza la fecha y hora actual
@@ -10,7 +10,7 @@ cd
 mkdir $folder
 cd $folder
 
-# obtener proyecte e ir a experimento 3
+# obtener proyecto
 git clone git@gitlab.com:labo-digitales-i/minialu.git .
 
 workingDir="$(pwd)"

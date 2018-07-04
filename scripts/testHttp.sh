@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dt=$(date '+%d/%m/%Y %H:%M:%S');
+dt=$(date '+%d-%m-%Y--%H-%M-%S');
 
 # nombre seguro para evitar choques
 # utiliza la fecha y hora actual

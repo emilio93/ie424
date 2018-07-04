@@ -50,9 +50,17 @@
 `define R20 8'd20
 `define R21 8'd21
 
+`define T1 8'd54
+`define T2 8'd55
+`define T3 8'd56
+`define T4 8'd57
+`define T5 8'd58
+`define T6 8'd59
+`define T7 8'd60
+`define T8 8'd61
+`define T9 8'd62
 
-
-`define RA 8'h1F
+`define RA 8'd63
 
 // LETRAS LCD
 `define H 16'h48

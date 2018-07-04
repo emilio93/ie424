@@ -13,7 +13,7 @@ JUGADOR:
   PUSH, 16'b0, R17
 
   NOP, 24'b0
-  STO, R10, 8'b0, `COLOR_MAGENTA
+  STO, R10, 8'b0, COLOR_MAGENTA
   NOP, 24'b0
   STO, R18, 16'd2 //ancho del jugador
   NOP, 24'b0

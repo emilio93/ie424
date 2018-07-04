@@ -1,0 +1,68 @@
+PINTAR_SOL:
+  NOP, 24'b0
+  PUSH, 16'b0, RA
+  PUSH, 16'b0, R11
+  PUSH, 16'b0, R12
+
+  STO, R10, 8'b0, COLOR_YELLOW
+
+
+  STO, R11, 16'd33
+  STO, R12, 16'd3
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd33
+  STO, R12, 16'd4
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd33
+  STO, R12, 16'd5
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd33
+  STO, R12, 16'd6
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd32
+  STO, R12, 16'd4
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R12, 16'd5
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd35
+  STO, R12, 16'd4
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R12, 16'd5
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  POP, R12, 16'b0
+  POP, R11, 16'b0
+  POP, RA, 16'b0
+  NOP, 24'b0
+  RET, 16'b0, RA

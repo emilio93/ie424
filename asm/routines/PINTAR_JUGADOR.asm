@@ -1,6 +1,6 @@
 
 
-JUGADOR:
+PINTAR_JUGADOR:
   NOP, 24'b0
   PUSH, 16'b0, RA
   NOP, 24'b0

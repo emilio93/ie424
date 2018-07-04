@@ -58,7 +58,7 @@ always @ (posedge Clock or posedge Reset) begin
 end
 
 wire [2:0] VGAOut;      // Dato solicitado para mostrar en pixel
-wire [10:0] ctrH, ctrV; // Posición del controlador vga(0 en tiempos de inactividad)
+wire [9:0] ctrH, ctrV; // Posición del controlador vga(0 en tiempos de inactividad)
 
 // Controlador VGA
 VGA vga(
@@ -85,7 +85,7 @@ VGAAdapter vgaadapter (
 );
 
 reg VGAWrite;               // senal para habilitar escritura en memoria de video
-reg [7:0] rVGAWriteAddress; // posición de memoria de video para escribir
+reg [15:0] rVGAWriteAddress; // posición de memoria de video para escribir
 
 // Memoria de video
 // el primer parametro indica que se trabaja con datos de 3 bits que forman un color
@@ -97,9 +97,9 @@ reg [7:0] rVGAWriteAddress; // posición de memoria de video para escribir
 // notese que el dato de lectura corresponde a la cantidad de datos horizontales por
 //   la posición de linea vertical más la posición horizontal.
 parameter VGA_DATA_WIDTH=3;
-parameter VGA_ADDR_WIDTH=8;
-parameter VGA_MEM_WIDTH=16;
-parameter VGA_MEM_HEIGHT=12;
+parameter VGA_ADDR_WIDTH=11;
+parameter VGA_MEM_WIDTH=40;
+parameter VGA_MEM_HEIGHT=30;
 parameter VGA_MEM_SIZE=VGA_MEM_WIDTH*VGA_MEM_HEIGHT;
 VGARam # (VGA_DATA_WIDTH, VGA_ADDR_WIDTH, VGA_MEM_SIZE )
 vgaram (

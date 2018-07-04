@@ -24,13 +24,13 @@
 `define PINTAR_SOL 8'd82
 `define DISPLAY 8'd134
 `define JUGADOR 8'd147
-`define LOOP_DIBUJO 8'd166
-`define ALTO_JUGADOR 8'd178
-`define TERMINAR_JUGADOR 8'd186
-`define MOVIMIENTO 8'd198
-`define SUBIR_MOVIMIENTO 8'd210
-`define BAJAR_MOVIMIENTO 8'd216
-`define TERMINAR_MOVIMIENTO 8'd222
+`define LOOP_DIBUJO 8'd167
+`define ALTO_JUGADOR 8'd179
+`define TERMINAR_JUGADOR 8'd187
+`define MOVIMIENTO 8'd199
+`define SUBIR_MOVIMIENTO 8'd211
+`define BAJAR_MOVIMIENTO 8'd217
+`define TERMINAR_MOVIMIENTO 8'd223
 
 module ROM
 (
@@ -221,81 +221,82 @@ begin
   155: oInstruction = {`NOP,24'b0};
   156: oInstruction = {`PUSH,16'b0,`R17};
   157: oInstruction = {`NOP,24'b0};
-  158: oInstruction = {`NOP,24'b0};
-  159: oInstruction = {`STO,`R18,16'd2};
-  160: oInstruction = {`NOP,24'b0};
-  161: oInstruction = {`STO,`R19,16'd5};
-  162: oInstruction = {`NOP,24'b0};
-  163: oInstruction = {`STO,`R16,16'b0};
-  164: oInstruction = {`NOP,24'b0};
-  165: oInstruction = {`STO,`R17,16'b0};
+  158: oInstruction = {`STO,`R10,8'b0,`COLOR_MAGENTA};
+  159: oInstruction = {`NOP,24'b0};
+  160: oInstruction = {`STO,`R18,16'd2};
+  161: oInstruction = {`NOP,24'b0};
+  162: oInstruction = {`STO,`R19,16'd5};
+  163: oInstruction = {`NOP,24'b0};
+  164: oInstruction = {`STO,`R16,16'b0};
+  165: oInstruction = {`NOP,24'b0};
+  166: oInstruction = {`STO,`R17,16'b0};
 // LOOP_DIBUJO:
-  166: oInstruction = {`NOP,24'b0};
-  167: oInstruction = {`ADD,`R11,`R20,`R16};
-  168: oInstruction = {`NOP,24'b0};
-  169: oInstruction = {`SUB,`R12,`R21,`R17};
-  170: oInstruction = {`NOP,24'b0};
-  171: oInstruction = {`CALL,`DISPLAY,16'b0};
-  172: oInstruction = {`NOP,24'b0};
-  173: oInstruction = {`ADD,`R16,`R16,`R1};
-  174: oInstruction = {`NOP,24'b0};
-  175: oInstruction = {`BEQ,`ALTO_JUGADOR,`R16,`R18};
-  176: oInstruction = {`NOP,24'b0};
-  177: oInstruction = {`JMP,`LOOP_DIBUJO,16'b0};
+  167: oInstruction = {`NOP,24'b0};
+  168: oInstruction = {`ADD,`R11,`R20,`R16};
+  169: oInstruction = {`NOP,24'b0};
+  170: oInstruction = {`SUB,`R12,`R21,`R17};
+  171: oInstruction = {`NOP,24'b0};
+  172: oInstruction = {`CALL,`DISPLAY,16'b0};
+  173: oInstruction = {`NOP,24'b0};
+  174: oInstruction = {`ADD,`R16,`R16,`R1};
+  175: oInstruction = {`NOP,24'b0};
+  176: oInstruction = {`BEQ,`ALTO_JUGADOR,`R16,`R18};
+  177: oInstruction = {`NOP,24'b0};
+  178: oInstruction = {`JMP,`LOOP_DIBUJO,16'b0};
 // ALTO_JUGADOR:
-  178: oInstruction = {`NOP,24'b0};
-  179: oInstruction = {`STO,`R16,16'b0};
-  180: oInstruction = {`NOP,24'b0};
-  181: oInstruction = {`ADD,`R17,`R17,`R1};
-  182: oInstruction = {`NOP,24'b0};
-  183: oInstruction = {`BEQ,`TERMINAR_JUGADOR,`R17,`R19};
-  184: oInstruction = {`NOP,24'b0};
-  185: oInstruction = {`JMP,`LOOP_DIBUJO,16'b0};
+  179: oInstruction = {`NOP,24'b0};
+  180: oInstruction = {`STO,`R16,16'b0};
+  181: oInstruction = {`NOP,24'b0};
+  182: oInstruction = {`ADD,`R17,`R17,`R1};
+  183: oInstruction = {`NOP,24'b0};
+  184: oInstruction = {`BEQ,`TERMINAR_JUGADOR,`R17,`R19};
+  185: oInstruction = {`NOP,24'b0};
+  186: oInstruction = {`JMP,`LOOP_DIBUJO,16'b0};
 // TERMINAR_JUGADOR:
-  186: oInstruction = {`NOP,24'b0};
-  187: oInstruction = {`POP,`R17,16'b0};
-  188: oInstruction = {`NOP,24'b0};
-  189: oInstruction = {`POP,`R16,16'b0};
-  190: oInstruction = {`NOP,24'b0};
-  191: oInstruction = {`POP,`R19,16'b0};
-  192: oInstruction = {`NOP,24'b0};
-  193: oInstruction = {`POP,`R18,16'b0};
-  194: oInstruction = {`NOP,24'b0};
-  195: oInstruction = {`POP,`RA,16'b0};
-  196: oInstruction = {`NOP,24'b0};
-  197: oInstruction = {`RET,16'b0,`RA};
+  187: oInstruction = {`NOP,24'b0};
+  188: oInstruction = {`POP,`R17,16'b0};
+  189: oInstruction = {`NOP,24'b0};
+  190: oInstruction = {`POP,`R16,16'b0};
+  191: oInstruction = {`NOP,24'b0};
+  192: oInstruction = {`POP,`R19,16'b0};
+  193: oInstruction = {`NOP,24'b0};
+  194: oInstruction = {`POP,`R18,16'b0};
+  195: oInstruction = {`NOP,24'b0};
+  196: oInstruction = {`POP,`RA,16'b0};
+  197: oInstruction = {`NOP,24'b0};
+  198: oInstruction = {`RET,16'b0,`RA};
 // MOVIMIENTO:
-  198: oInstruction = {`NOP,24'b0};
-  199: oInstruction = {`PUSH,16'b0,`RA};
-  200: oInstruction = {`NOP,24'b0};
-  201: oInstruction = {`STO,`T1,16'h1D};
-  202: oInstruction = {`NOP,24'b0};
-  203: oInstruction = {`STO,`T2,16'h1B};
-  204: oInstruction = {`NOP,24'b0};
-  205: oInstruction = {`BEQ,`SUBIR_MOVIMIENTO,`R22,`T1};
-  206: oInstruction = {`NOP,24'b0};
-  207: oInstruction = {`BEQ,`BAJAR_MOVIMIENTO,`R22,`T2};
-  208: oInstruction = {`NOP,24'b0};
-  209: oInstruction = {`JMP,`TERMINAR_MOVIMIENTO,16'b0};
+  199: oInstruction = {`NOP,24'b0};
+  200: oInstruction = {`PUSH,16'b0,`RA};
+  201: oInstruction = {`NOP,24'b0};
+  202: oInstruction = {`STO,`T1,16'h1D};
+  203: oInstruction = {`NOP,24'b0};
+  204: oInstruction = {`STO,`T2,16'h1B};
+  205: oInstruction = {`NOP,24'b0};
+  206: oInstruction = {`BEQ,`SUBIR_MOVIMIENTO,`R22,`T1};
+  207: oInstruction = {`NOP,24'b0};
+  208: oInstruction = {`BEQ,`BAJAR_MOVIMIENTO,`R22,`T2};
+  209: oInstruction = {`NOP,24'b0};
+  210: oInstruction = {`JMP,`TERMINAR_MOVIMIENTO,16'b0};
 // SUBIR_MOVIMIENTO:
-  210: oInstruction = {`NOP,24'b0};
-  211: oInstruction = {`SUB,`R20,`R20,`R1};
-  212: oInstruction = {`NOP,24'b0};
-  213: oInstruction = {`SUB,`R21,`R21,`R1};
-  214: oInstruction = {`NOP,24'b0};
-  215: oInstruction = {`JMP,`TERMINAR_MOVIMIENTO};
+  211: oInstruction = {`NOP,24'b0};
+  212: oInstruction = {`SUB,`R20,`R20,`R1};
+  213: oInstruction = {`NOP,24'b0};
+  214: oInstruction = {`SUB,`R21,`R21,`R1};
+  215: oInstruction = {`NOP,24'b0};
+  216: oInstruction = {`JMP,`TERMINAR_MOVIMIENTO};
 // BAJAR_MOVIMIENTO:
-  216: oInstruction = {`NOP,24'b0};
-  217: oInstruction = {`ADD,`R20,`R20,`R1};
-  218: oInstruction = {`NOP,24'b0};
-  219: oInstruction = {`ADD,`R21,`R21,`R1};
-  220: oInstruction = {`NOP,24'b0};
-  221: oInstruction = {`JMP,`TERMINAR_MOVIMIENTO};
+  217: oInstruction = {`NOP,24'b0};
+  218: oInstruction = {`ADD,`R20,`R20,`R1};
+  219: oInstruction = {`NOP,24'b0};
+  220: oInstruction = {`ADD,`R21,`R21,`R1};
+  221: oInstruction = {`NOP,24'b0};
+  222: oInstruction = {`JMP,`TERMINAR_MOVIMIENTO};
 // TERMINAR_MOVIMIENTO:
-  222: oInstruction = {`NOP,24'b0};
-  223: oInstruction = {`POP,`RA,16'b0};
-  224: oInstruction = {`NOP,24'b0};
-  225: oInstruction = {`RET,16'b0,`RA};
+  223: oInstruction = {`NOP,24'b0};
+  224: oInstruction = {`POP,`RA,16'b0};
+  225: oInstruction = {`NOP,24'b0};
+  226: oInstruction = {`RET,16'b0,`RA};
 
   default:
     oInstruction = {`LED,24'b10101010}; // NOP

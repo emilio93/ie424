@@ -2,7 +2,7 @@
 `timescale 1ns / 1ps
 //`include "LCD.v"
 //`include "TestBench_LCD.v"
-
+`include "serial2parallel.v"
 `include "Defintions.v"
 `include "LCD.v"
 `include "VGA.v"
@@ -190,9 +190,9 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 6 ) FFD1
 (
   .Clock(Clock),
   .Reset(!rModulesLoaded),
-	.Enable(1'b1),
-	.D(wInstruction[29:24]),
-	.Q(wOperation)
+  .Enable(1'b1),
+  .D(wInstruction[29:24]),
+  .Q(wOperation)
 );
 
 // wSourceAddr0
@@ -232,7 +232,7 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FF_LEDS
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable( rFFLedEN ),
-	.D( wSourceData1 ),
+  .D( wSourceData1 ),
   .Q( oLed )
 );
 
@@ -279,20 +279,25 @@ always @ (posedge slowCLK) begin
 end
 
 wire [7:0] wKey;
-serial2parallel s2p(.iReset(Reset), .i1b(ibData), .o8b(wKey), .ClockTeclado(ClockTeclado));
+serial2parallel s2p(
+  .iReset(Reset),
+  .i1b(ibData),
+  .o8b(wKey),
+  .ClockTeclado(ClockTeclado)
+);
 
 always @ ( * )
 begin
   drive_defaults;
-	case (wOperation)
-	//-------------------------------------
-	`NOP:
-	begin
-	   // drive_defaults;
-		rBranchTaken <= 1'b0;
-		rWriteEnable <= 1'b0;
-		rResult      <= 0;
-	end
+  case (wOperation)
+  //-------------------------------------
+  `NOP:
+  begin
+     // drive_defaults;
+    rBranchTaken <= 1'b0;
+    rWriteEnable <= 1'b0;
+    rResult      <= 0;
+  end
   //------------------------------------------
   `AND:
   begin
@@ -317,13 +322,13 @@ begin
     rWriteEnable <= 1'b1;
     rResult <= wSourceData1 + wSourceAddr0;
   end
-	//-------------------------------------
-	`ADD:
-	begin
-		rWriteEnable <= 1'b1;
-		rResult      <= wSourceData1 + wSourceData0;
-	end
-	//-------------------------------------
+  //-------------------------------------
+  `ADD:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 + wSourceData0;
+  end
+  //-------------------------------------
   // Operación de resta.
   // No se altera el número mostrado con
   // los leds.
@@ -384,8 +389,8 @@ begin
     else
       rBranchTaken <= 1'b0;
 
-	end
-	//-------------------------------------
+  end
+  //-------------------------------------
   `BEQ:
   begin
   rResult <= 0;
@@ -396,12 +401,12 @@ begin
     end
   end
   //---------------------------------------
-	`JMP:
-	begin
-		rResult      <= 0;
-		rBranchTaken <= 1'b1;
-	end
-	//-------------------------------------
+  `JMP:
+  begin
+    rResult      <= 0;
+    rBranchTaken <= 1'b1;
+  end
+  //-------------------------------------
   //
   // CALL, SUBRUTINA, 16'b0
   //
@@ -438,13 +443,13 @@ begin
   // POP, R1, 16'b0
   // Saca el ultimo dato del stack y lo pone en R1
   `POP:
-	begin
-		rWriteEnable <= 1'b1;
-		rPopStackEnable <= 1'b1;
-		rResult      <= wStackOut;
-	end
-	//-------------------------------------
-	`LED:
+  begin
+    rWriteEnable <= 1'b1;
+    rPopStackEnable <= 1'b1;
+    rResult      <= wStackOut;
+  end
+  //-------------------------------------
+  `LED:
   begin
     rFFLedEN     <= 1'b1;
     rWriteEnable <= 1'b0;
@@ -461,7 +466,7 @@ begin
     rRetTaken <= 1'b0;
     rResult      <= wKey;
   end
-	//-------------------------------------
+  //-------------------------------------
   `LCD:
   begin
     rWriteLCD <= 1'b1;

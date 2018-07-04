@@ -49,6 +49,7 @@
 `define R19 8'd19
 `define R20 8'd20 //posicion x jugador
 `define R21 8'd21 //posicion y jugador
+`define R22 8'd22
 
 `define T1 8'd54
 `define T2 8'd55

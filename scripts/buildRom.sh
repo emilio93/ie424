@@ -23,4 +23,4 @@ done
 node scripts/translate.js temp.asm Verilog/Module_ROM.v
 
 # eliminar archivo temporal
-rm temp.asm
+# rm temp.asm

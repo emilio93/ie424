@@ -9,178 +9,193 @@ STO, R11, 16'b0 // horizontal
 STO, R12, 16'b0 // vertical
 
 // LIMITES
-STO, R13, 16'd16 // horizontal
-STO, R14, 16'd12 // vertical
+STO, R13, 16'd40 // horizontal
+STO, R14, 16'd30 // vertical
 
-STO, R3, 16'd5
+NOP, 24'b0
 
-// width = 16, height = 12
-//
-//  gggggggggggggg
-//  rrrrrrrrrrrrrr
-//  mmmmmmmmmmmmmm
-//  bbbbbbbbbbbbbb
-//
+LOOPVERTICAL:
+  STO, R11, 16'b0
+  NOP, 24'b0
+  LOOPHORIZONTAL:
+    ADD, T1, R11, R12
+    NOP, 24'b0
+    AND, T1, R1, T1
+    NOP, 24'b0
+    BEQ, CUADROBLANCO, T1, R0
+    JMP, CUADRONEGRO, 16'b0
 
-GAME:
-  CALL, DIA, 16'b0
-  CALL, SOL, 16'b0
+    CUADROBLANCO:
+      STO, R10, 8'b0, COLOR_WHITE
+      JMP, LOOPREGRESOHORIZONTAL, 16'b0
 
-STO, R5, 16'b0
-STO, R4, 16'd10000
+    CUADRONEGRO:
+      STO, R10, 8'b0, COLOR_BLACK
+      JMP, LOOPREGRESOHORIZONTAL, 16'b0
 
-CALL, WAIT, 16'b0
+    LOOPREGRESOHORIZONTAL:
+      CALL, DISPLAY, 16'b0
+      ADD, R11, R11, R1
+      BLE, LOOPHORIZONTAL, R11, R13
+      ADD, R12, R12, R1
+      BLE, LOOPVERTICAL, R12, R14
+      JMP, CONTINUAR, 16'b0
 
-CALL, NOCHE, 16'b0
-CALL, LUNA, 16'b0
+CONTINUAR:
+  CALL, PONER_CIELO_DIA, 16'b0
+  STO, R14, 16'd30
+  CALL, PONER_ZACATE, 16'b0
+  NOP, 24'd0
 
-CALL, WAIT, 16'b0
+  CALL, PINTAR_SOL, 16'b0
 
-JMP, GAME, 16'b0
+  STO, R20, 16'd5
+  STO, R21, 16'd25
 
+  CALL, JUGADOR, 16'b0
 
 FIN:
-  JMP, FIN, 16'b0
+JMP, FIN, 16'b0
 
-WAIT:
+//
+// IMPRIMIR ZACATE
+//
+
+PONER_ZACATE:
   NOP, 24'b0
   PUSH, 16'b0, RA
-  PUSH, 16'b0, R2
-  PUSH, 16'b0, R3
+  STO, R12, 16'd18
+  STO, R10, 8'b0, COLOR_GREEN
+
+LOOPVERTICAL_ZACATE:
+  STO, R11, 16'b0
   NOP, 24'b0
-  STO, R3, 16'b0
-  WAIT1:
-    STO, R2, 16'b0
+  LOOPHORIZONTAL_ZACATE:
     NOP, 24'b0
-    WAIT2:
-      ADD, R2, R2, R1
-      BLE, WAIT2, R2, R4
-    ADD, R3, R3, R1
-    BLE, WAIT1, R3, R4
-  NOP, 24'b0
-  POP, R3, 16'b0
-  POP, R2, 16'b0
-  POP, RA, 16'b0
-  NOP, 24'b0
-  RET, 16'b0, RA
 
-DIA:
-  NOP,24'd0
-  PUSH, 16'b0, RA
-  STO, R12, 16'b0 // vertical
-  LOOPVERTICAL:
-    STO, R11, 16'b0 // horizontal
-    LOOPHORIZONTAL:
-      STO, R10, 8'b0, COLOR_CYAN
-      BLE, REGRESOLOOPHORIZONTAL, R12, R3
-      STO, R10, 8'b0, COLOR_GREEN
-      JMP, REGRESOLOOPHORIZONTAL, 16'b0
-
-    REGRESOLOOPHORIZONTAL:
-      BLE, REGRESOLOOPVERTICAL, R13, R11
+    LOOPREGRESOHORIZONTAL_ZACATE:
       CALL, DISPLAY, 16'b0
       ADD, R11, R11, R1
-      JMP, LOOPHORIZONTAL, 16'b0
+      BLE, LOOPHORIZONTAL_ZACATE, R11, R13
+      ADD, R12, R12, R1
+      BLE, LOOPVERTICAL_ZACATE, R12, R14
+      POP, RA, 16'b0
+      NOP, 24'b0
+      RET, 16'b0, RA
 
-  REGRESOLOOPVERTICAL:
-    BLE, RETURNGAME, R14, R12
-    ADD, R12, R12, R1
-    JMP, LOOPVERTICAL, 16'b0
 
-RETURNGAME:
-    POP, RA, 16'b0
-    NOP,24'd0
-    RET, 16'b0, RA
-
-  SOL:
-    NOP,24'd0
-    PUSH, 16'b0, RA
-    STO, R11, 16'd14
-    STO, R12, 16'b1
-    STO, R10, 8'b0, COLOR_YELLOW
-    CALL, DISPLAY, 16'b0
-    POP, RA, 16'b0
-    NOP,24'd0
-    RET, 16'b0, RA
-
-NOCHE:
-  NOP,24'd0
+PONER_CIELO_NOCHE:
+  NOP, 24'b0
   PUSH, 16'b0, RA
-  STO, R12, 16'b0 // vertical
-  LOOPVERTICAL2:
-    STO, R11, 16'b0 // horizontal
-    LOOPHORIZONTAL2:
-      STO, R10, 8'b0, COLOR_BLACK
-      BLE, REGRESOLOOPHORIZONTAL2, R12, R3
-      STO, R10, 8'b0, COLOR_GREEN
-      JMP, REGRESOLOOPHORIZONTAL2, 16'b0
+  STO, R14, 16'd18
+  STO, R10, 8'b0, COLOR_BLACK
+  STO, R12, 16'b0
 
-    REGRESOLOOPHORIZONTAL2:
-      BLE, REGRESOLOOPVERTICAL2, R13, R11
+LOOPVERTICAL_CIELO_NOCHE:
+  STO, R11, 16'b0
+  NOP, 24'b0
+  LOOPHORIZONTAL_CIELO_NOCHE:
+    NOP, 24'b0
+
+    LOOPREGRESOHORIZONTAL_CIELO_NOCHE:
       CALL, DISPLAY, 16'b0
       ADD, R11, R11, R1
-      JMP, LOOPHORIZONTAL2, 16'b0
+      BLE, LOOPHORIZONTAL_CIELO_NOCHE, R11, R13
+      ADD, R12, R12, R1
+      BLE, LOOPVERTICAL_CIELO_NOCHE, R12, R14
+      POP, RA, 16'b0
+      NOP, 24'b0
+      RET, 16'b0, RA
 
-  REGRESOLOOPVERTICAL2:
-    BLE, RETURNGAME, R14, R12
-    ADD, R12, R12, R1
-    JMP, LOOPVERTICAL2, 16'b0
-
-LUNA:
-    NOP,24'd0
-    PUSH, 16'b0, RA
-    STO, R11, 16'd14
-    STO, R12, 16'b1
-    STO, R10, 8'b0, COLOR_WHITE
-    CALL, DISPLAY, 16'b0
-    POP, RA, 16'b0
-    NOP,24'd0
-    RET, 16'b0, RA
-
-// LE ENTRA R10, R11, R12, R13 y R14
-// PONE EL COLOR INDICADO EN R10
-// EN LA POSICIÓN R11, R12
-// R13 ES EL LIMITE HORIONTAL
-// R14 ES EL LIMITE VERTICAL
-// _______________________
-// |
-// | 0X0 1X0 2X0 ... nX0
-// | 0x1 1x1 2x1 ... nx1
-// |  .   .   . .     .
-// |  .   .   .    .  .
-// |  .   .   .       .
-// | 0xm 1xm 2xm ... nxm
-// |_____________________
-//
-// ______________________
-// |
-// | 0+0n 1+0n 2+0n ... (n-1)+0n
-// | 0+1n 1+1n 2+1n ... (n-1)+1n
-// | 0+2n 1+2n 2+2n ... (n-1)+2n
-// |  .    .    .  .     .
-// |  .    .    .     .  .
-// |  .    .    .        .
-// | 0+mn 1+mn 2+mn  ... (n-1)+nm
-// |_____________________
-//
-// R11=x
-// R12=y
-// R4=limHor
-// R2= R11 + R12 * R13
-DISPLAY:
+PONER_CIELO_DIA:
   NOP, 24'b0
   PUSH, 16'b0, RA
-  PUSH, 16'b0, R2 // POSICION EN MEM VGA
+  STO, R14, 16'd18
+  STO, R10, 8'b0, COLOR_CYAN
+  STO, R12, 16'b0
 
+LOOPVERTICAL_CIELO_DIA:
+  STO, R11, 16'b0
   NOP, 24'b0
-  MUL, R2, R12, R13
-  NOP, 24'b0
-  ADD, R2, R2, R11
+  LOOPHORIZONTAL_CIELO_DIA:
+    NOP, 24'b0
 
-  NOP, 24'b0
-  VGA, 8'b0, R10, R2
+    LOOPREGRESOHORIZONTAL_CIELO_DIA:
+      CALL, DISPLAY, 16'b0
+      ADD, R11, R11, R1
+      BLE, LOOPHORIZONTAL_CIELO_DIA, R11, R13
+      ADD, R12, R12, R1
+      BLE, LOOPVERTICAL_CIELO_DIA, R12, R14
+      POP, RA, 16'b0
+      NOP, 24'b0
+      RET, 16'b0, RA
 
-  POP, R2, 16'b0
+PINTAR_SOL:
+  NOP, 24'b0
+  PUSH, 16'b0, RA
+  PUSH, 16'b0, R11
+  PUSH, 16'b0, R12
+
+  STO, R10, 8'b0, COLOR_YELLOW
+
+
+  STO, R11, 16'd33
+  STO, R12, 16'd3
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd33
+  STO, R12, 16'd4
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd33
+  STO, R12, 16'd5
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd33
+  STO, R12, 16'd6
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd34
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd32
+  STO, R12, 16'd4
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R12, 16'd5
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R11, 16'd35
+  STO, R12, 16'd4
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+  STO, R12, 16'd5
+  NOP, 24'd0
+  CALL, DISPLAY, 16'b0
+
+
+  POP, R12, 16'b0
+  POP, R11, 16'b0
   POP, RA, 16'b0
   NOP, 24'b0
   RET, 16'b0, RA

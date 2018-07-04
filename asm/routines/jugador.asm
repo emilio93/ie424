@@ -1,3 +1,5 @@
+
+
 JUGADOR:
   NOP, 24'b0
   PUSH, 16'b0, RA
@@ -11,11 +13,11 @@ JUGADOR:
   PUSH, 16'b0, R17
 
   NOP, 24'b0
-  STO, R10, `COLOR_MAGENTA
+  STO, R10, 8'b0, `COLOR_MAGENTA
   NOP, 24'b0
-  STO, R18, 16'b2 //ancho del jugador
+  STO, R18, 16'd2 //ancho del jugador
   NOP, 24'b0
-  STO, R19, 16'b5 //alto del jugador
+  STO, R19, 16'd5 //alto del jugador
   NOP, 24'b0
   STO, R16, 16'b0 //contador del ancho del jugador
   NOP, 24'b0
@@ -25,7 +27,7 @@ JUGADOR:
     NOP, 24'b0
     ADD, R11, R20, R16 //posicion a dibujar en X
     NOP, 24'b0
-    ADD, R12, R21, R17 //posicion a dibujar en Y
+    SUB, R12, R21, R17 //posicion a dibujar en Y
     NOP, 24'b0
     CALL, DISPLAY, 16'b0 //dibuja
 
@@ -57,4 +59,5 @@ JUGADOR:
     POP, R18, 16'b0
     NOP, 24'b0
     POP, RA, 16'b0
+    NOP, 24'b0
     RET, 16'b0, RA

@@ -13,8 +13,8 @@ module VGAAdapter # (
 ) (
   input wire [9:0] widthVgaPos,
   input wire [9:0] heightVgaPos,
-  output reg [4:0] widthMemPos,
-  output reg [4:0] heightMemPos
+  output reg [5:0] widthMemPos,
+  output reg [5:0] heightMemPos
 );
 
   always @ (*) begin

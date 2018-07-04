@@ -74,8 +74,7 @@ VGA vga(
   .VS(VGA_VS)
 );
 
-wire [4:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
-
+wire [5:0] vgaramh, vgaramv; // posicion horizontal, vertical para memoria vga
 // Adaptador de controlador VGA a memoria
 VGAAdapter vgaadapter (
   .widthVgaPos(ctrH),

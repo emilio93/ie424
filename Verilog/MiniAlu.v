@@ -186,7 +186,7 @@ assign wIP = (!rModulesLoaded) ? 0 :
              wIP_temp;
 
 // wOperation
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 4 ) FFD1
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 6 ) FFD1
 (
   .Clock(Clock),
   .Reset(!rModulesLoaded),

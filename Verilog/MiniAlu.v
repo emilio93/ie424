@@ -344,6 +344,32 @@ begin
     rResult      <= wSourceData1 * wSourceData0;
   end
   //-------------------------------------
+  //
+  // SLL shift logical left
+  // STO, R1, 16'b1
+  // SLL, R0, R1, 8'b1
+  // => R0 = 16'b10
+  //
+  //
+  `SLL:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 << wSourceData0;
+  end
+  //-------------------------------------
+  //
+  // SLR shift logical left
+  // STO, R1, 16'b10
+  // SLR, R0, R1, 8'b1
+  // => R0 = 16'b1
+  //
+  //
+  `SLR:
+  begin
+    rWriteEnable <= 1'b1;
+    rResult      <= wSourceData1 >> wSourceData0;
+  end
+  //-------------------------------------
   `STO:
   begin
     rWriteEnable <= 1'b1;

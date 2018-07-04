@@ -13,16 +13,18 @@
 `define SUB   6'd7 // 0111
 `define LCD   6'd8 // 1000
 `define MUL   6'd9
-`define PUSH   6'd10
+`define PUSH  6'd10
 `define POP   6'd11
 `define CALL  6'd12
 `define RET   6'd13
 `define VGA   6'd14 // 1101
-`define ADDI   6'd15
-`define BEQ 6'd16
-`define AND 6'd17
-`define OR 6'd18
-`define NOR 6'd19
+`define ADDI  6'd15
+`define BEQ   6'd16
+`define AND   6'd17
+`define OR    6'd18
+`define NOR   6'd19
+`define SLL   6'd20 // shift logical left
+`define SLR   6'd21 // shift logical right
 
 
 `define R0 8'd0 // 00000000

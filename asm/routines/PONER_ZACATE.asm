@@ -1,22 +1,22 @@
-
 PONER_ZACATE:
   NOP, 24'b0
   PUSH, 16'b0, RA
-  STO, R12, 16'd18
+  PUSH, 16'b0, R16
+  PUSH, 16'b0, R15
+
   STO, R10, 8'b0, COLOR_GREEN
 
-LOOPVERTICAL_ZACATE:
-  STO, R11, 16'b0
-  NOP, 24'b0
-  LOOPHORIZONTAL_ZACATE:
-    NOP, 24'b0
+  # limites rectangulo
+  STO, R11, 16'd0
+  STO, R12, 16'd18
+  STO, R15, 16'd40
+  STO, R16, 16'd30
 
-    LOOPREGRESOHORIZONTAL_ZACATE:
-      CALL, DISPLAY, 16'b0
-      ADD, R11, R11, R1
-      BLE, LOOPHORIZONTAL_ZACATE, R11, R13
-      ADD, R12, R12, R1
-      BLE, LOOPVERTICAL_ZACATE, R12, R14
-      POP, RA, 16'b0
-      NOP, 24'b0
-      RET, 16'b0, RA
+  # dibujar rectangulo
+  CALL, PINTAR_RECTANGULO, 16'b0
+
+  POP, R15, 16'b0
+  POP, R16, 16'b0
+  POP, RA, 16'b0
+  NOP, 24'b0
+  RET, 16'b0, RA

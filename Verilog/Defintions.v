@@ -50,6 +50,9 @@
 `define R20 8'd20 //posicion x jugador
 `define R21 8'd21 //posicion y jugador
 `define R22 8'd22 //tecla que se presiona
+`define R23 8'd23
+`define R24 8'd24
+`define R25 8'd25
 
 `define T1 8'd54
 `define T2 8'd55

@@ -3,6 +3,8 @@ PONER_CIELO_DIA:
   PUSH, 16'b0, RA
   PUSH, 16'b0, R16
   PUSH, 16'b0, R15
+  PUSH, 16'b0, R12
+  PUSH, 16'b0, R11
 
   STO, R10, 8'b0, COLOR_CYAN
 
@@ -12,9 +14,14 @@ PONER_CIELO_DIA:
   STO, R15, 16'd40
   STO, R16, 16'd18
 
+  STO, R13, 16'd40
+  STO, R14, 16'd30
+
   # dibujar rectangulo
   CALL, PINTAR_RECTANGULO, 16'b0
 
+  POP, R11, 16'b0
+  POP, R12, 16'b0
   POP, R15, 16'b0
   POP, R16, 16'b0
   POP, RA, 16'b0

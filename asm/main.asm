@@ -4,15 +4,20 @@ STO, R1, 16'b1 // uno
 
 INICIO:
 
+  // limites globales de vga
+  STO, R13, 16'd40 // horizontal
+  STO, R14, 16'd30 // vertical
+
+  // posición del jugador
+  STO, R20, 16'd5 // horizontal
+  STO, R21, 16'd20 // vertical
 
 JUEGO:
-  NOP, 24'b0
-  TEC, R22, R22, 8'b0
-  NOP, 24'b0
+
   CALL, MOVIMIENTO, 16'b0
   CALL, FONDO, 16'b0
   CALL, PINTAR_JUGADOR, 16'b0
 
-  //puede ser que sea necesario un loop largo aqui
-
-  JMP, JUEGO, 16'b0
+  // JMP, JUEGO, 16'b0
+FIN:
+JMP, FIN, 16'b0

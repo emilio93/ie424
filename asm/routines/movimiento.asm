@@ -1,5 +1,30 @@
+// Esta es la lógica del juego
+//
+// Define el estado del juego
+//
+//  - posicion x jugador
+//  - posicion y jugador
+//  - tamaño x jugador
+//  - tamaño y jugador
+//
+//  - posicion x obstaculo
+//  - posicion y obstaculo
+//  - tamaño x obstaculo
+//  - tamaño y obstaculo
+//
+//  - puntuación
+//  - nivel[velocidad obstaculo]
+//  - horario[dia/noche]
+//  - estado[inicio/juego/derrota]
+
+
+
+
 //R20 y R21 son la posicion actual XY del jugador. Al presionarse una tecla se sobreescriben con la nueva posicion
 //Recibe en R22 la tecla que se presiono
+
+
+
 
 MOVIMIENTO:
   NOP, 24'b0

@@ -10,7 +10,7 @@ PONER_CIELO_DIA:
   STO, R11, 16'd0
   STO, R12, 16'd0
   STO, R13, 16'd40
-  STO, R15, 16'd40
+  STO, R15, 16'd39
   STO, R16, 16'd18
 
   # dibujar rectangulo

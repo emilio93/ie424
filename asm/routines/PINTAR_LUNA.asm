@@ -6,7 +6,7 @@ PINTAR_LUNA:
 
   STO, R10, 8'b0, COLOR_WHITE
 
-  # limites rectangulo 2
+  # limites rectangulo 1
   STO, R11, 16'd33
   STO, R12, 16'd3
   STO, R15, 16'd34

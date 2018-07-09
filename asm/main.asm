@@ -12,10 +12,13 @@ INICIO:
   STO, R20, 16'd5 // horizontal
   STO, R21, 16'd20 // vertical
 
+  // posición del obstaculo
+  STO, R24, 16'd35 // horizontal
+  STO, R25, 16'd20 // vertical
+
 JUEGO:
 
   CALL, MOVIMIENTO, 16'b0
-
 
   CALL, PONER_CIELO_NOCHE, 16'b0
   CALL, PINTAR_LUNA, 16'b0
@@ -23,15 +26,9 @@ JUEGO:
 
   CALL, PINTAR_JUGADOR, 16'b0
 
-  CALL, DELAYMS, 16'b0
+  CALL, PINTAR_OBSTACULO, 16'b0
 
-  CALL, PONER_CIELO_DIA, 16'b0
-  CALL, PINTAR_SOL, 16'b0
-  CALL, PONER_ZACATE, 16'b0
 
-  CALL, PINTAR_JUGADOR, 16'b0
-
-  CALL, DELAYMS, 16'b0
 
   JMP, JUEGO, 16'b0
 FIN:

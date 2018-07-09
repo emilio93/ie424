@@ -9,8 +9,8 @@ PINTAR_SOL:
   # limites rectangulo 2
   STO, R11, 16'd34
   STO, R12, 16'd3
-  STO, R15, 16'd36
-  STO, R16, 16'd7
+  STO, R15, 16'd35
+  STO, R16, 16'd6
 
   # dibujar rectangulo 1
   CALL, PINTAR_RECTANGULO, 16'b0
@@ -18,8 +18,8 @@ PINTAR_SOL:
   # limites rectangulo 2
   STO, R11, 16'd33
   STO, R12, 16'd4
-  STO, R15, 16'd37
-  STO, R16, 16'd6
+  STO, R15, 16'd36
+  STO, R16, 16'd5
 
   # dibujar rectangulo 2
   CALL, PINTAR_RECTANGULO, 16'b0

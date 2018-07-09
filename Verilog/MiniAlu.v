@@ -279,7 +279,7 @@ end
 
 wire [7:0] wKey;
 serial2parallel s2p(
-  .iReset(Reset),
+  .iReset(!rModulesLoaded),
   .i1b(ibData),
   .o8b(wKey),
   .ClockTeclado(ClockTeclado)
@@ -458,12 +458,8 @@ begin
 
   `TEC:
   begin
-    rFFLedEN     <= 1'b0;
     rWriteEnable <= 1'b1;
-    rBranchTaken <= 1'b0;
-    rCallTaken <= 1'b0;
-    rRetTaken <= 1'b0;
-    rResult      <= wKey;
+    rResult <= wKey;
   end
   //-------------------------------------
   `LCD:

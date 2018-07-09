@@ -49,12 +49,14 @@ MOVIMIENTO:
 
   SUBIR_MOVIMIENTO:
    // SUB, R20, R20, R1 //posicion X reducida en 1.
-    STO, R22, 16'd15  //posicion Y reducida en 1.
+    STO, R21, 16'd15  //posicion Y reducida en 1.
+    CALL, PINTAR_JUGADOR, 16'b0
     JMP, TERMINAR_MOVIMIENTO
 
   BAJAR_MOVIMIENTO:
     //ADD, R20, R20, R1 //posicion X aumentada en 1.
-    STO, R22, 16'd20 //posicion Y aumentada en 1.
+    STO, R21, 16'd20 //posicion Y aumentada en 1.
+    CALL, PINTAR_JUGADOR, 16'b0
     JMP, TERMINAR_MOVIMIENTO
 
   TERMINAR_MOVIMIENTO:

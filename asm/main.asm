@@ -1,47 +1,73 @@
 NOP,24'd4000
-STO, R0, 16'b0 // cero
-STO, R1, 16'b1 // uno
+STO, R0, 20'b0 // cero
+STO, R1, 20'b1 // uno
 
 INICIO:
+ //límites de la pantalla
+  STO, R13, 20'd40
+  STO, R13, 20'd30
 
-  // limites globales de vga
-  STO, R13, 16'd40 // horizontal
-  STO, R14, 16'd30 // vertical
-
-  // posición del jugador
-  STO, R20, 16'd5 // horizontal
-  STO, R21, 16'd24 // vertical
+ // posición del jugador
+  STO, R20, 20'd5 // horizontal
+  STO, R21, 20'd24 // vertical
 
   // posición del obstaculo
-  STO, R24, 16'd35 // horizontal
-  STO, R25, 16'd20 // vertical
+  STO, R24, 20'd35 // horizontal
+  STO, R25, 20'd20 // vertical
+
+   // posición del jugador
+  STO, R20, 20'd5 // horizontal
+  STO, R21, 20'd24 // vertical
+
+  // posición del obstaculo
+  STO, R24, 20'd35 // horizontal
+  STO, R25, 20'd20 // vertical
 
   //Contador de Delay
-  STO, R3, 16'd0
-  STO, R2, 16'd6000
-
+  STO, R3, 20'd0
+  STO, R2, 20'd6000
+  STO, R4, 20'd0
+  STO, R5, 20'd1
 
 JUEGO:
 
-  CALL, PONER_CIELO_NOCHE, 16'b0
-  CALL, PINTAR_LUNA, 16'b0
-  CALL, PONER_ZACATE, 16'b0
-  CALL, PINTAR_ESTRELLAS, 16'b0
-  CALL, PINTAR_JUGADOR, 16'b0
-  CALL, PINTAR_OBSTACULO, 16'b0
+  CALL, PONER_CIELO_NOCHE, 20'b0
+  CALL, PINTAR_LUNA, 20'b0
+  CALL, PONER_ZACATE, 20'b0
+  CALL, PINTAR_ESTRELLAS, 20'b0
+  CALL, PINTAR_JUGADOR, 20'b0
+  CALL, PINTAR_OBSTACULO, 20'b0
 
 DELAY_MAIN1:
-    CALL, MOVIMIENTO, 16'b0
+    CALL, MOVIMIENTO, 20'b0
     ADD, R3, R3, R1
-    CALL, DELAY_MS_FIX, 16'b0
+    CALL, DELAY_MS_FIX, 20'b0
+    CALL, PINTAR_OBSTACULO, 20'b0
     BEQ, CONTINUE_MAIN1, R2, R3
-    NOP, 24'b0
-    JMP, DELAY_MAIN1, 16'd0
+    NOP, 30'b0
+    JMP, DELAY_MAIN1, 20'd0
 
 CONTINUE_MAIN1:
+  STO, R3, 20'd0
+  CALL, PONER_CIELO_DIA, 20'b0
+  CALL, PINTAR_SOL, 20'b0
+  CALL, PONER_ZACATE, 20'b0
+  CALL, PINTAR_JUGADOR, 20'b0
+  CALL, PINTAR_OBSTACULO, 20'b0
 
-  STO, R3, 16'd0
+DELAY_MAIN2:
+    CALL, MOVIMIENTO, 20'b0
+    ADD, R3, R3, R1
+    CALL, DELAY_MS_FIX, 20'b0
+    CALL, PINTAR_OBSTACULO, 20'b0
+    BEQ, CONTINUE_MAIN2, R2, R3
+    NOP, 30'b0
+    JMP, DELAY_MAIN2, 20'd0
 
-  JMP, JUEGO, 16'b0
+CONTINUE_MAIN2:
+  STO, R3, 20'd0
+  JMP, JUEGO, 20'b0
+
+
 FIN:
-JMP, FIN, 16'b0
+JMP, FIN, 20'b0

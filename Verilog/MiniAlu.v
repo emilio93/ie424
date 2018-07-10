@@ -30,11 +30,12 @@ wire [15:0]  wIP,wIP_temp; //PC counter
 wire [15:0]  wStackOut;
 reg          rWriteEnable,rBranchTaken; //habilitadores
 reg          rPushStackEnable, rPopStackEnable; //habilitadores para actuar en el es stack
-wire [29:0]  wInstruction; //instruccion compuesta por concatenacion
+wire [35:0]  wInstruction; //instruccion compuesta por concatenacion
 wire [5:0]   wOperation; //OPCODE
-reg  [15:0]  rResult; //Salida de la ALU
-wire [7:0]   wSourceAddr0,wSourceAddr1,wDestination; //Entradas de la RAM
-wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue,wImmediateValue; //Entradas de la ALU y RAM
+reg  [19:0]  rResult; //Salida de la ALU
+wire [9:0]   wSourceAddr0,wSourceAddr1, wDestination; //Entradas de la RAM
+wire [15:0]  wSourceData0,wSourceData1,wIPInitialValue;
+wire [19:0]  wImmediateValue; //Entradas de la ALU y RAM
 reg rWriteLCD; //Habilitador de la pantalla para escribir. Indica que se esta escribiendo.
 
 wire wready; // Lcd está lista para recibir comandos.
@@ -43,7 +44,7 @@ wire wIsInitialized; // Indica que máquina de estados de la lcd ha sido inicial
 reg rModulesLoaded;// indica si ya todos los modulos han sido inicializados y están listos
 
 reg         rRetTaken, rCallTaken; // Flags para llamadas a RET y CALL
-reg [15:0]  wResult;
+reg [19:0]  wResult;
 
 always @ (*) begin
   rModulesLoaded = wIsInitialized;
@@ -120,8 +121,8 @@ RAM_DUAL_READ_PORT DataRam
 (
   .Clock(         Clock        ),
   .iWriteEnable(  rWriteEnable ),
-  .iReadAddress0( wInstruction[7:0] ),
-  .iReadAddress1( wInstruction[15:8] ),
+  .iReadAddress0( wInstruction[9:0] ),
+  .iReadAddress1( wInstruction[19:10] ),
   .iWriteAddress( rCallTaken ? `RA : wDestination ),
   .iDataIn(       rResult ),
   .oDataOut0(     wSourceData0 ),
@@ -150,7 +151,7 @@ Stack Stack
 // tiene una operación RET
 //
 // Para todo lo demás, se toma wDestination
-assign wIPInitialValue = (!rModulesLoaded) ? 8'b0 :
+assign wIPInitialValue = (!rModulesLoaded) ? 10'b0 :
                          (rCallTaken | rBranchTaken&wready | rBranchTaken) ?  wDestination :
                          (rRetTaken)  ?  wSourceData0 :
                          (!wready) ? wIP_temp-1:
@@ -190,37 +191,37 @@ FFD_POSEDGE_SYNCRONOUS_RESET # ( 6 ) FFD1
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable(1'b1),
-  .D(wInstruction[29:24]),
+  .D(wInstruction[35:30]),
   .Q(wOperation)
 );
 
 // wSourceAddr0
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD2
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 10 ) FFD2
 (
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable(1'b1),
-  .D(wInstruction[7:0]),
+  .D(wInstruction[9:0]),
   .Q(wSourceAddr0)
 );
 
 // wSourceAddr1
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD3
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 10 ) FFD3
 (
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable(1'b1),
-  .D(wInstruction[15:8]),
+  .D(wInstruction[19:10]),
   .Q(wSourceAddr1)
 );
 
 // wDestination
-FFD_POSEDGE_SYNCRONOUS_RESET # ( 8 ) FFD4
+FFD_POSEDGE_SYNCRONOUS_RESET # ( 10 ) FFD4
 (
   .Clock(Clock),
   .Reset(!rModulesLoaded),
   .Enable(1'b1),
-  .D(wInstruction[23:16]),
+  .D(wInstruction[29:20]),
   .Q(wDestination)
 );
 
@@ -277,7 +278,7 @@ always @ (posedge slowCLK) begin
   if (DataFilter == 8'd0) ibData = 1'b0;
 end
 
-wire [7:0] wKey;
+wire [9:0] wKey;
 serial2parallel s2p(
   .iReset(!rModulesLoaded),
   .i1b(ibData),

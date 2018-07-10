@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module Stack # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=8, parameter MEM_SIZE=64 )
+module Stack # ( parameter DATA_WIDTH= 16, parameter ADDR_WIDTH=10, parameter MEM_SIZE=64 )
 (
   input wire                        Clock,
   input wire                        Reset,

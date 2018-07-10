@@ -10,7 +10,7 @@ INICIO:
 
   // posición del jugador
   STO, R20, 16'd5 // horizontal
-  STO, R21, 16'd20 // vertical
+  STO, R21, 16'd24 // vertical
 
   // posición del obstaculo
   STO, R24, 16'd35 // horizontal
@@ -18,7 +18,7 @@ INICIO:
 
   //Contador de Delay
   STO, R3, 16'd0
-  STO, R2, 16'd40
+  STO, R2, 16'd6000
 
 
 JUEGO:
@@ -27,19 +27,16 @@ JUEGO:
   CALL, PINTAR_LUNA, 16'b0
   CALL, PONER_ZACATE, 16'b0
   CALL, PINTAR_ESTRELLAS, 16'b0
-  CALL, MOVIMIENTO, 16'b0
-
+  CALL, PINTAR_JUGADOR, 16'b0
   CALL, PINTAR_OBSTACULO, 16'b0
 
 DELAY_MAIN1:
+    CALL, MOVIMIENTO, 16'b0
     ADD, R3, R3, R1
     CALL, DELAY_MS_FIX, 16'b0
     BEQ, CONTINUE_MAIN1, R2, R3
     NOP, 24'b0
     JMP, DELAY_MAIN1, 16'd0
-
-
-
 
 CONTINUE_MAIN1:
 

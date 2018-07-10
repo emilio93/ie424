@@ -29,35 +29,31 @@ MOVIMIENTO:
 
   STO, T1, 16'h1D //tecla W
   STO, T2, 16'h1B //tecla S
-  STO, T3, 16'd15
-  STO, T4, 16'd5
+  STO, T3, 16'd19
 
   STO, R22, 16'b0
   NOP, 24'b0
   TEC, R22, 16'b0
   NOP, 24'b0
 
-  BEQ, BAJAR_MOVIMIENTO, R20, T3
+  BEQ, CHEQUEAR_BAJAR_MOVIMIENTO, R21, T3
 
   BEQ, SUBIR_MOVIMIENTO, R22, T1 //revisa si se intento subir al jugador
-//no se modifican las posiciones XY
-  JMP, TERMINAR_MOVIMIENTO
-  BEQ, BAJAR_MOVIMIENTO, R22, T2 //revisa si se intento bajar al jugador
+  JMP, TERMINAR_MOVIMIENTO, 16'b0
 
-//no se modifican las posiciones XY
+  CHEQUEAR_BAJAR_MOVIMIENTO:
+  BEQ, BAJAR_MOVIMIENTO, R22, T2 //revisa si se intento bajar al jugador
   JMP, TERMINAR_MOVIMIENTO, 16'b0
 
   SUBIR_MOVIMIENTO:
-   // SUB, R20, R20, R1 //posicion X reducida en 1.
-    STO, R21, 16'd15  //posicion Y reducida en 1.
+    STO, R21, 16'd19  //posicion Y reducida en 1.
     CALL, PINTAR_JUGADOR, 16'b0
-    JMP, TERMINAR_MOVIMIENTO
+    JMP, TERMINAR_MOVIMIENTO, 16'b0
 
   BAJAR_MOVIMIENTO:
-    //ADD, R20, R20, R1 //posicion X aumentada en 1.
-    STO, R21, 16'd20 //posicion Y aumentada en 1.
+    STO, R21, 16'd24 //posicion Y aumentada en 1.
     CALL, PINTAR_JUGADOR, 16'b0
-    JMP, TERMINAR_MOVIMIENTO
+    JMP, TERMINAR_MOVIMIENTO, 16'b0
 
   TERMINAR_MOVIMIENTO:
     POP, R22, 16'b0

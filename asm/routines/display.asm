@@ -29,17 +29,17 @@
 // R4=limHor
 // T1= R11 + R12 * R13
 DISPLAY:
-  NOP, 24'b0
-  PUSH, 16'b0, RA
+  NOP, 30'b0
+  PUSH, 20'b0, RA
 
-  NOP, 24'b0
+  NOP, 30'b0
   MUL, T1, R12, R13
-  NOP, 24'b0
+  NOP, 30'b0
   ADD, T1, T1, R11
 
-  NOP, 24'b0
-  VGA, 8'b0, R10, T1
+  NOP, 30'b0
+  VGA, 10'b0, R10, T1
 
-  POP, RA, 16'b0
-  NOP, 24'b0
-  RET, 16'b0, RA
+  POP, RA, 20'b0
+  NOP, 30'b0
+  RET, 20'b0, RA

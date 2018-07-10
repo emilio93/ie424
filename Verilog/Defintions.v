@@ -27,44 +27,44 @@
 `define SLR   6'd21 // shift logical right
 
 
-`define R0 8'd0 // 00000000
-`define R1 8'd1 // 00000001
-`define R2 8'd2 // 00000010
-`define R3 8'd3 // 00000011
-`define R4 8'd4 // 00000100
-`define R5 8'd5 // 00000101
-`define R6 8'd6 // 00000110
-`define R7 8'd7 // 00000111
-`define R8 8'd8
-`define R9 8'd9
-`define R10 8'd10
-`define R11 8'd11
-`define R12 8'd12
-`define R13 8'd13
-`define R14 8'd14
-`define R15 8'd15
-`define R16 8'd16
-`define R17 8'd17
-`define R18 8'd18
-`define R19 8'd19
-`define R20 8'd20 //posicion x jugador
-`define R21 8'd21 //posicion y jugador
-`define R22 8'd22 //tecla que se presiona
-`define R23 8'd23
-`define R24 8'd24
-`define R25 8'd25
+`define R0 10'd0 // 00000000
+`define R1 10'd1 // 00000001
+`define R2 10'd2 // 00000010
+`define R3 10'd3 // 00000011
+`define R4 10'd4 // 00000100
+`define R5 10'd5 // 00000101
+`define R6 10'd6 // 00000110
+`define R7 10'd7 // 00000111
+`define R8 10'd8
+`define R9 10'd9
+`define R10 10'd10
+`define R11 10'd11
+`define R12 10'd12
+`define R13 10'd13
+`define R14 10'd14
+`define R15 10'd15
+`define R16 10'd16
+`define R17 10'd17
+`define R18 10'd18
+`define R19 10'd19
+`define R20 10'd20 //posicion x jugador
+`define R21 10'd21 //posicion y jugador
+`define R22 10'd22 //tecla que se presiona
+`define R23 10'd23
+`define R24 10'd24
+`define R25 10'd25
 
-`define T1 8'd54
-`define T2 8'd55
-`define T3 8'd56
-`define T4 8'd57
-`define T5 8'd58
-`define T6 8'd59
-`define T7 8'd60
-`define T8 8'd61
-`define T9 8'd62
+`define T1 10'd54
+`define T2 10'd55
+`define T3 10'd56
+`define T4 10'd57
+`define T5 10'd58
+`define T6 10'd59
+`define T7 10'd60
+`define T8 10'd61
+`define T9 10'd62
 
-`define RA 8'd63
+`define RA 10'd63
 
 // LETRAS LCD
 `define H 16'h48
@@ -78,15 +78,15 @@
 `define D 16'h44
 
 // COLORES VGA
-`define COLOR_BLACK 8'b000
-`define COLOR_WHITE 8'b111
+`define COLOR_BLACK 10'b000
+`define COLOR_WHITE 10'b111
 
-`define COLOR_RED 8'b100
-`define COLOR_GREEN 8'b010
-`define COLOR_BLUE 8'b001
+`define COLOR_RED 10'b100
+`define COLOR_GREEN 10'b010
+`define COLOR_BLUE 10'b001
 
-`define COLOR_MAGENTA 8'b101
-`define COLOR_YELLOW 8'b110
-`define COLOR_CYAN 8'b011
+`define COLOR_MAGENTA 10'b101
+`define COLOR_YELLOW 10'b110
+`define COLOR_CYAN 10'b011
 
 `endif

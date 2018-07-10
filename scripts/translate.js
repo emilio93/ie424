@@ -40,13 +40,13 @@ let getOutputFile = (args, v=false) => {
 
 // Creates the verilog module code.
 //
-let generateModule = (lines,dataWidth=16,instructionWidth=30,includeFile="Defintions.v", moduleName="ROM", iAddress="iAddress", oInstruction="oInstruction") => {
+let generateModule = (lines,dataWidth=16,instructionWidth=36,includeFile="Defintions.v", moduleName="ROM", iAddress="iAddress", oInstruction="oInstruction") => {
   let tags = '';
   let instructions = '';
 
   lines.forEach((val, idx, arr) => {
     if (val.type==='tag')
-      tags = `${tags}\`define ${val.tag} 8'd${val.tagIp}\n`;
+      tags = `${tags}\`define ${val.tag} 10'd${val.tagIp}\n`;
   });
 
   lines.forEach((val, idx, arr) => {

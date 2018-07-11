@@ -5,7 +5,7 @@ PINTAR_OBSTACULO1:
   PUSH, 20'b0, R25
 
   STO, R10, 10'b0, COLOR_WHITE
-  STO, R18, 20'd2 //ancho del obstaculo
+  STO, R18, 20'd1 //ancho del obstaculo
   STO, R19, 20'd1 //alto del obstaculo
 
   # limites rectangulo

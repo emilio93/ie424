@@ -8,8 +8,8 @@ BORRAR_OBSTACULO2:
 
   STO, R10, 10'b0, COLOR_GREEN
 
-  STO, R18, 20'd2 //ancho del obstaculo = R18+1
-  STO, R19, 20'd1 //alto del obstaculo = R19+1
+  STO, R18, 20'd1 //ancho del obstaculo = R18+1
+  STO, R19, 20'd2 //alto del obstaculo = R19+1
 
   # limites rectangulo
   ADD, R11, R22, R0

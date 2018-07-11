@@ -30,12 +30,13 @@ PINTAR_JUGADOR:
   CALL, PINTAR_RECTANGULO, 20'b0
 
   STO, R10, 10'b0, COLOR_YELLOW
-
+  STO, T4, 20'd5
+  STO, T5, 20'd2
   # limites rectangulo
   ADD, R11, R20, R18
-  ADD, R12, R21, R19
+  ADD, R12, R21, T5
   ADD, R15, R20, R1
-  ADD, R16, R21, R19
+  ADD, R16, R21, T4
   NOP, 30'd0
   SUB, R16, R16, R1
   NOP, 30'd0
